@@ -10,7 +10,7 @@ Independent, unofficial messenger for Android. Sign in with your existing Telegr
 
 [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=im.navo.app)
 [![Website](https://img.shields.io/badge/Website-navo.im-2D7FF9)](https://www.navo.im)
-[![CI](https://github.com/NavoMessenger/NavoMessenger/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/NavoMessenger/actions)
+[![CI](https://github.com/NavoMessenger/Navo/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/Navo/actions)
 
 > **Disclaimer** — Navo is an **independent, unofficial** project. It is **not affiliated with, endorsed by, or connected to Telegram**. "Telegram" is a trademark of its respective owner. Use at your own risk and in accordance with Telegram's [Terms of Service](https://telegram.org/tos) and [API Terms](https://core.telegram.org/api/terms).
 

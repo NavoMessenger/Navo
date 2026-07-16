@@ -10,7 +10,7 @@
 
 [![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=im.navo.app)
 [![Website](https://img.shields.io/badge/Website-navo.im-2D7FF9)](https://www.navo.im)
-[![CI](https://github.com/NavoMessenger/NavoMessenger/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/NavoMessenger/actions)
+[![CI](https://github.com/NavoMessenger/Navo/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/Navo/actions)
 
 > **免责声明** — Navo 是一个**独立、非官方**项目，**与 Telegram 无隶属、背书或关联关系**。"Telegram" 为其各自所有者的商标。请自行承担风险，并遵守 Telegram 的[服务条款](https://telegram.org/tos)与 [API 条款](https://core.telegram.org/api/terms)。
 

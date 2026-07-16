@@ -1,0 +1,50 @@
+title: Navo
+description: Independent Telegram client for Android, Windows & macOS. Flutter + TDLib. iOS coming soon.
+url: "https://navo.im"
+baseurl: ""
+
+remote_theme: just-the-docs/just-the-docs@v0.10.1
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Until custom domain DNS is live, preview at:
+#   https://navomessenger.github.io/NavoMessenger/
+# For project-site preview without CNAME, temporarily set:
+#   url: "https://navomessenger.github.io"
+#   baseurl: "/NavoMessenger"
+
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "Download":
+    - "/download.html"
+  "GitHub":
+    - "https://github.com/NavoMessenger/Navo"
+  "Releases":
+    - "https://github.com/NavoMessenger/Navo/releases/latest"
+  "中文":
+    - "/zh-CN/"
+
+aux_links_new_tab: false
+
+footer_content: >-
+  Navo is an independent, unofficial Telegram client — not affiliated with Telegram.
+  <a href="/privacy.html">Privacy</a> ·
+  <a href="/terms.html">Terms</a> ·
+  <a href="https://github.com/NavoMessenger/Navo">GitHub</a>
+
+sass:
+  quiet_deps: true
+
+# Brand overrides (Just the Docs loads this path when present)
+# https://just-the-docs.com/docs/customization/
+callouts_level: quiet
+callouts:
+  warning:
+    title: Note
+    color: yellow

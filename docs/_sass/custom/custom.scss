@@ -1,0 +1,38 @@
+/* Navo brand accents on Just the Docs */
+:root {
+  --navo-blue: #2d7ff9;
+  --navo-blue-dark: #1a5fd4;
+}
+
+a {
+  color: var(--navo-blue);
+}
+
+a:hover {
+  color: var(--navo-blue-dark);
+}
+
+.site-title,
+.site-button:hover,
+.btn-primary {
+  background-color: var(--navo-blue) !important;
+}
+
+.btn-primary:hover {
+  background-color: var(--navo-blue-dark) !important;
+}
+
+.navigation-list-link.active {
+  color: var(--navo-blue) !important;
+  font-weight: 600;
+}
+
+.main-content h1,
+.main-content h2 {
+  letter-spacing: -0.02em;
+}
+
+table {
+  display: table;
+  width: 100%;
+}

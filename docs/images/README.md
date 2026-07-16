@@ -1,3 +1,10 @@
+---
+layout: default
+title: Image assets
+nav_exclude: true
+search_exclude: true
+---
+
 # Image assets
 
 Place marketing and site images here. Paths below are relative to this folder.

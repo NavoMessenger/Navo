@@ -17,7 +17,12 @@ This file is for maintainers. It is hidden from the site nav.
 4. Custom domain: `navo.im`
 5. Enable **Enforce HTTPS** after DNS verifies
 
-`docs/CNAME` already contains `navo.im`.
+When ready for the custom domain:
+
+1. Create `docs/CNAME` with one line: `navo.im`
+2. In `_config.yml`, set `url: "https://navo.im"` and `baseurl: ""`
+3. Change `aux_links` / footer paths from `/Navo/...` to `/...`
+4. Configure DNS as below and enable Enforce HTTPS
 
 ## DNS records
 

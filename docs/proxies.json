@@ -1,0 +1,150 @@
+{
+  "updated_at": "2026-03-25T00:00:00Z",
+  "proxies": [
+    {
+      "location": "香港-Hong Kong1",
+      "flag": "🇭🇰",
+      "server": "45.39.190.22",
+      "domain": "45.39.190.22",
+      "port": "12432",
+      "secret": "eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d",
+      "ping": "115ms",
+      "speed": "Fast", 
+      "status": "online",
+      "link": "tg://proxy?server=45.39.190.22&port=12432&secret=eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d"
+    },
+    {
+      "location": "香港-Hong Kong2",
+      "flag": "🇭🇰",
+      "server": "45.39.190.22",
+      "domain": "45.39.190.22",
+      "port": "22124",
+      "secret": "eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d",
+      "ping": "115ms",
+      "speed": "Fast", 
+      "status": "online",
+      "link": "tg://proxy?server=45.39.190.22&port=22124&secret=eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d"
+    },
+    {
+      "location": "香港-Hong Kong3",
+      "flag": "🇭🇰",
+      "server": "45.39.190.22",
+      "domain": "45.39.190.22",
+      "port": "32332",
+      "secret": "eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d",
+      "ping": "115ms",
+      "speed": "Fast", 
+      "status": "online",
+      "link": "tg://proxy?server=45.39.190.22&port=32332&secret=eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d"
+    },
+    {
+      "location": "新加坡-Singapore1",
+      "flag": "🇸🇬",
+      "server": "140.245.109.193",
+      "domain": "mtpsg1.onetaplink.app",
+      "port": "12432",
+      "secret": "ee8ead80833a964b949b5bed25e36850136f7261636c652e636f6d",
+      "ping": "115ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=140.245.109.193&port=12432&secret=ee8ead80833a964b949b5bed25e36850136f7261636c652e636f6d"
+    },
+    {
+      "location": "新加坡-Singapore2",
+      "flag": "🇸🇬",
+      "server": "140.245.109.193",
+      "domain": "mtpsg2.onetaplink.app",
+      "port": "22124",
+      "secret": "ee8ead80833a964b949b5bed25e36850136f7261636c652e636f6d",
+      "ping": "115ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=140.245.109.193&port=22124&secret=ee8ead80833a964b949b5bed25e36850136f7261636c652e636f6d"
+    },
+    {
+      "location": "新加坡-Singapore3",
+      "flag": "🇸🇬",
+      "server": "140.245.109.193",
+      "domain": "mtpsg3.onetaplink.app",
+      "port": "32332",
+      "secret": "ee8ead80833a964b949b5bed25e36850136f7261636c652e636f6d",
+      "ping": "115ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=140.245.109.193&port=32332&secret=ee8ead80833a964b949b5bed25e36850136f7261636c652e636f6d"
+    },
+
+    {
+      "location": "美国-United States1",
+      "flag": "🇺🇸",
+      "server": "155.248.198.225",
+      "domain": "mtpus1.onetaplink.app",
+      "port": "12432",
+      "secret": "eed77ecc3d0cc0bbed1809bd5ae989e1976f7261636c652e636f6d",
+      "ping": "145ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=155.248.198.225&port=12432&secret=eed77ecc3d0cc0bbed1809bd5ae989e1976f7261636c652e636f6d"
+    },
+    {
+      "location": "美国-United States2",
+      "flag": "🇺🇸",
+      "server": "155.248.198.225",
+      "domain": "mtpus2.onetaplink.app",
+      "port": "22124",
+      "secret": "eed77ecc3d0cc0bbed1809bd5ae989e1976f7261636c652e636f6d",
+      "ping": "145ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=155.248.198.225&port=12432&secret=eed77ecc3d0cc0bbed1809bd5ae989e1976f7261636c652e636f6d"
+    },
+    {
+      "location": "美国-United States3",
+      "flag": "🇺🇸",
+      "server": "155.248.198.225",
+      "domain": "mtpus3.onetaplink.app",
+      "port": "32332",
+      "secret": "eed77ecc3d0cc0bbed1809bd5ae989e1976f7261636c652e636f6d",
+      "ping": "145ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=155.248.198.225&port=12432&secret=eed77ecc3d0cc0bbed1809bd5ae989e1976f7261636c652e636f6d"
+    },
+    {
+      "location": "韩国-Korea1",
+      "flag": "🇰🇷",
+      "server": "146.56.133.135",
+      "domain": "146.56.133.135",
+      "port": "12432",
+      "secret": "eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d",
+      "ping": "145ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=146.56.133.135&port=12432&secret=eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d"
+    },
+    {
+      "location": "韩国-Korea2",
+      "flag": "🇰🇷",
+      "server": "146.56.133.135",
+      "domain": "146.56.133.135",
+      "port": "22124",
+      "secret": "eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d",
+      "ping": "145ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=146.56.133.135&port=22124&secret=eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d"
+    },
+    {
+      "location": "韩国-Korea3",
+      "flag": "🇰🇷",
+      "server": "146.56.133.135",
+      "domain": "146.56.133.135",
+      "port": "32332",
+      "secret": "eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d",
+      "ping": "145ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=146.56.133.135&port=32332&secret=eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d"
+    }
+  ]
+}

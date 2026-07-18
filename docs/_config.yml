@@ -1,14 +1,10 @@
 title: Navo
 description: Independent Telegram client for Android, Windows & macOS. Flutter + TDLib. iOS coming soon.
 
-# Project site on GitHub Pages (current):
-#   https://navomessenger.github.io/Navo/
-# When navo.im DNS + CNAME are live, switch to:
-#   url: "https://navo.im"
-#   baseurl: ""
-# and restore docs/CNAME (content: navo.im). See DNS.md.
-url: "https://navomessenger.github.io"
-baseurl: "/Navo"
+# Custom domain (GitHub Pages). Project path /Navo is not used when CNAME is active.
+# Fallback preview: https://navomessenger.github.io/Navo/ (may redirect to custom domain).
+url: "https://www.navo.im"
+baseurl: ""
 
 remote_theme: just-the-docs/just-the-docs@v0.10.1
 
@@ -23,20 +19,20 @@ heading_anchors: true
 
 aux_links:
   "Download":
-    - "/Navo/download.html"
+    - "/download.html"
   "GitHub":
     - "https://github.com/NavoMessenger/Navo"
   "Releases":
     - "https://github.com/NavoMessenger/Navo/releases/latest"
   "中文":
-    - "/Navo/zh-CN/"
+    - "/zh-CN/"
 
 aux_links_new_tab: false
 
 footer_content: >-
   Independent unofficial Telegram client — not affiliated with Telegram.
-  <a href="/Navo/privacy.html">Privacy</a> ·
-  <a href="/Navo/terms.html">Terms</a> ·
+  <a href="/privacy.html">Privacy</a> ·
+  <a href="/terms.html">Terms</a> ·
   <a href="https://github.com/NavoMessenger/Navo">GitHub</a>
 
 sass:

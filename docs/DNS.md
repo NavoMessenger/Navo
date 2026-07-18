@@ -17,12 +17,12 @@ This file is for maintainers. It is hidden from the site nav.
 4. Custom domain: `navo.im`
 5. Enable **Enforce HTTPS** after DNS verifies
 
-When ready for the custom domain:
+Custom domain is active when:
 
-1. Create `docs/CNAME` with one line: `navo.im`
-2. In `_config.yml`, set `url: "https://navo.im"` and `baseurl: ""`
-3. Change `aux_links` / footer paths from `/Navo/...` to `/...`
-4. Configure DNS as below and enable Enforce HTTPS
+1. `docs/CNAME` contains the primary host (currently `www.navo.im`; apex `navo.im` should redirect to it)
+2. `_config.yml` has `url: "https://www.navo.im"` and **`baseurl: ""`** (never `/Navo` with a custom domain — that breaks CSS/images)
+3. `aux_links` / footer paths are root-relative (`/download.html`, not `/Navo/...`)
+4. DNS is configured as below and **Enforce HTTPS** is enabled in Pages settings
 
 ## DNS records
 

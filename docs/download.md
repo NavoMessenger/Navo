@@ -27,7 +27,7 @@ Install from [Google Play](https://play.google.com/store/apps/details?id=im.navo
 ### Alternative: Release APK
 
 1. Open [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest).
-2. Download the Android APK (typical name: `Navo-{version}-android-universal.apk`).
+2. Download the Android APK (typical name: `navo-{version}+{build}-arm64-v8a-release.apk`).
 3. On your device, allow installation from unknown sources if prompted, then open the APK.
 
 **Requirements:** Android 7.0 (API 24) or newer (exact minimum may change; check the Release notes).
@@ -35,7 +35,7 @@ Install from [Google Play](https://play.google.com/store/apps/details?id=im.navo
 ## Windows
 
 1. Open [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest).
-2. Download the Windows installer (typical name: `Navo-{version}-windows-x64-setup.exe`).
+2. Download the Windows installer when published (typical name: `navo-{version}-windows-*.exe`).
 3. Run the installer. If **Windows SmartScreen** appears, choose *More info* → *Run anyway* (the build is not yet widely attested).
 4. Launch Navo from the Start menu.
 
@@ -44,7 +44,7 @@ Install from [Google Play](https://play.google.com/store/apps/details?id=im.navo
 ## macOS
 
 1. Open [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest).
-2. Download the macOS package (typical name: `Navo-{version}-macos-universal.dmg`).
+2. Download the macOS package (typical name: `navo-{version}+{build}-macos-adhoc.dmg`).
 3. Open the DMG and drag Navo to Applications.
 4. On first launch, if macOS says the app **cannot be verified**:
    - Open **System Settings → Privacy & Security**

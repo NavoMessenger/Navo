@@ -27,7 +27,7 @@ nav_exclude: true
 ### 备选：Release APK
 
 1. 打开 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest)。
-2. 下载 Android APK（常见命名：`Navo-{version}-android-universal.apk`）。
+2. 下载 Android APK（常见命名：`navo-{version}+{build}-arm64-v8a-release.apk`）。
 3. 如系统提示，允许未知来源安装后打开 APK。
 
 **系统要求：** Android 7.0（API 24）及以上（以 Release 说明为准）。
@@ -35,7 +35,7 @@ nav_exclude: true
 ## Windows
 
 1. 打开 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest)。
-2. 下载 Windows 安装包（常见命名：`Navo-{version}-windows-x64-setup.exe`）。
+2. 下载 Windows 安装包（若已发布，常见命名：`navo-{version}-windows-*.exe`）。
 3. 运行安装程序。若出现 **Windows SmartScreen**，选择「更多信息」→「仍要运行」。
 4. 从开始菜单启动 Navo。
 
@@ -44,7 +44,7 @@ nav_exclude: true
 ## macOS
 
 1. 打开 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest)。
-2. 下载 macOS 安装包（常见命名：`Navo-{version}-macos-universal.dmg`）。
+2. 下载 macOS 安装包（常见命名：`navo-{version}+{build}-macos-adhoc.dmg`）。
 3. 打开 DMG，将 Navo 拖入「应用程序」。
 4. 首次打开若提示**无法验证开发者**：
    - 打开 **系统设置 → 隐私与安全性**

@@ -19,18 +19,21 @@ Referenced from repository root as `docs/images/banner.png`.
 
 ## Screenshots
 
-Put product screenshots in `screenshots/`:
+Product screenshots live under `screenshots/` (web-optimized copies). Source captures may also live in repo-root `Screenshots/`.
 
-| File | Suggested size |
-|------|----------------|
-| `screenshots/chat.png` | ~360–540px wide (phone UI) |
-| `screenshots/list.png` | same |
-| `screenshots/settings.png` | same |
+| Path | Device | Scene |
+|------|--------|-------|
+| `screenshots/mobile/drawer.png` | Phone | Profile drawer & accounts |
+| `screenshots/mobile/contacts.png` | Phone | Contacts / channels |
+| `screenshots/mobile/moments.png` | Phone | Moments feed |
+| `screenshots/pad/drawer.png` | Tablet | Split view — drawer |
+| `screenshots/pad/contacts.png` | Tablet | Split view — contacts |
+| `screenshots/pad/moments.png` | Tablet | Split view — moments |
 
-After adding files, uncomment the screenshot blocks in:
+Used by:
 
 - `README.md` / `README.zh-CN.md`
-- `docs/index.md` / `docs/zh-CN/index.md`
+- `docs/index.md` / `docs/zh-CN/index.md` (Screenshots section)
 
 ## Optional
 

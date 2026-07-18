@@ -58,6 +58,51 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
   </div>
 </section>
 
+<section class="home-section home-shots" id="screenshots">
+  <div class="home-section__inner">
+    <header class="home-section__header home-reveal">
+      <h2>See it in action</h2>
+      <p>Phone and tablet layouts — contacts, moments, and your profile drawer.</p>
+    </header>
+
+    <div class="home-shots__group home-reveal">
+      <h3 class="home-shots__label">Phone</h3>
+      <div class="home-shots__row home-shots__row--phone">
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/mobile/drawer.png' | relative_url }}" alt="Phone — profile drawer" width="720" height="1560" loading="lazy" decoding="async">
+          <figcaption>Profile &amp; accounts</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/mobile/contacts.png' | relative_url }}" alt="Phone — contacts and channels" width="720" height="1560" loading="lazy" decoding="async">
+          <figcaption>Contacts &amp; channels</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/mobile/moments.png' | relative_url }}" alt="Phone — moments feed" width="720" height="1560" loading="lazy" decoding="async">
+          <figcaption>Moments</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="home-shots__group home-reveal">
+      <h3 class="home-shots__label">Tablet</h3>
+      <div class="home-shots__row home-shots__row--pad">
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/pad/drawer.png' | relative_url }}" alt="Tablet — split view with profile drawer" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>Split view — drawer</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/pad/contacts.png' | relative_url }}" alt="Tablet — contacts and channels" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>Split view — contacts</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/pad/moments.png' | relative_url }}" alt="Tablet — moments feed" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>Split view — moments</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="home-section home-platforms" id="download">
   <div class="home-section__inner">
     <header class="home-section__header home-reveal">

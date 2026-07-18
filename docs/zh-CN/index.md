@@ -58,6 +58,51 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
   </div>
 </section>
 
+<section class="home-section home-shots" id="screenshots">
+  <div class="home-section__inner">
+    <header class="home-section__header home-reveal">
+      <h2>界面预览</h2>
+      <p>手机与平板布局 — 联系人、动态与侧边栏账号管理。</p>
+    </header>
+
+    <div class="home-shots__group home-reveal">
+      <h3 class="home-shots__label">手机</h3>
+      <div class="home-shots__row home-shots__row--phone">
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/mobile/drawer.png' | relative_url }}" alt="手机 — 侧边栏与账号" width="720" height="1560" loading="lazy" decoding="async">
+          <figcaption>侧边栏与账号</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/mobile/contacts.png' | relative_url }}" alt="手机 — 联系人与频道" width="720" height="1560" loading="lazy" decoding="async">
+          <figcaption>联系人与频道</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/mobile/moments.png' | relative_url }}" alt="手机 — 动态" width="720" height="1560" loading="lazy" decoding="async">
+          <figcaption>动态</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="home-shots__group home-reveal">
+      <h3 class="home-shots__label">平板</h3>
+      <div class="home-shots__row home-shots__row--pad">
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/pad/drawer.png' | relative_url }}" alt="平板 — 分栏侧边栏" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>分栏 — 侧边栏</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/pad/contacts.png' | relative_url }}" alt="平板 — 联系人与频道" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>分栏 — 联系人</figcaption>
+        </figure>
+        <figure class="home-shot">
+          <img src="{{ '/images/screenshots/pad/moments.png' | relative_url }}" alt="平板 — 动态" width="1280" height="800" loading="lazy" decoding="async">
+          <figcaption>分栏 — 动态</figcaption>
+        </figure>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="home-section home-platforms" id="download">
   <div class="home-section__inner">
     <header class="home-section__header home-reveal">

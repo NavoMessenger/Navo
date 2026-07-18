@@ -51,15 +51,21 @@ Sign in with your existing Telegram account to message friends and groups in a c
 
 ## Screenshots
 
-<!-- Add 3–6 screenshots under docs/images/screenshots/ and uncomment:
-<p align="center">
-  <img src="docs/images/screenshots/chat.png" width="180" alt="Chat" />
-  <img src="docs/images/screenshots/list.png" width="180" alt="Chat list" />
-  <img src="docs/images/screenshots/settings.png" width="180" alt="Settings" />
-</p>
--->
+### Phone
 
-*Screenshots coming soon.*
+<p align="center">
+  <img src="docs/images/screenshots/mobile/drawer.png" width="200" alt="Phone — profile drawer" />
+  <img src="docs/images/screenshots/mobile/contacts.png" width="200" alt="Phone — contacts &amp; channels" />
+  <img src="docs/images/screenshots/mobile/moments.png" width="200" alt="Phone — moments feed" />
+</p>
+
+### Tablet
+
+<p align="center">
+  <img src="docs/images/screenshots/pad/drawer.png" width="360" alt="Tablet — split view with profile drawer" />
+  <img src="docs/images/screenshots/pad/contacts.png" width="360" alt="Tablet — contacts &amp; channels" />
+  <img src="docs/images/screenshots/pad/moments.png" width="360" alt="Tablet — moments feed" />
+</p>
 
 ## Roadmap
 

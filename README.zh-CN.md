@@ -51,15 +51,21 @@ iOS 暂未上架 App Store，目前**不提供**面向普通用户的 TestFlight
 
 ## 截图
 
-<!-- 将 3–6 张截图放到 docs/images/screenshots/ 后取消注释：
-<p align="center">
-  <img src="docs/images/screenshots/chat.png" width="180" alt="聊天" />
-  <img src="docs/images/screenshots/list.png" width="180" alt="聊天列表" />
-  <img src="docs/images/screenshots/settings.png" width="180" alt="设置" />
-</p>
--->
+### 手机
 
-*截图即将补充。*
+<p align="center">
+  <img src="docs/images/screenshots/mobile/drawer.png" width="200" alt="手机 — 侧边栏与账号" />
+  <img src="docs/images/screenshots/mobile/contacts.png" width="200" alt="手机 — 联系人与频道" />
+  <img src="docs/images/screenshots/mobile/moments.png" width="200" alt="手机 — 动态" />
+</p>
+
+### 平板
+
+<p align="center">
+  <img src="docs/images/screenshots/pad/drawer.png" width="360" alt="平板 — 分栏侧边栏" />
+  <img src="docs/images/screenshots/pad/contacts.png" width="360" alt="平板 — 联系人与频道" />
+  <img src="docs/images/screenshots/pad/moments.png" width="360" alt="平板 — 动态" />
+</p>
 
 ## 路线图
 

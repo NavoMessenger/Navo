@@ -7,9 +7,16 @@ nav_order: 2
 
 # Download & Install
 
+<div class="download-cta" markdown="0">
+  <a class="home-btn home-btn--primary home-btn--sm" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
+  <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="android" rel="noopener">Android APK</a>
+  <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="windows" rel="noopener">Windows</a>
+  <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="macos" rel="noopener">macOS</a>
+</div>
+
 Prebuilt packages are published on **[GitHub Releases](https://github.com/NavoMessenger/Navo/releases/latest)**. Asset names may vary by version — always use the files listed on the latest Release page.
 
-**Latest release:** [https://github.com/NavoMessenger/Navo/releases/latest](https://github.com/NavoMessenger/Navo/releases/latest)
+**Latest release:** <a href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-version>latest</a> · [Releases page](https://github.com/NavoMessenger/Navo/releases/latest)
 
 ## Android
 

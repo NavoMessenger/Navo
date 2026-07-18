@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{% if page.lang == 'zh' %}zh-CN{% else %}en{% endif %}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.title and page.title != site.title %}
+  <title>{{ page.title }} · {{ site.title }}</title>
+  {% else %}
+  <title>{{ site.title }} — {{ site.description }}</title>
+  {% endif %}
+  {% seo %}
+  {% include head_custom.html %}
+</head>
+<body class="home{% if page.lang == 'zh' %} home--zh{% endif %}">
+  {% include home-nav.html %}
+  <main class="home-main">
+    {{ content }}
+  </main>
+  {% include home-footer.html %}
+  <script>
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var nodes = document.querySelectorAll('.home-reveal');
+      if (!nodes.length || !('IntersectionObserver' in window)) {
+        nodes.forEach(function (el) { el.classList.add('is-visible'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+      nodes.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% assign lang = page.lang | default: 'en' %}
+<footer class="home-footer">
+  <div class="home-footer__inner">
+    {% if lang == 'zh' %}
+    <p class="home-footer__note">Navo 是独立、非官方的 Telegram 客户端，与 Telegram 无隶属或背书关系。</p>
+    <nav class="home-footer__links" aria-label="页脚">
+      <a href="{{ '/zh-CN/download.html' | relative_url }}">下载</a>
+      <a href="{{ '/privacy.html' | relative_url }}">隐私政策</a>
+      <a href="{{ '/terms.html' | relative_url }}">服务条款</a>
+      <a href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
+      <a href="{{ '/' | relative_url }}">English</a>
+    </nav>
+    {% else %}
+    <p class="home-footer__note">Navo is an independent, unofficial Telegram client — not affiliated with Telegram.</p>
+    <nav class="home-footer__links" aria-label="Footer">
+      <a href="{{ '/download.html' | relative_url }}">Download</a>
+      <a href="{{ '/privacy.html' | relative_url }}">Privacy</a>
+      <a href="{{ '/terms.html' | relative_url }}">Terms</a>
+      <a href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
+      <a href="{{ '/zh-CN/' | relative_url }}">中文</a>
+    </nav>
+    {% endif %}
+  </div>
+</footer>

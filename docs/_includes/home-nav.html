@@ -1,0 +1,17 @@
+{% assign lang = page.lang | default: 'en' %}
+<header class="home-nav">
+  <div class="home-nav__inner">
+    <a class="home-nav__brand" href="{% if lang == 'zh' %}{{ '/zh-CN/' | relative_url }}{% else %}{{ '/' | relative_url }}{% endif %}">Navo</a>
+    <nav class="home-nav__links" aria-label="{% if lang == 'zh' %}主导航{% else %}Primary{% endif %}">
+      {% if lang == 'zh' %}
+      <a href="{{ '/zh-CN/download.html' | relative_url }}">下载</a>
+      <a href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
+      <a href="{{ '/' | relative_url }}">English</a>
+      {% else %}
+      <a href="{{ '/download.html' | relative_url }}">Download</a>
+      <a href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
+      <a href="{{ '/zh-CN/' | relative_url }}">中文</a>
+      {% endif %}
+    </nav>
+  </div>
+</header>

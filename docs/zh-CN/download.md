@@ -7,9 +7,16 @@ nav_exclude: true
 
 # 下载与安装
 
+<div class="download-cta" markdown="0">
+  <a class="home-btn home-btn--primary home-btn--sm" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
+  <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="android" rel="noopener">Android APK</a>
+  <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="windows" rel="noopener">Windows</a>
+  <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="macos" rel="noopener">macOS</a>
+</div>
+
 预编译安装包发布在 **[GitHub Releases](https://github.com/NavoMessenger/Navo/releases/latest)**。具体文件名以最新 Release 页的 Assets 为准。
 
-**最新版本：** [https://github.com/NavoMessenger/Navo/releases/latest](https://github.com/NavoMessenger/Navo/releases/latest)
+**最新版本：** <a href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-version>latest</a> · [Releases 页面](https://github.com/NavoMessenger/Navo/releases/latest)
 
 ## Android
 

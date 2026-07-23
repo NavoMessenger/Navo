@@ -76,7 +76,7 @@ Sign in with your existing Telegram account to message friends and groups in a c
 
 ## Why open source
 
-Navo is open source so you can inspect how it talks to Telegram via TDLib, audit privacy-related behavior, and build trust beyond a store listing alone. The repository contains original, independently written code — no proprietary assets from third-party apps.
+Navo is open source so you can inspect how it talks to Telegram via TDLib, audit privacy-related behavior, and build trust beyond a store listing alone. The project builds on open-source upstream work and ships no proprietary assets from third-party apps.
 
 ## Building from source
 
@@ -100,7 +100,7 @@ If Navo is useful, please **[star the repo](https://github.com/NavoMessenger/Nav
 
 ## License & credits
 
-TDLib is © Telegram, used under its own license. This repository contains only original, independently written code; it ships no third-party app's proprietary assets or trademarks.
+Navo builds on **[Mithka](https://github.com/iebb/mithka)** by [iebb](https://github.com/iebb) — thank you for the open Flutter + TDLib foundation (BSD-3-Clause). Navo continues as an independent project with its own branding and platform support. TDLib is © Telegram, used under its own license. Navo ships no proprietary assets or trademarks from third-party apps.
 
 ---
 

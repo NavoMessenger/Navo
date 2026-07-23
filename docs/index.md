@@ -160,6 +160,7 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
       <a href="https://github.com/NavoMessenger/Navo" rel="noopener">View source on GitHub</a>
       <a href="{{ '/build.html' | relative_url }}">Build from source</a>
     </p>
+    <p class="home-trust__thanks">Based on <a href="https://github.com/iebb/mithka" rel="noopener">Mithka</a> — with thanks to <a href="https://github.com/iebb/mithka" rel="noopener">iebb/mithka</a>.</p>
     <p class="home-trust__disclaimer">Navo is <strong>not affiliated with, endorsed by, or connected to Telegram</strong>. Use at your own risk and follow Telegram’s Terms of Service.</p>
   </div>
 </section>

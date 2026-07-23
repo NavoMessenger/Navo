@@ -579,6 +579,22 @@ body.home *::after {
   text-decoration: none;
 }
 
+.home-trust__thanks {
+  margin-top: 1.25rem !important;
+  font-size: 0.95rem !important;
+  color: var(--navo-ink-soft) !important;
+}
+
+.home-trust__thanks a {
+  color: var(--navo-blue);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.home-trust__thanks a:hover {
+  text-decoration: underline;
+}
+
 .home-trust__disclaimer {
   margin-top: 2rem !important;
   padding-top: 1.5rem;

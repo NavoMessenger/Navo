@@ -190,6 +190,19 @@
     );
   }
 
+  /** TDLib fill colors are RGB (optionally ARGB); match app: 0xFF000000 | (f & 0xFFFFFF). */
+  function fillColorsToHex(list) {
+    if (!Array.isArray(list)) return [];
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      var c = list[i];
+      if (typeof c !== "number" || !isFinite(c)) continue;
+      var rgb = (c >>> 0) & 0xffffff;
+      out.push("#" + rgb.toString(16).padStart(6, "0").toUpperCase());
+    }
+    return out;
+  }
+
   function appearanceLabel(lang, mode) {
     if (mode === "dark") return t(lang, "appearanceDark");
     if (mode === "system") return t(lang, "appearanceSystem");
@@ -200,8 +213,18 @@
   function wallpaperLabel(lang, data) {
     var source = data.wallpaperSource || "";
     var id = data.chatWallpaperId || "";
+    var fills = fillColorsToHex(data.wallpaperFillColors);
     if (source === "tdBackground") {
+      if (data.wallpaperIsPattern) {
+        return t(lang, "wallpaperTd") + " · pattern" + (fills.length ? " (" + fills.length + ")" : "");
+      }
+      if (fills.length && !(data.tdBackgroundName || "").trim()) {
+        return t(lang, "wallpaperTd") + " · fill";
+      }
       return t(lang, "wallpaperTd") + (id ? " · " + id : "");
+    }
+    if (source === "customLocal" || data.customWallpaperJpeg) {
+      return t(lang, "wallpaperUnknown");
     }
     if (id && WALLPAPER_IDS[id]) {
       return t(lang, "wallpaperBuiltin") + " · " + id;
@@ -471,8 +494,15 @@
     return next();
   }
 
-  function loadTdWallpaper(name, lang, statusEl) {
-    if (!name) return Promise.resolve(false);
+  function loadTdWallpaper(name, lang, statusEl, fillFallback) {
+    if (!name) {
+      if (fillFallback && fillFallback.length) {
+        applyWallpaperPattern(fillFallback);
+        setStatus(statusEl, t(lang, "statusOk"), "ok");
+        return Promise.resolve(true);
+      }
+      return Promise.resolve(false);
+    }
     setStatus(statusEl, t(lang, "statusWallLoading"), "info");
 
     return loadTdWallpaperViaWorker(name)
@@ -481,8 +511,48 @@
         return true;
       })
       .catch(function () {
+        if (fillFallback && fillFallback.length) {
+          applyWallpaperPattern(fillFallback);
+          setStatus(statusEl, t(lang, "statusOk"), "ok");
+          return true;
+        }
         return loadTdWallpaperLegacy(name, lang, statusEl);
       });
+  }
+
+  /**
+   * Resolve wallpaper the same way the app preview does:
+   * - custom JPEG embedded in pack
+   * - pattern / fill / freeform → wallpaperFillColors (pack-local, no Worker)
+   * - photo TD background → Worker / t.me
+   * - builtin → CSS (already set via data-wallpaper)
+   */
+  function applyThemeWallpaper(data, lang, statusEl) {
+    var fills = fillColorsToHex(data.wallpaperFillColors);
+    var name = (data.tdBackgroundName || "").trim();
+    var source = data.wallpaperSource || "";
+
+    if (data.customWallpaperJpeg && typeof data.customWallpaperJpeg === "string") {
+      var b64 = data.customWallpaperJpeg.replace(/\s+/g, "");
+      applyWallpaperImage("data:image/jpeg;base64," + b64);
+      setStatus(statusEl, t(lang, "statusOk"), "ok");
+      return;
+    }
+
+    // Official non-photo backgrounds ship colors in the share JSON (same as app).
+    // Do not depend on t.me / Worker for these — Worker often has no JPEG.
+    if (fills.length > 0) {
+      applyWallpaperPattern(fills);
+      setStatus(statusEl, t(lang, "statusOk"), "ok");
+      return;
+    }
+
+    if (source === "tdBackground" || name) {
+      loadTdWallpaper(name, lang, statusEl, fills);
+      return;
+    }
+
+    setStatus(statusEl, t(lang, "statusOk"), "ok");
   }
 
   function isAndroid() {
@@ -606,10 +676,7 @@
       if (fontCjk) fontCjk.textContent = prettyFont(lang, data.cjkFontChoice);
       if (fontMono) fontMono.textContent = prettyFont(lang, data.monospaceFontChoice);
       setStatus(status, t(lang, "statusOk"), "ok");
-
-      if (data.wallpaperSource === "tdBackground" && data.tdBackgroundName) {
-        loadTdWallpaper(data.tdBackgroundName, lang, status);
-      }
+      applyThemeWallpaper(data, lang, status);
     } else {
       if (sumAppearance) sumAppearance.textContent = t(lang, "dash");
       if (sumWallpaper) sumWallpaper.textContent = t(lang, "dash");

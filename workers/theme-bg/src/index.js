@@ -13,7 +13,7 @@
 
 const CACHE_TTL_SECONDS = 86400; // 24h
 const CACHE_VERSION = "v2";
-const NAME_RE = /^[A-Za-z0-9_-]{8,128}$/;
+const NAME_RE = /^[A-Za-z0-9_.-]{4,200}$/;
 const TG_LOGO_RE = /telegram\.org\/img\//i;
 const ALLOWED_ORIGINS = new Set([
   "https://www.navo.im",

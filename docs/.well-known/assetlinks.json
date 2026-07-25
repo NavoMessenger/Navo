@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "im.navo.app",
+      "sha256_cert_fingerprints": [
+        "FE:66:F0:B9:9C:72:A7:36:43:1E:87:35:87:42:DC:B3:16:C0:53:80:F7:3A:18:21:0B:81:C9:6B:6D:3D:EC:4A"
+      ]
+    }
+  }
+]

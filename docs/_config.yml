@@ -35,6 +35,10 @@ footer_content: >-
   <a href="/terms.html">Terms</a> ·
   <a href="https://github.com/NavoMessenger/Navo">GitHub</a>
 
+# Serve Digital Asset Links for Android App Links (dotfolders are ignored by default).
+include:
+  - .well-known
+
 sass:
   quiet_deps: true
 

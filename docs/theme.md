@@ -11,8 +11,12 @@ description: Preview a shared Navo theme and download the app to import it.
     <header class="theme-hero__intro">
       <p class="theme-hero__brand">Navo</p>
       <h1 class="theme-hero__title" data-i18n="title">Theme preview</h1>
-      <p class="theme-hero__lead" data-i18n="lead">Install Navo, then open this link again to import the theme into the app.</p>
+      <p class="theme-hero__lead" data-i18n="lead">Open in Navo to apply this theme, or download the app first.</p>
       <p class="theme-status" id="theme-status" hidden></p>
+      <div class="theme-open" id="theme-open" hidden>
+        <button type="button" class="home-btn home-btn--primary" id="theme-open-btn" data-i18n="openInNavo">Open in Navo</button>
+        <p class="theme-open__hint" data-i18n="openHint">Requires Navo installed. If nothing happens, download below.</p>
+      </div>
     </header>
 
     <div class="theme-stage">
@@ -40,32 +44,43 @@ description: Preview a shared Navo theme and download the app to import it.
         </div>
       </div>
 
-      <dl class="theme-summary" id="theme-summary">
-        <div class="theme-summary__row">
-          <dt data-i18n="labelColor">Brand color</dt>
-          <dd id="theme-sum-color"><span class="theme-swatch" id="theme-swatch"></span><code id="theme-color-hex">#2D7FF9</code></dd>
+      <div class="theme-aside">
+        <div class="theme-pack" id="theme-pack">
+          <div class="theme-pack__color">
+            <span class="theme-swatch theme-swatch--lg" id="theme-swatch"></span>
+            <span data-i18n="labelColorShort">Color</span>
+            <code id="theme-color-hex">#2D7FF9</code>
+          </div>
+          <div class="theme-pack__wall" id="theme-pack-wall">
+            <div class="theme-pack__wall-img" id="theme-pack-wall-img" data-wallpaper="aurora"></div>
+          </div>
+          <ul class="theme-pack__fonts" id="theme-pack-fonts">
+            <li><span data-i18n="labelFont">Font</span>: <strong id="theme-font-main">—</strong></li>
+            <li><span data-i18n="labelCjk">CJK</span>: <strong id="theme-font-cjk">—</strong></li>
+            <li><span data-i18n="labelMono">Mono</span>: <strong id="theme-font-mono">—</strong></li>
+          </ul>
+          <p class="theme-pack__note" data-i18n="packNote">Preview below — open Navo to apply color, wallpaper, fonts, and more.</p>
         </div>
-        <div class="theme-summary__row">
-          <dt data-i18n="labelAppearance">Appearance</dt>
-          <dd id="theme-sum-appearance">—</dd>
-        </div>
-        <div class="theme-summary__row">
-          <dt data-i18n="labelWallpaper">Wallpaper</dt>
-          <dd id="theme-sum-wallpaper">—</dd>
-        </div>
-        <div class="theme-summary__row">
-          <dt data-i18n="labelFont">Font</dt>
-          <dd id="theme-sum-font">—</dd>
-        </div>
-        <div class="theme-summary__row">
-          <dt data-i18n="labelGlass">Glass quality</dt>
-          <dd id="theme-sum-glass">—</dd>
-        </div>
-        <div class="theme-summary__row">
-          <dt data-i18n="labelExtras">Extras</dt>
-          <dd id="theme-sum-extras">—</dd>
-        </div>
-      </dl>
+
+        <dl class="theme-summary" id="theme-summary">
+          <div class="theme-summary__row">
+            <dt data-i18n="labelAppearance">Appearance</dt>
+            <dd id="theme-sum-appearance">—</dd>
+          </div>
+          <div class="theme-summary__row">
+            <dt data-i18n="labelWallpaper">Wallpaper</dt>
+            <dd id="theme-sum-wallpaper">—</dd>
+          </div>
+          <div class="theme-summary__row">
+            <dt data-i18n="labelGlass">Glass quality</dt>
+            <dd id="theme-sum-glass">—</dd>
+          </div>
+          <div class="theme-summary__row">
+            <dt data-i18n="labelExtras">Extras</dt>
+            <dd id="theme-sum-extras">—</dd>
+          </div>
+        </dl>
+      </div>
     </div>
 
     <div class="theme-download">

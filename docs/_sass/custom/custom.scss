@@ -815,6 +815,32 @@ body.home *::after {
   color: #8a2f22;
 }
 
+.theme-status--info {
+  background: rgba(15, 23, 36, 0.05);
+  color: var(--navo-ink-soft);
+}
+
+.theme-open {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.theme-open .home-btn {
+  border: none;
+  cursor: pointer;
+}
+
+.theme-open__hint {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--navo-muted);
+  max-width: 28rem;
+  line-height: 1.4;
+}
+
 .theme-stage {
   display: flex;
   flex-direction: column;
@@ -919,6 +945,14 @@ body.home *::after {
   z-index: 0;
   pointer-events: none;
   opacity: 0.85;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.theme-chat__wallpaper.has-photo {
+  opacity: 1;
+  filter: none !important;
 }
 
 .theme-chat__wallpaper[data-wallpaper="aurora"] {
@@ -1060,9 +1094,121 @@ body.home *::after {
   transform: translateX(1px);
 }
 
+.theme-aside {
+  width: min(100%, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.theme-pack {
+  padding: 0;
+}
+
+.theme-pack__color {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--navo-ink-soft);
+  margin-bottom: 0.85rem;
+}
+
+.theme-pack__color code {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--navo-ink);
+  letter-spacing: 0.02em;
+}
+
+.theme-swatch {
+  width: 1.15rem;
+  height: 1.15rem;
+  border-radius: 4px;
+  background: var(--theme-brand, #2d7ff9);
+  border: 1px solid rgba(15, 23, 36, 0.12);
+  flex-shrink: 0;
+}
+
+.theme-swatch--lg {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-radius: 50%;
+}
+
+.theme-pack__wall {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--navo-line);
+  background: var(--navo-surface);
+  aspect-ratio: 16 / 10;
+}
+
+.theme-pack__wall-img {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 140px;
+}
+
+.theme-pack__wall-img[data-wallpaper="aurora"] {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 20% 30%, rgba(80, 220, 200, 0.55), transparent 55%),
+    radial-gradient(ellipse 70% 55% at 85% 70%, rgba(90, 140, 255, 0.5), transparent 50%),
+    linear-gradient(160deg, #c8e8f8 0%, #e8f0ff 45%, #d4f0ea 100%);
+}
+
+.theme-pack__wall-img[data-wallpaper="dusk"] {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 30% 20%, rgba(255, 140, 100, 0.45), transparent 55%),
+    linear-gradient(165deg, #2a1a3a 0%, #4a2a50 40%, #1a2035 100%);
+}
+
+.theme-pack__wall-img[data-wallpaper="mist"] {
+  background-image: linear-gradient(180deg, #e8ecf2 0%, #d0d8e4 100%);
+}
+
+.theme-pack__wall-img[data-wallpaper="gradient"] {
+  background-image: linear-gradient(145deg, #5b8def 0%, #7b6cf0 45%, #c06bdf 100%);
+}
+
+.theme-pack__wall-img[data-wallpaper="td"] {
+  background-image:
+    radial-gradient(ellipse 75% 55% at 70% 25%, color-mix(in srgb, var(--theme-brand, #2d7ff9) 55%, white), transparent 55%),
+    linear-gradient(160deg, color-mix(in srgb, var(--theme-brand, #2d7ff9) 25%, #e8f4fc), #f5f7fa);
+}
+
+.theme-pack__wall-img.has-photo {
+  background-color: #111;
+}
+
+.theme-pack__fonts {
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
+  font-size: 0.92rem;
+  color: var(--navo-ink-soft);
+  line-height: 1.55;
+}
+
+.theme-pack__fonts strong {
+  font-weight: 600;
+  color: var(--navo-ink);
+}
+
+.theme-pack__note {
+  margin: 0.85rem 0 0;
+  font-size: 0.88rem;
+  color: var(--navo-muted);
+  line-height: 1.45;
+}
+
 .theme-summary {
   margin: 0;
-  width: min(100%, 360px);
+  width: 100%;
   border-top: 1px solid var(--navo-line);
 }
 
@@ -1090,27 +1236,6 @@ body.home *::after {
   color: var(--navo-ink);
   word-break: break-word;
   line-height: 1.4;
-}
-
-.theme-summary__row dd code {
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-
-#theme-sum-color {
-  display: flex;
-  align-items: center;
-  gap: 0.55rem;
-}
-
-.theme-swatch {
-  width: 1.15rem;
-  height: 1.15rem;
-  border-radius: 4px;
-  background: var(--theme-brand, #2d7ff9);
-  border: 1px solid rgba(15, 23, 36, 0.12);
-  flex-shrink: 0;
 }
 
 .theme-download {
@@ -1162,10 +1287,11 @@ body.home *::after {
     gap: 3rem;
   }
 
-  .theme-summary {
+  .theme-aside {
     flex: 1;
     max-width: none;
     align-self: center;
+    width: auto;
   }
 
   .theme-summary__row {

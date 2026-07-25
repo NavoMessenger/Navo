@@ -5,34 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title }} · {{ site.title }}</title>
   {% seo %}
-  {% include head_custom.html %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/theme-open.css' | relative_url }}">
+  <meta name="theme-color" content="#2D7FF9">
   <meta name="robots" content="noindex">
+  <meta property="og:site_name" content="Navo">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ '/images/banner.png' | absolute_url }}">
+  <link rel="icon" href="{{ '/images/banner.png' | relative_url }}" type="image/png">
 </head>
-<body class="home theme-page">
-  <header class="home-nav">
-    <div class="home-nav__inner">
-      <a class="home-nav__brand" href="{{ '/' | relative_url }}">Navo</a>
-      <nav class="home-nav__links" aria-label="Primary">
-        <a href="{{ '/download.html' | relative_url }}" data-i18n="navDownload">Download</a>
-        <a href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
-        <button type="button" class="theme-lang-toggle" id="theme-lang-toggle" data-i18n="langToggle">中文</button>
-      </nav>
-    </div>
-  </header>
-  <main class="home-main theme-main">
-    {{ content }}
-  </main>
-  <footer class="home-footer">
-    <div class="home-footer__inner">
-      <p class="home-footer__note" data-i18n="footerNote">Navo is an independent, unofficial Telegram client — not affiliated with Telegram.</p>
-      <nav class="home-footer__links" aria-label="Footer">
-        <a href="{{ '/download.html' | relative_url }}" data-i18n="navDownload">Download</a>
-        <a href="{{ '/privacy.html' | relative_url }}" data-i18n="navPrivacy">Privacy</a>
-        <a href="{{ '/terms.html' | relative_url }}" data-i18n="navTerms">Terms</a>
-        <a href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </footer>
-  <script src="{{ '/assets/js/theme-preview.js' | relative_url }}" defer></script>
+<body class="theme-open">
+  {{ content }}
+  <script src="{{ '/assets/js/theme-open.js' | relative_url }}" defer></script>
 </body>
 </html>

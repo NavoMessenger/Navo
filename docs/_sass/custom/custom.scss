@@ -950,9 +950,16 @@ body.home *::after {
   background-repeat: no-repeat;
 }
 
-.theme-chat__wallpaper.has-photo {
+.theme-chat__wallpaper.has-photo,
+.theme-pack__wall-img.has-photo {
   opacity: 1;
   filter: none !important;
+}
+
+.theme-chat__wallpaper[data-wallpaper="pattern"].has-photo,
+.theme-pack__wall-img[data-wallpaper="pattern"].has-photo {
+  background-size: cover;
+  background-position: center;
 }
 
 .theme-chat__wallpaper[data-wallpaper="aurora"] {

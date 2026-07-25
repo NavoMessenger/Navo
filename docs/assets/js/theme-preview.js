@@ -258,7 +258,58 @@
       if (!el) return;
       el.style.backgroundImage = 'url("' + url.replace(/"/g, '\\"') + '")';
       el.classList.add("has-photo");
+      el.removeAttribute("data-pattern-colors");
     });
+  }
+
+  /** Apply Telegram pattern / fill colors as CSS blobs (no network). */
+  function applyWallpaperPattern(colors) {
+    var layers = [
+      document.getElementById("theme-wallpaper"),
+      document.getElementById("theme-pack-wall-img"),
+    ];
+    var hex = (colors || [])
+      .map(function (c) {
+        c = String(c || "").trim();
+        return c.charAt(0) === "#" ? c : "#" + c;
+      })
+      .filter(Boolean);
+    if (!hex.length) return false;
+
+    var positions = [
+      ["20%", "30%"],
+      ["85%", "25%"],
+      ["70%", "75%"],
+      ["15%", "80%"],
+      ["50%", "50%"],
+      ["40%", "15%"],
+      ["60%", "90%"],
+      ["90%", "55%"],
+    ];
+    var layersCss = positions
+      .map(function (p, i) {
+        var c = hex[i % hex.length];
+        return (
+          "radial-gradient(ellipse 55% 45% at " +
+          p[0] +
+          " " +
+          p[1] +
+          ", " +
+          c +
+          " 0%, transparent 70%)"
+        );
+      })
+      .join(", ");
+    layersCss += ", linear-gradient(160deg, " + hex[0] + ", " + hex[hex.length - 1] + ")";
+
+    layers.forEach(function (el) {
+      if (!el) return;
+      el.style.backgroundImage = layersCss;
+      el.classList.add("has-photo");
+      el.setAttribute("data-wallpaper", "pattern");
+      el.setAttribute("data-pattern-colors", hex.join(","));
+    });
+    return true;
   }
 
   /**
@@ -380,11 +431,37 @@
     function next() {
       if (i >= bases.length) return Promise.reject(new Error("all_workers_failed"));
       var base = bases[i++];
-      var workerUrl = base + "/bg?name=" + encodeURIComponent(name);
-      return preloadImage(workerUrl)
-        .then(function () {
+      var metaUrl = base + "/v2/bg?name=" + encodeURIComponent(name) + "&format=json";
+      var previewUrl = base + "/v2/bg?name=" + encodeURIComponent(name);
+
+      return fetch(metaUrl, {
+        method: "GET",
+        headers: { Accept: "application/json" },
+        mode: "cors",
+        credentials: "omit",
+      })
+        .then(function (res) {
+          if (!res.ok) throw new Error("http " + res.status);
+          return res.json();
+        })
+        .then(function (meta) {
+          if (!meta || !meta.type) throw new Error("bad_meta");
           rememberBgBase(base);
-          return workerUrl;
+
+          if (meta.type === "pattern" && meta.colors && meta.colors.length) {
+            if (!applyWallpaperPattern(meta.colors)) throw new Error("pattern_apply");
+            return { kind: "pattern", base: base };
+          }
+
+          if (meta.type === "image") {
+            // Prefer Worker URL (302→CDN, edge-cached) over raw CDN for stable caching.
+            return preloadImage(previewUrl).then(function () {
+              applyWallpaperImage(previewUrl);
+              return { kind: "image", base: base };
+            });
+          }
+
+          throw new Error("unsupported_type");
         })
         .catch(function () {
           return next();
@@ -399,8 +476,7 @@
     setStatus(statusEl, t(lang, "statusWallLoading"), "info");
 
     return loadTdWallpaperViaWorker(name)
-      .then(function (workerUrl) {
-        applyWallpaperImage(workerUrl);
+      .then(function () {
         setStatus(statusEl, t(lang, "statusOk"), "ok");
         return true;
       })

@@ -5,17 +5,28 @@ Cloudflare Worker that resolves Telegram chat-background preview images for the 
 ## Endpoint
 
 ```
-GET https://api.navo.im/bg?name=<tdBackgroundName>
-→ 302 Location: https://cdn*.telesco.pe/file/...
+GET …/v2/bg?name=<tdBackgroundName>
+→ image: 302 Location: https://cdn*.telesco.pe/file/...
+→ pattern/fill: 200 image/svg+xml (blob preview from data-colors)
 
-GET https://api.navo.im/bg?name=<tdBackgroundName>&format=json
-→ { "url": "https://cdn…/file/…", "name": "…" }
+GET …/v2/bg?name=<tdBackgroundName>&format=json
+→ { "type": "image", "url": "…" }
+→ { "type": "pattern", "colors": ["#dbddbb", …] }
 
-GET https://api.navo.im/health
+GET …/health
 → { "ok": true }
 ```
 
-Resolved URLs are cached at the edge for 24 hours.
+(`/bg` still works; `/v2/bg` is preferred to avoid stale CDN caches from the image-only era.)
+
+Telegram has two public background kinds on `t.me/bg/…`:
+
+| Type | HTML signal | Preview |
+|------|-------------|---------|
+| Image | `background:url(...)` / real `og:image` | 302 to CDN |
+| Pattern / color field | `<canvas data-colors="…">` | SVG + site CSS blobs |
+
+Resolved metadata is cached at the edge for 24 hours.
 
 ## Deploy
 

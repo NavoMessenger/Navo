@@ -38,7 +38,7 @@
       downloadLead: "Available on Android, Windows, and macOS.",
       downloadGuide: "Full install guide →",
       openInNavo: "Open in Navo",
-      openHint: "Requires Navo installed. If nothing happens, download below.",
+      openHint: "Opens via navo:// — requires Navo installed. If nothing happens, download below.",
       statusInvalid: "This theme link is missing or invalid. You can still download Navo below.",
       statusOk: "Theme loaded — open Navo to apply it.",
       statusWallLoading: "Loading wallpaper preview…",
@@ -86,7 +86,7 @@
       downloadLead: "支持 Android、Windows 与 macOS。",
       downloadGuide: "完整安装说明 →",
       openInNavo: "在 Navo 中打开",
-      openHint: "需已安装 Navo。若无反应，请先下载安装。",
+      openHint: "通过 navo:// 调起，需已安装 Navo。若无反应，请先下载安装。",
       statusInvalid: "主题链接缺失或无效。你仍可在下方下载 Navo。",
       statusOk: "主题已加载 — 在 Navo 中打开以应用。",
       statusWallLoading: "正在加载壁纸预览…",
@@ -563,59 +563,44 @@
     return /Android|iPhone|iPad|iPod/i.test(navigator.userAgent || "");
   }
 
-  /** Prefer URL-safe base64 in Intent path so `/` in payload does not split the URI. */
+  /** Prefer URL-safe base64 (matches ThemePack.toShareLink / tryParseLink). */
   function toBase64Url(s) {
     return String(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
   }
 
-  /** Build deep-link candidates. Hash payload uses %23 so Intent URI still parses. */
-  function openUrls(payload) {
-    var hash = "#" + payload;
-    var safe = toBase64Url(payload);
-    var httpsUrl = "https://www.navo.im/theme" + hash;
-    var intentUrl =
-      "intent://www.navo.im/theme%23" +
+  /**
+   * App parses: navo://theme?d=<base64url>
+   * (https://navo.im/theme#… App Links deferred — use custom scheme for now.)
+   */
+  function navoThemeUrl(payload) {
+    return "navo://theme?d=" + encodeURIComponent(toBase64Url(payload));
+  }
+
+  function androidNavoIntent(payload) {
+    var safe = encodeURIComponent(toBase64Url(payload));
+    return (
+      "intent://theme?d=" +
       safe +
-      "#Intent;scheme=https;package=" +
+      "#Intent;scheme=navo;package=" +
       PACKAGE +
       ";S.browser_fallback_url=" +
       encodeURIComponent(PLAY_STORE) +
-      ";end";
-    var customUrl = "navo://theme" + hash;
-    return { httpsUrl: httpsUrl, intentUrl: intentUrl, customUrl: customUrl };
+      ";end"
+    );
   }
 
-  function tryOpenInNavo(payload, opts) {
-    opts = opts || {};
+  function tryOpenInNavo(payload) {
     if (!payload) return;
-    var urls = openUrls(payload);
-    var fallbackMs = opts.fallbackMs || 1600;
+    var navoUrl = navoThemeUrl(payload);
 
     if (isAndroid()) {
-      window.location.href = urls.intentUrl;
+      // Chrome: Intent with scheme=navo is more reliable than bare custom-scheme navigation.
+      window.location.href = androidNavoIntent(payload);
       return;
     }
 
-    // iOS / desktop: try custom scheme, then same https URL (App Links / associated domains).
-    var hidden = document.createElement("iframe");
-    hidden.style.display = "none";
-    hidden.src = urls.customUrl;
-    document.body.appendChild(hidden);
-    setTimeout(function () {
-      try {
-        document.body.removeChild(hidden);
-      } catch (e) {}
-    }, 800);
-
-    var start = Date.now();
-    setTimeout(function () {
-      // If still visible, custom scheme likely failed — try https (for App Links).
-      if (document.visibilityState === "visible" && Date.now() - start >= fallbackMs - 50) {
-        if (opts.allowHttpsFallback !== false) {
-          window.location.href = urls.httpsUrl;
-        }
-      }
-    }, fallbackMs);
+    // iOS / desktop (Windows navo:// via registry, macOS CFBundleURLTypes).
+    window.location.href = navoUrl;
   }
 
   function render(lang, data, payload) {
@@ -724,7 +709,7 @@
     if (openBtn) {
       openBtn.addEventListener("click", function () {
         if (!raw || !data) return;
-        tryOpenInNavo(raw, { allowHttpsFallback: true, fallbackMs: 1200 });
+        tryOpenInNavo(raw);
       });
     }
 
@@ -734,14 +719,14 @@
       render(lang, data, raw);
       if (shouldAutoOpen(raw) && data) {
         setTimeout(function () {
-          tryOpenInNavo(raw, { allowHttpsFallback: false, fallbackMs: 1400 });
+          tryOpenInNavo(raw);
         }, 500);
       }
     });
 
     if (shouldAutoOpen(raw) && data) {
       setTimeout(function () {
-        tryOpenInNavo(raw, { allowHttpsFallback: false, fallbackMs: 1400 });
+        tryOpenInNavo(raw);
       }, 600);
     }
   }

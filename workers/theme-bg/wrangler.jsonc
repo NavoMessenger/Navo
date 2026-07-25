@@ -1,0 +1,13 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "navo-theme-bg",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-25",
+  "workers_dev": true,
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  },
+  // Attach after the zone is on Cloudflare (or use a CF-managed subdomain):
+  // "routes": [{ "pattern": "api.navo.im", "custom_domain": true }]
+}

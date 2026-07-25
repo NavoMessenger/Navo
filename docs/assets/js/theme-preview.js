@@ -261,6 +261,16 @@
     });
   }
 
+  /**
+   * Wallpaper API bases (Cloudflare Worker).
+   * workers.dev is live now; api.navo.im after custom domain is attached.
+   */
+  var BG_API_BASES = [
+    "https://navo-theme-bg.duckey93.workers.dev",
+    "https://api.navo.im",
+  ];
+  var BG_API_PREF_KEY = "navo_bg_api_base";
+
   function extractOgImage(html) {
     var m = html.match(/property=["']og:image["']\s+content=["']([^"']+)["']/i);
     if (m) return m[1];
@@ -292,9 +302,49 @@
     });
   }
 
-  function loadTdWallpaper(name, lang, statusEl) {
-    if (!name) return Promise.resolve(false);
-    setStatus(statusEl, t(lang, "statusWallLoading"), "info");
+  function preloadImage(url) {
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      var timer = setTimeout(function () {
+        img.onload = img.onerror = null;
+        reject(new Error("image_timeout"));
+      }, 8000);
+      img.onload = function () {
+        clearTimeout(timer);
+        resolve(url);
+      };
+      img.onerror = function () {
+        clearTimeout(timer);
+        reject(new Error("image_load_failed"));
+      };
+      img.referrerPolicy = "no-referrer";
+      img.src = url;
+    });
+  }
+
+  function orderedBgBases() {
+    var preferred = null;
+    try {
+      preferred = sessionStorage.getItem(BG_API_PREF_KEY);
+    } catch (e) {}
+    var list = BG_API_BASES.slice();
+    if (preferred) {
+      list = [preferred].concat(
+        list.filter(function (b) {
+          return b !== preferred;
+        }),
+      );
+    }
+    return list;
+  }
+
+  function rememberBgBase(base) {
+    try {
+      sessionStorage.setItem(BG_API_PREF_KEY, base);
+    } catch (e) {}
+  }
+
+  function loadTdWallpaperLegacy(name, lang, statusEl) {
     var tgUrl = "https://t.me/bg/" + encodeURIComponent(name);
     var proxies = proxyUrls(tgUrl);
     var i = 0;
@@ -309,9 +359,11 @@
         .then(function (html) {
           var img = extractOgImage(html || "");
           if (!img) throw new Error("no og:image");
-          applyWallpaperImage(img);
-          setStatus(statusEl, t(lang, "statusOk"), "ok");
-          return true;
+          return preloadImage(img).then(function () {
+            applyWallpaperImage(img);
+            setStatus(statusEl, t(lang, "statusOk"), "ok");
+            return true;
+          });
         })
         .catch(function () {
           return next();
@@ -319,6 +371,42 @@
     }
 
     return Promise.resolve().then(next);
+  }
+
+  function loadTdWallpaperViaWorker(name) {
+    var bases = orderedBgBases();
+    var i = 0;
+
+    function next() {
+      if (i >= bases.length) return Promise.reject(new Error("all_workers_failed"));
+      var base = bases[i++];
+      var workerUrl = base + "/bg?name=" + encodeURIComponent(name);
+      return preloadImage(workerUrl)
+        .then(function () {
+          rememberBgBase(base);
+          return workerUrl;
+        })
+        .catch(function () {
+          return next();
+        });
+    }
+
+    return next();
+  }
+
+  function loadTdWallpaper(name, lang, statusEl) {
+    if (!name) return Promise.resolve(false);
+    setStatus(statusEl, t(lang, "statusWallLoading"), "info");
+
+    return loadTdWallpaperViaWorker(name)
+      .then(function (workerUrl) {
+        applyWallpaperImage(workerUrl);
+        setStatus(statusEl, t(lang, "statusOk"), "ok");
+        return true;
+      })
+      .catch(function () {
+        return loadTdWallpaperLegacy(name, lang, statusEl);
+      });
   }
 
   function isAndroid() {

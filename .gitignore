@@ -1,2 +1,6 @@
 .DS_Store
 **/.DS_Store
+
+# Cloudflare Workers
+workers/**/node_modules/
+workers/**/.wrangler/

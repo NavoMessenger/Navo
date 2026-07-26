@@ -2,22 +2,21 @@
  * Enrich download buttons with latest Release asset URLs.
  * Fallback href remains /releases/latest when no matching asset exists.
  *
- * Current CI naming examples (tag 2.0.0):
- *   navo-2.0.0+26071805-arm64-v8a-release.apk
- *   navo-2.0.0+26071805-macos-adhoc.dmg
+ * Current CI naming examples:
+ *   navo-2.0.5+26072608-android-v8a-release.apk
+ *   navo-2.0.5+26072608-macos-adhoc.dmg
+ *   navo-2.0.5+26072613-windows-setup.exe
  */
 (function () {
   var REPO = "NavoMessenger/Navo";
   var KEY = "navo_latest_release";
-  var TTL_MS = 60 * 60 * 1000;
 
   function cacheGet() {
     try {
       var raw = sessionStorage.getItem(KEY);
       if (!raw) return null;
       var parsed = JSON.parse(raw);
-      if (Date.now() - parsed.ts > TTL_MS) return null;
-      return parsed.data;
+      return parsed && parsed.data ? parsed.data : null;
     } catch (e) {
       return null;
     }
@@ -71,24 +70,30 @@
     document.querySelectorAll("[data-release-version]").forEach(function (el) {
       if (release.tag_name) {
         el.textContent = release.tag_name;
+        el.setAttribute("href", release.html_url || el.getAttribute("href"));
       }
     });
   }
 
-  var cached = cacheGet();
-  if (cached) {
-    apply(cached);
-    return;
+  function fetchLatest() {
+    return fetch("https://api.github.com/repos/" + REPO + "/releases/latest")
+      .then(function (r) {
+        if (!r.ok) throw new Error("release fetch failed");
+        return r.json();
+      })
+      .then(function (data) {
+        cacheSet(data);
+        apply(data);
+        return data;
+      });
   }
 
-  fetch("https://api.github.com/repos/" + REPO + "/releases/latest")
-    .then(function (r) {
-      if (!r.ok) throw new Error("release fetch failed");
-      return r.json();
-    })
-    .then(function (data) {
-      cacheSet(data);
-      apply(data);
-    })
-    .catch(function () {});
+  var cached = cacheGet();
+  if (cached) {
+    // Paint immediately from cache, then always revalidate so a new Release
+    // is not stuck behind sessionStorage for the rest of the TTL window.
+    apply(cached);
+  }
+
+  fetchLatest().catch(function () {});
 })();

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Example Appcast for Navo / upgrader (Sparkle-style RSS).
+
+  Host this file (or a production copy) at https://www.navo.im/appcast.xml
+  (see LegalUrls.appcast / AppUpgrader.appcastURL).
+
+  Each <item> targets one OS via sparkle:os. upgrader picks the best match
+  for the running platform and compares sparkle:version to the installed
+  package version (pubspec.yaml version / CFBundleShortVersionString).
+
+  Optional force update: add inside an item
+    <sparkle:tags><sparkle:criticalUpdate /></sparkle:tags>
+
+  Store-distributed builds should prefer the store update UI; keep Appcast
+  for sideload / desktop channels.
+-->
+<rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle">
+  <channel>
+    <title>Navo Appcast</title>
+    <language>en</language>
+
+    <item>
+      <title>Version 2.0.5 (Android)</title>
+      <description>Bug fixes and improvements.</description>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <enclosure
+        url="https://github.com/NavoMessenger/Navo/releases/download/2.0.5/navo-2.0.5%2B26072608-android-v8a-release.apk"
+        sparkle:version="2.0.5"
+        sparkle:os="android" />
+    </item>
+
+    <item>
+      <title>Version 2.0.5 (iOS)</title>
+      <description>Bug fixes and improvements.</description>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <enclosure
+        url="https://apps.apple.com/app/idYOUR_APP_ID"
+        sparkle:version="2.0.5"
+        sparkle:os="ios" />
+    </item>
+
+    <item>
+      <title>Version 2.0.5 (macOS)</title>
+      <description>Bug fixes and improvements.</description>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <enclosure
+        url="https://github.com/NavoMessenger/Navo/releases/download/2.0.5/navo-2.0.5%2B26072608-macos-adhoc.dmg"
+        sparkle:version="2.0.5"
+        sparkle:os="macos" />
+    </item>
+
+    <item>
+      <title>Version 2.0.5 (Windows)</title>
+      <description>Bug fixes and improvements.</description>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <enclosure
+        url="https://github.com/NavoMessenger/Navo/releases/download/2.0.5/navo-2.0.5%2B26072613-windows-setup.exe"
+        sparkle:version="2.0.5"
+        sparkle:os="windows" />
+    </item>
+
+    <item>
+      <title>Version 2.0.5 (Linux)</title>
+      <description>Bug fixes and improvements.</description>
+      <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
+      <enclosure
+        url="https://www.navo.im/downloads/navo-2.0.5.AppImage"
+        sparkle:version="2.0.5"
+        sparkle:os="linux" />
+    </item>
+  </channel>
+</rss>

@@ -22,7 +22,7 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
   <div class="home-hero__visual">
     <img
       src="{{ '/images/banner.png' | relative_url }}"
-      alt="Navo messaging app on a phone — chat list with Fast, Secure, Connected, Simple"
+      alt="Navo on phone and macOS — chat list and split-view messaging"
       width="1440"
       height="720"
       decoding="async"
@@ -62,7 +62,7 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
   <div class="home-section__inner">
     <header class="home-section__header home-reveal">
       <h2>See it in action</h2>
-      <p>Phone and tablet layouts — contacts, moments, and your profile drawer.</p>
+      <p>Phone and macOS — chats, conversations, profile drawer, and moments.</p>
     </header>
 
     <div class="home-shots__group home-reveal">
@@ -70,19 +70,25 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
       <div class="home-shots__row home-shots__row--phone">
         <figure class="home-shot home-shot--phone">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/mobile/drawer.png' | relative_url }}" alt="Phone — profile drawer" width="720" height="1560" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/mobile/chats.png' | relative_url }}" alt="Phone — chat list" width="720" height="1602" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Chat list</figcaption>
+        </figure>
+        <figure class="home-shot home-shot--phone">
+          <div class="home-shot__frame">
+            <img src="{{ '/images/screenshots/mobile/chat.png' | relative_url }}" alt="Phone — conversation" width="720" height="1602" loading="lazy" decoding="async">
+          </div>
+          <figcaption>Conversation</figcaption>
+        </figure>
+        <figure class="home-shot home-shot--phone">
+          <div class="home-shot__frame">
+            <img src="{{ '/images/screenshots/mobile/drawer.png' | relative_url }}" alt="Phone — profile drawer" width="720" height="1602" loading="lazy" decoding="async">
           </div>
           <figcaption>Profile &amp; accounts</figcaption>
         </figure>
         <figure class="home-shot home-shot--phone">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/mobile/contacts.png' | relative_url }}" alt="Phone — contacts and channels" width="720" height="1560" loading="lazy" decoding="async">
-          </div>
-          <figcaption>Contacts &amp; channels</figcaption>
-        </figure>
-        <figure class="home-shot home-shot--phone">
-          <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/mobile/moments.png' | relative_url }}" alt="Phone — moments feed" width="720" height="1560" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/mobile/moments.png' | relative_url }}" alt="Phone — moments feed" width="720" height="1602" loading="lazy" decoding="async">
           </div>
           <figcaption>Moments</figcaption>
         </figure>
@@ -90,25 +96,25 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
     </div>
 
     <div class="home-shots__group home-reveal">
-      <h3 class="home-shots__label">Tablet</h3>
-      <div class="home-shots__row home-shots__row--pad">
-        <figure class="home-shot home-shot--pad">
+      <h3 class="home-shots__label">macOS</h3>
+      <div class="home-shots__row home-shots__row--desktop">
+        <figure class="home-shot home-shot--desktop">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/pad/drawer.png' | relative_url }}" alt="Tablet — split view with profile drawer" width="1280" height="800" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/macos/chat.png' | relative_url }}" alt="macOS — split view chat" width="1280" height="933" loading="lazy" decoding="async">
           </div>
-          <figcaption>Split view — drawer</figcaption>
+          <figcaption>Split view — chat</figcaption>
         </figure>
-        <figure class="home-shot home-shot--pad">
+        <figure class="home-shot home-shot--desktop">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/pad/contacts.png' | relative_url }}" alt="Tablet — contacts and channels" width="1280" height="800" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/macos/drawer.png' | relative_url }}" alt="macOS — profile drawer" width="1280" height="933" loading="lazy" decoding="async">
           </div>
-          <figcaption>Split view — contacts</figcaption>
+          <figcaption>Profile &amp; accounts</figcaption>
         </figure>
-        <figure class="home-shot home-shot--pad">
+        <figure class="home-shot home-shot--desktop">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/pad/moments.png' | relative_url }}" alt="Tablet — moments feed" width="1280" height="800" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/macos/moments.png' | relative_url }}" alt="macOS — moments feed" width="1280" height="933" loading="lazy" decoding="async">
           </div>
-          <figcaption>Split view — moments</figcaption>
+          <figcaption>Moments</figcaption>
         </figure>
       </div>
     </div>

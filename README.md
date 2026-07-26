@@ -54,17 +54,18 @@ Sign in with your existing Telegram account to message friends and groups in a c
 ### Phone
 
 <p align="center">
+  <img src="docs/images/screenshots/mobile/chats.png" width="200" alt="Phone — chat list" />
+  <img src="docs/images/screenshots/mobile/chat.png" width="200" alt="Phone — conversation" />
   <img src="docs/images/screenshots/mobile/drawer.png" width="200" alt="Phone — profile drawer" />
-  <img src="docs/images/screenshots/mobile/contacts.png" width="200" alt="Phone — contacts &amp; channels" />
   <img src="docs/images/screenshots/mobile/moments.png" width="200" alt="Phone — moments feed" />
 </p>
 
-### Tablet
+### macOS
 
 <p align="center">
-  <img src="docs/images/screenshots/pad/drawer.png" width="360" alt="Tablet — split view with profile drawer" />
-  <img src="docs/images/screenshots/pad/contacts.png" width="360" alt="Tablet — contacts &amp; channels" />
-  <img src="docs/images/screenshots/pad/moments.png" width="360" alt="Tablet — moments feed" />
+  <img src="docs/images/screenshots/macos/chat.png" width="360" alt="macOS — split view chat" />
+  <img src="docs/images/screenshots/macos/drawer.png" width="360" alt="macOS — profile drawer" />
+  <img src="docs/images/screenshots/macos/moments.png" width="360" alt="macOS — moments feed" />
 </p>
 
 ## Roadmap

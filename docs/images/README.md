@@ -13,7 +13,7 @@ Place marketing and site images here. Paths below are relative to this folder.
 
 | File | Use | Suggested size |
 |------|-----|----------------|
-| `banner.png` | README hero + site favicon fallback | **720×200** (or wider, ~720px wide) |
+| `banner.png` | README hero + site hero / favicon fallback | **1440×720** |
 
 Referenced from repository root as `docs/images/banner.png`.
 
@@ -23,12 +23,13 @@ Product screenshots live under `screenshots/` (web-optimized copies). Source cap
 
 | Path | Device | Scene |
 |------|--------|-------|
+| `screenshots/mobile/chats.png` | Phone | Chat list |
+| `screenshots/mobile/chat.png` | Phone | Conversation |
 | `screenshots/mobile/drawer.png` | Phone | Profile drawer & accounts |
-| `screenshots/mobile/contacts.png` | Phone | Contacts / channels |
 | `screenshots/mobile/moments.png` | Phone | Moments feed |
-| `screenshots/pad/drawer.png` | Tablet | Split view — drawer |
-| `screenshots/pad/contacts.png` | Tablet | Split view — contacts |
-| `screenshots/pad/moments.png` | Tablet | Split view — moments |
+| `screenshots/macos/chat.png` | macOS | Split view — chat |
+| `screenshots/macos/drawer.png` | macOS | Profile drawer & accounts |
+| `screenshots/macos/moments.png` | macOS | Moments feed |
 
 Used by:
 

@@ -54,17 +54,18 @@ iOS 暂未上架 App Store，目前**不提供**面向普通用户的 TestFlight
 ### 手机
 
 <p align="center">
+  <img src="docs/images/screenshots/mobile/chats.png" width="200" alt="手机 — 消息列表" />
+  <img src="docs/images/screenshots/mobile/chat.png" width="200" alt="手机 — 会话" />
   <img src="docs/images/screenshots/mobile/drawer.png" width="200" alt="手机 — 侧边栏与账号" />
-  <img src="docs/images/screenshots/mobile/contacts.png" width="200" alt="手机 — 联系人与频道" />
   <img src="docs/images/screenshots/mobile/moments.png" width="200" alt="手机 — 动态" />
 </p>
 
-### 平板
+### macOS
 
 <p align="center">
-  <img src="docs/images/screenshots/pad/drawer.png" width="360" alt="平板 — 分栏侧边栏" />
-  <img src="docs/images/screenshots/pad/contacts.png" width="360" alt="平板 — 联系人与频道" />
-  <img src="docs/images/screenshots/pad/moments.png" width="360" alt="平板 — 动态" />
+  <img src="docs/images/screenshots/macos/chat.png" width="360" alt="macOS — 分栏会话" />
+  <img src="docs/images/screenshots/macos/drawer.png" width="360" alt="macOS — 侧边栏与账号" />
+  <img src="docs/images/screenshots/macos/moments.png" width="360" alt="macOS — 动态" />
 </p>
 
 ## 路线图

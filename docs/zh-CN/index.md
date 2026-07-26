@@ -22,7 +22,7 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
   <div class="home-hero__visual">
     <img
       src="{{ '/images/banner.png' | relative_url }}"
-      alt="Navo 手机端聊天列表界面 — Fast、Secure、Connected、Simple"
+      alt="Navo 手机端与 macOS 端界面 — 消息列表与分栏会话"
       width="1440"
       height="720"
       decoding="async"
@@ -62,7 +62,7 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
   <div class="home-section__inner">
     <header class="home-section__header home-reveal">
       <h2>界面预览</h2>
-      <p>手机与平板布局 — 联系人、动态与侧边栏账号管理。</p>
+      <p>手机与 macOS — 消息列表、会话、侧边栏账号与动态。</p>
     </header>
 
     <div class="home-shots__group home-reveal">
@@ -70,19 +70,25 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
       <div class="home-shots__row home-shots__row--phone">
         <figure class="home-shot home-shot--phone">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/mobile/drawer.png' | relative_url }}" alt="手机 — 侧边栏与账号" width="720" height="1560" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/mobile/chats.png' | relative_url }}" alt="手机 — 消息列表" width="720" height="1602" loading="lazy" decoding="async">
+          </div>
+          <figcaption>消息列表</figcaption>
+        </figure>
+        <figure class="home-shot home-shot--phone">
+          <div class="home-shot__frame">
+            <img src="{{ '/images/screenshots/mobile/chat.png' | relative_url }}" alt="手机 — 会话" width="720" height="1602" loading="lazy" decoding="async">
+          </div>
+          <figcaption>会话</figcaption>
+        </figure>
+        <figure class="home-shot home-shot--phone">
+          <div class="home-shot__frame">
+            <img src="{{ '/images/screenshots/mobile/drawer.png' | relative_url }}" alt="手机 — 侧边栏与账号" width="720" height="1602" loading="lazy" decoding="async">
           </div>
           <figcaption>侧边栏与账号</figcaption>
         </figure>
         <figure class="home-shot home-shot--phone">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/mobile/contacts.png' | relative_url }}" alt="手机 — 联系人与频道" width="720" height="1560" loading="lazy" decoding="async">
-          </div>
-          <figcaption>联系人与频道</figcaption>
-        </figure>
-        <figure class="home-shot home-shot--phone">
-          <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/mobile/moments.png' | relative_url }}" alt="手机 — 动态" width="720" height="1560" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/mobile/moments.png' | relative_url }}" alt="手机 — 动态" width="720" height="1602" loading="lazy" decoding="async">
           </div>
           <figcaption>动态</figcaption>
         </figure>
@@ -90,25 +96,25 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
     </div>
 
     <div class="home-shots__group home-reveal">
-      <h3 class="home-shots__label">平板</h3>
-      <div class="home-shots__row home-shots__row--pad">
-        <figure class="home-shot home-shot--pad">
+      <h3 class="home-shots__label">macOS</h3>
+      <div class="home-shots__row home-shots__row--desktop">
+        <figure class="home-shot home-shot--desktop">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/pad/drawer.png' | relative_url }}" alt="平板 — 分栏侧边栏" width="1280" height="800" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/macos/chat.png' | relative_url }}" alt="macOS — 分栏会话" width="1280" height="933" loading="lazy" decoding="async">
           </div>
-          <figcaption>分栏 — 侧边栏</figcaption>
+          <figcaption>分栏 — 会话</figcaption>
         </figure>
-        <figure class="home-shot home-shot--pad">
+        <figure class="home-shot home-shot--desktop">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/pad/contacts.png' | relative_url }}" alt="平板 — 联系人与频道" width="1280" height="800" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/macos/drawer.png' | relative_url }}" alt="macOS — 侧边栏与账号" width="1280" height="933" loading="lazy" decoding="async">
           </div>
-          <figcaption>分栏 — 联系人</figcaption>
+          <figcaption>侧边栏与账号</figcaption>
         </figure>
-        <figure class="home-shot home-shot--pad">
+        <figure class="home-shot home-shot--desktop">
           <div class="home-shot__frame">
-            <img src="{{ '/images/screenshots/pad/moments.png' | relative_url }}" alt="平板 — 动态" width="1280" height="800" loading="lazy" decoding="async">
+            <img src="{{ '/images/screenshots/macos/moments.png' | relative_url }}" alt="macOS — 动态" width="1280" height="933" loading="lazy" decoding="async">
           </div>
-          <figcaption>分栏 — 动态</figcaption>
+          <figcaption>动态</figcaption>
         </figure>
       </div>
     </div>

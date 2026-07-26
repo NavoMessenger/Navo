@@ -417,7 +417,7 @@ body.home *::after {
 }
 
 .home-shot--phone {
-  width: min(148px, 28vw);
+  width: min(132px, 22vw);
 }
 
 .home-shot--phone .home-shot__frame {
@@ -431,18 +431,18 @@ body.home *::after {
   border-radius: 0.9rem;
 }
 
-.home-shot--pad {
+.home-shot--desktop {
   width: min(420px, 100%);
 }
 
-.home-shot--pad .home-shot__frame {
+.home-shot--desktop .home-shot__frame {
   border-radius: 0.65rem;
   padding: 0.4rem;
   background: #1e293b;
   border-color: #334155;
 }
 
-.home-shot--pad .home-shot__frame img {
+.home-shot--desktop .home-shot__frame img {
   border-radius: 0.4rem;
 }
 
@@ -455,28 +455,28 @@ body.home *::after {
 
 @media (min-width: 720px) {
   .home-shot--phone {
-    width: 156px;
+    width: 140px;
   }
 
   .home-shots__row--phone {
-    gap: 1.5rem 1.75rem;
-  }
-
-  .home-shots__row--pad {
     gap: 1.25rem 1.5rem;
   }
 
-  .home-shot--pad {
+  .home-shots__row--desktop {
+    gap: 1.25rem 1.5rem;
+  }
+
+  .home-shot--desktop {
     width: min(380px, calc(50% - 0.75rem));
   }
 }
 
 @media (min-width: 960px) {
   .home-shot--phone {
-    width: 168px;
+    width: 148px;
   }
 
-  .home-shot--pad {
+  .home-shot--desktop {
     width: min(340px, calc(33.333% - 1rem));
   }
 }

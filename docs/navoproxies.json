@@ -2,7 +2,7 @@
   "updated_at": "2026-03-25T00:00:00Z",
   "proxies": [
     {
-      "location": "Singapore高速",
+      "location": "Singapore高速一",
       "flag": "🇸🇬",
       "server": "195.172.139.60",
       "domain": "195.172.139.60",
@@ -12,6 +12,19 @@
       "speed": "Fast",
       "status": "online",
       "link": "tg://proxy?server=195.172.139.60&port=32430&secret=ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d"
+    },
+
+    {
+      "location": "Singapore高速二",
+      "flag": "🇸🇬",
+      "server": "45.88.42.76",
+      "domain": "45.88.42.76",
+      "port": "12432",
+      "secret": "eeb7f01f7abec67bbaf227ce230659e08a7777772e6d6963726f736f66742e636f6d",
+      "ping": "90ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=45.88.42.76&port=12432&secret=eeb7f01f7abec67bbaf227ce230659e08a7777772e6d6963726f736f66742e636f6d"
     },
     {
       "location": "香港-Hong Kong",

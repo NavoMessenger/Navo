@@ -4,14 +4,14 @@
     {
       "location": "Singapore高速一",
       "flag": "🇸🇬",
-      "server": "195.172.139.60",
-      "domain": "195.172.139.60",
+      "server": "45.88.42.76",
+      "domain": "45.88.42.76",
       "port": "32430",
       "secret": "ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d",
       "ping": "90ms",
       "speed": "Fast",
       "status": "online",
-      "link": "tg://proxy?server=195.172.139.60&port=32430&secret=ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d"
+      "link": "tg://proxy?server=45.88.42.76&port=32431&secret=ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d"
     },
 
     {

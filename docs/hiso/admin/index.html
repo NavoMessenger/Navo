@@ -170,9 +170,10 @@
 
     async function loadSubmissions() {
       const { data, error } = await client.from("submissions")
-        .select("id, title, username, description, status, review_note, category:categories(slug), created_at")
+        .select("id, title, username, description, status, review_note, kind, category:categories(slug), created_at")
         .order("created_at", { ascending: false });
       if (error) { toast(error.message); return; }
+      const kindLabel = (k) => k === "channel" ? "频道" : k === "bot" ? "机器人" : "群组";
       $("reviewList").innerHTML = (data || []).map((s) => `
         <div class="card">
           <div class="row">
@@ -181,7 +182,7 @@
             <span class="badge ${esc(s.status)}">${esc(s.status)}</span>
           </div>
           <p class="muted" style="margin:6px 0">${esc(s.description || "无简介")}</p>
-          <p class="muted">分类：${esc(s.category?.slug || "-")} · ${esc(s.created_at || "")}</p>
+          <p class="muted">类型：${kindLabel(s.kind)} · 分类：${esc(s.category?.slug || "-")} · ${esc(s.created_at || "")}</p>
           ${s.status === "pending" ? `
           <div class="row" style="margin-top:10px">
             <button class="ok" onclick="review(${s.id},'approved')">通过并上架</button>

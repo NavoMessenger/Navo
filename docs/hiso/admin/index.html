@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Navo 资源广场 · 运营后台</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root { --bg:#0f1117; --card:#181c27; --line:#262b3a; --txt:#e8eaf0; --sub:#9aa3b5;
+      --brand:#3b82f6; --ok:#22c55e; --warn:#f59e0b; --err:#ef4444; }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body { font:14px/1.5 -apple-system, "PingFang SC", "Segoe UI", sans-serif; background:var(--bg); color:var(--txt); }
+    .wrap { max-width:1080px; margin:0 auto; padding:24px 16px 80px; }
+    h1 { font-size:20px; margin-bottom:4px; }
+    .sub { color:var(--sub); margin-bottom:20px; }
+    header { display:flex; align-items:center; justify-content:space-between; margin-bottom:18px; }
+    nav { display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap; }
+    nav button { background:var(--card); color:var(--sub); border:1px solid var(--line); border-radius:10px;
+      padding:9px 16px; cursor:pointer; font-size:13px; }
+    nav button.active { color:var(--brand); border-color:var(--brand); }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; margin-bottom:14px; }
+    table { width:100%; border-collapse:collapse; font-size:13px; }
+    th, td { text-align:left; padding:9px 8px; border-bottom:1px solid var(--line); vertical-align:top; }
+    th { color:var(--sub); font-weight:600; }
+    input, textarea, select { width:100%; background:#10141d; color:var(--txt); border:1px solid var(--line);
+      border-radius:8px; padding:8px 10px; font-size:13px; margin:4px 0 10px; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+    button.primary { background:var(--brand); color:#fff; border:0; border-radius:9px; padding:8px 14px; cursor:pointer; }
+    button.ok { background:var(--ok); color:#04120a; }
+    button.warn { background:var(--warn); color:#201503; }
+    button.ghost { background:transparent; color:var(--sub); border:1px solid var(--line); border-radius:9px; padding:8px 14px; cursor:pointer; }
+    .badge { display:inline-block; border-radius:999px; padding:2px 9px; font-size:11px; font-weight:600; }
+    .badge.pending { background:#3b3a2a; color:var(--warn); }
+    .badge.approved { background:#17361f; color:var(--ok); }
+    .badge.rejected, .badge.removed { background:#3a1f1f; color:var(--err); }
+    .badge.regular { background:#232839; color:var(--sub); }
+    .badge.premium { background:#2b2a3f; color:#a78bfa; }
+    .badge.featured { background:#2f2a1d; color:var(--warn); }
+    .muted { color:var(--sub); font-size:12px; }
+    #login { max-width:360px; margin:12vh auto; }
+    .hidden { display:none; }
+    .toast { position:fixed; left:50%; bottom:26px; transform:translateX(-50%); background:#232839;
+      border:1px solid var(--line); border-radius:999px; padding:10px 18px; font-size:13px; z-index:9; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section id="login" class="hidden">
+      <h1>Navo 运营后台</h1>
+      <p class="sub">管理员登录</p>
+      <div class="card">
+        <input id="email" type="email" placeholder="邮箱" autocomplete="username" />
+        <input id="password" type="password" placeholder="密码" autocomplete="current-password" />
+        <button class="primary" style="width:100%" onclick="login()">登录</button>
+      </div>
+    </section>
+
+    <section id="app" class="hidden">
+      <header>
+        <div>
+          <h1>Navo 资源广场 · 运营后台</h1>
+          <div class="sub" id="who"></div>
+        </div>
+        <button class="ghost" onclick="logout()">退出</button>
+      </header>
+      <nav>
+        <button data-tab="review" class="active" onclick="tab('review')">审核队列</button>
+        <button data-tab="catalog" onclick="tab('catalog')">目录</button>
+        <button data-tab="metrics" onclick="tab('metrics')">数据看板</button>
+      </nav>
+
+      <div id="tab-review">
+        <div class="card row">
+          <input id="reviewNote" placeholder="审核备注（可选）" style="flex:1" />
+          <button class="primary" onclick="loadSubmissions()">刷新</button>
+          <button class="ok" onclick="batchReview('approved')">批量通过选中</button>
+        </div>
+        <div id="reviewList"></div>
+      </div>
+
+      <div id="tab-catalog" class="hidden">
+        <div class="card row">
+          <button class="primary" onclick="loadCatalog()">刷新</button>
+          <button class="ok" onclick="batchEdit({'status':'listed'})">批量上架</button>
+          <button class="warn" onclick="batchEdit({'status':'hidden'})">批量隐藏</button>
+          <button class="ghost" onclick="batchEdit({'official':true})">官方✓</button>
+          <button class="ghost" onclick="batchEdit({'community_pick':true})">社区✓</button>
+          <button class="ghost" onclick="batchEdit({'is_new':true})">新✓</button>
+          <select id="catSelect" style="width:auto;margin:0">
+            <option value="">批量设分类…</option>
+          </select>
+        </div>
+        <div class="card">
+          <textarea id="bulkImport" rows="3" placeholder='批量导入 JSON 数组，如 [{"slug":"x","title":"X","username":"x","category":"tech"}]'></textarea>
+          <div class="row">
+            <button class="primary" onclick="bulkImport()">导入/更新</button>
+            <span class="muted">按 slug 覆盖，支持 kind/description/language/tags/official/community_pick/is_new/popularity</span>
+          </div>
+        </div>
+        <div id="catalogList"></div>
+      </div>
+
+      <div id="tab-metrics" class="hidden">
+        <div class="card row">
+          <button class="primary" onclick="loadLeaderboard()">刷新榜单</button>
+        </div>
+        <div id="leaderboardList"></div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const SUPABASE_URL = window.SUPABASE_URL || "https://jvqrqmbinwzdbxvyrvlz.supabase.co";
+    const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || "sb_publishable__VX5h9iIUbmuCu1LhST41w_eSfT-0tt";
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const $ = (id) => document.getElementById(id);
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) =>
+      ({ "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;" })[c]);
+    let currentUser = null;
+    const selected = new Set();
+
+    function toast(msg) {
+      const t = document.createElement("div");
+      t.className = "toast"; t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 2200);
+    }
+
+    async function ensureAdmin() {
+      const { data: { user } } = await client.auth.getUser();
+      if (!user) return false;
+      const { data } = await client.from("profiles").select("role, username").eq("id", user.id).maybeSingle();
+      if (!data || data.role !== "admin") return false;
+      currentUser = { ...user, ...data };
+      return true;
+    }
+
+    async function boot() {
+      if (await ensureAdmin()) {
+        $("login").classList.add("hidden");
+        $("app").classList.remove("hidden");
+        $("who").textContent = `${esc(currentUser.username || "admin")} · ${currentUser.email}`;
+        tab("review");
+      } else {
+        $("login").classList.remove("hidden");
+        $("app").classList.add("hidden");
+      }
+    }
+
+    async function login() {
+      const { error } = await client.auth.signInWithPassword({
+        email: $("email").value.trim(),
+        password: $("password").value,
+      });
+      if (error) { toast(error.message); return; }
+      if (!(await ensureAdmin())) { await client.auth.signOut(); toast("该账号不是管理员"); return; }
+      boot();
+    }
+
+    async function logout() { await client.auth.signOut(); boot(); }
+
+    function tab(name) {
+      document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
+      ["review", "catalog", "metrics"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
+      if (name === "review") loadSubmissions();
+      if (name === "catalog") loadCatalog();
+      if (name === "metrics") loadLeaderboard();
+    }
+
+    async function loadSubmissions() {
+      const { data, error } = await client.from("submissions")
+        .select("id, title, username, description, status, review_note, category:categories(slug), created_at")
+        .order("created_at", { ascending: false });
+      if (error) { toast(error.message); return; }
+      $("reviewList").innerHTML = (data || []).map((s) => `
+        <div class="card">
+          <div class="row">
+            <input type="checkbox" ${selected.has("s" + s.id) ? "checked" : ""} onchange="toggleSel('s${s.id}')" style="width:auto;margin:0" />
+            <strong style="flex:1">${esc(s.title)} <span class="muted">@${esc(s.username || "-")}</span></strong>
+            <span class="badge ${esc(s.status)}">${esc(s.status)}</span>
+          </div>
+          <p class="muted" style="margin:6px 0">${esc(s.description || "无简介")}</p>
+          <p class="muted">分类：${esc(s.category?.slug || "-")} · ${esc(s.created_at || "")}</p>
+          ${s.status === "pending" ? `
+          <div class="row" style="margin-top:10px">
+            <button class="ok" onclick="review(${s.id},'approved')">通过并上架</button>
+            <button class="warn" onclick="review(${s.id},'rejected')">驳回</button>
+          </div>` : `<p class="muted">备注：${esc(s.review_note || "—")}</p>`}
+        </div>`).join("") || '<div class="card muted">暂无申请</div>';
+    }
+
+    function toggleSel(key) {
+      if (selected.has(key)) selected.delete(key); else selected.add(key);
+    }
+
+    async function batchReview(status) {
+      const ids = [...selected].filter((k) => k.startsWith("s")).map((k) => Number(k.slice(1)));
+      if (!ids.length) { toast("请先勾选"); return; }
+      const note = $("reviewNote").value.trim();
+      const { error } = await client.rpc("batch_review_submissions", {
+        p_ids: ids, p_status: status, p_note: note || null,
+      });
+      if (error) { toast(error.message); return; }
+      ids.forEach((id) => selected.delete("s" + id));
+      toast("已处理 " + ids.length + " 条");
+      loadSubmissions();
+    }
+
+    async function review(id, status) {
+      const note = $("reviewNote").value.trim();
+      const { error } = await client.rpc("review_submission", {
+        p_submission_id: id, p_status: status, p_note: note || null,
+      });
+      if (error) { toast(error.message); return; }
+      toast(status === "approved" ? "已上架" : "已驳回");
+      loadSubmissions();
+    }
+
+    async function loadCatalog() {
+      const { data, error } = await client.rpc("admin_list_entries");
+      if (error) { toast(error.message); return; }
+      const entries = Array.isArray(data) ? data : [];
+      const catSel = $("catSelect");
+      const cats = (await client.from("categories").select("slug")).data || [];
+      catSel.innerHTML = '<option value="">批量设分类…</option>' + cats.map((c) =>
+        `<option value="${esc(c.slug)}">${esc(c.slug)}</option>`).join("");
+      $("catalogList").innerHTML = `
+        <div class="card row"><strong>共 ${entries.length} 条</strong></div>
+        <table><thead><tr><th></th><th>标题</th><th>用户名</th><th>分类</th><th>徽章</th><th>等级</th><th>得分</th><th>状态</th></tr></thead>
+        <tbody>${entries.map((e) => `
+          <tr>
+            <td><input type="checkbox" ${selected.has("e" + e.db_id) ? "checked" : ""} onchange="toggleSel('e${e.db_id}')" style="width:auto;margin:0" /></td>
+            <td>${esc(e.title)}</td><td>@${esc(e.username)}</td><td>${esc(e.category || "-")}</td>
+            <td>${e.official ? "官方 " : ""}${e.community_pick ? "社区推荐 " : ""}${e.is_new ? "新" : ""}</td>
+            <td><span class="badge ${esc(e.tier)}">${esc(e.tier)}</span></td>
+            <td>${esc(e.score)}</td><td>${esc(e.status)}</td>
+          </tr>`).join("")}</tbody></table>`;
+    }
+
+    async function batchEdit(fields) {
+      const ids = [...selected].filter((k) => k.startsWith("e")).map((k) => Number(k.slice(1)));
+      if (!ids.length) { toast("请先勾选"); return; }
+      const payload = { ...fields };
+      if ($("catSelect") && $("catSelect").value && !fields.status) {
+        payload.category = $("catSelect").value;
+      }
+      const { error } = await client.rpc("batch_update_entries", {
+        p_ids: ids, p_fields: payload,
+      });
+      if (error) { toast(error.message); return; }
+      ids.forEach((id) => selected.delete("e" + id));
+      toast("已更新 " + ids.length + " 条");
+      loadCatalog();
+    }
+
+    async function bulkImport() {
+      let items;
+      try { items = JSON.parse($("bulkImport").value); } catch (_) { toast("JSON 解析失败"); return; }
+      if (!Array.isArray(items) || !items.length) { toast("请输入 JSON 数组"); return; }
+      const { data, error } = await client.rpc("bulk_import_entries", { p_items: items });
+      if (error) { toast(error.message); return; }
+      toast(`导入 ${data?.imported ?? 0} · 更新 ${data?.updated ?? 0}`);
+      $("bulkImport").value = "";
+      loadCatalog();
+    }
+
+    async function loadLeaderboard() {
+      const { data, error } = await client.rpc("leaderboard", { p_limit: 50 });
+      if (error) { toast(error.message); return; }
+      $("leaderboardList").innerHTML = `
+        <table><thead><tr><th>#</th><th>群</th><th>等级</th><th>贡献分</th><th>加入</th></tr></thead>
+        <tbody>${(data || []).map((e, i) => `
+          <tr>
+            <td>${i + 1}</td><td>${esc(e.title)} <span class="muted">@${esc(e.username)}</span></td>
+            <td><span class="badge ${esc(e.tier)}">${esc(e.tier)}</span></td>
+            <td>${esc(e.score)}</td><td>${esc(e.joins)}</td>
+          </tr>`).join("")}</tbody></table>` || '<div class="card muted">暂无数据</div>';
+    }
+
+    boot();
+  </script>
+</body>
+</html>

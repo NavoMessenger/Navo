@@ -129,7 +129,8 @@
     async function ensureAdmin() {
       const { data: { user } } = await client.auth.getUser();
       if (!user) return false;
-      const { data } = await client.from("profiles").select("role, username").eq("id", user.id).maybeSingle();
+      const { data, error } = await client.from("profiles").select("role, username").eq("id", user.id).maybeSingle();
+      if (error) { toast("权限校验失败：" + error.message); return false; }
       if (!data || data.role !== "admin") return false;
       currentUser = { ...user, ...data };
       return true;
@@ -153,7 +154,7 @@
         password: $("password").value,
       });
       if (error) { toast(error.message); return; }
-      if (!(await ensureAdmin())) { await client.auth.signOut(); toast("该账号不是管理员"); return; }
+      if (!(await ensureAdmin())) { await client.auth.signOut(); toast("该邮箱不是管理员账号，或未获得后台权限"); return; }
       boot();
     }
 

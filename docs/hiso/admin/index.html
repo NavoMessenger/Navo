@@ -67,6 +67,7 @@
         <button data-tab="review" class="active" onclick="tab('review')">审核队列</button>
         <button data-tab="catalog" onclick="tab('catalog')">目录</button>
         <button data-tab="metrics" onclick="tab('metrics')">数据看板</button>
+        <button data-tab="risk" onclick="tab('risk')">风控</button>
       </nav>
 
       <div id="tab-review">
@@ -105,6 +106,22 @@
           <button class="primary" onclick="loadLeaderboard()">刷新榜单</button>
         </div>
         <div id="leaderboardList"></div>
+      </div>
+
+      <div id="tab-risk" class="hidden">
+        <div class="card row">
+          <button class="primary" onclick="runAudit()">运行扫描</button>
+          <button class="ghost" onclick="loadRisk()">刷新</button>
+          <span class="muted">异常设备会自动打标（flagged），上报上限收紧；suspended 直接拒绝。</span>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px">设备</h3>
+          <div id="deviceList"></div>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px">审计记录</h3>
+          <div id="auditList"></div>
+        </div>
       </div>
     </section>
   </div>
@@ -162,10 +179,11 @@
 
     function tab(name) {
       document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
-      ["review", "catalog", "metrics"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
+      ["review", "catalog", "metrics", "risk"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
       if (name === "review") loadSubmissions();
       if (name === "catalog") loadCatalog();
       if (name === "metrics") loadLeaderboard();
+      if (name === "risk") loadRisk();
     }
 
     async function loadSubmissions() {
@@ -277,6 +295,46 @@
             <td><span class="badge ${esc(e.tier)}">${esc(e.tier)}</span></td>
             <td>${esc(e.score)}</td><td>${esc(e.joins)}</td>
           </tr>`).join("")}</tbody></table>` || '<div class="card muted">暂无数据</div>';
+    }
+
+    async function loadRisk() {
+      const [devices, audit] = await Promise.all([
+        client.rpc("admin_list_devices"),
+        client.rpc("admin_list_audit", { p_limit: 200 }),
+      ]);
+      if (devices.error) { toast(devices.error.message); return; }
+      const devs = devices.data || [];
+      $("deviceList").innerHTML = devs.length
+        ? `<table><thead><tr><th>设备</th><th>平台</th><th>状态</th><th>备注</th><th>首次/最近</th></tr></thead><tbody>${
+            devs.map((d) => `
+              <tr>
+                <td class="muted">${esc((d.id || "").slice(0, 8))}…</td>
+                <td>${esc(d.platform || "-")}</td>
+                <td><span class="badge ${esc(d.status)}">${esc(d.status)}</span></td>
+                <td>${esc(d.note || "-")}</td>
+                <td class="muted">${esc((d.created_at || "").slice(0, 16))}<br/>${esc((d.last_seen_at || "").slice(0, 16))}</td>
+              </tr>`).join("")
+        }</tbody></table>` : '<div class="muted">暂无设备</div>';
+      if (!audit.error) {
+        const rows = audit.data || [];
+        $("auditList").innerHTML = rows.length
+          ? `<table><thead><tr><th>时间</th><th>设备</th><th>类型</th><th>详情</th></tr></thead><tbody>${
+              rows.map((a) => `
+                <tr>
+                  <td class="muted">${esc((a.created_at || "").slice(0, 16))}</td>
+                  <td class="muted">${esc((a.device_id || "").slice(0, 8))}…</td>
+                  <td>${esc(a.kind)}</td>
+                  <td>${esc(JSON.stringify(a.detail || {}))}</td>
+                </tr>`).join("")
+          }</tbody></table>` : '<div class="muted">暂无审计记录</div>';
+      }
+    }
+
+    async function runAudit() {
+      const { data, error } = await client.rpc("run_audit");
+      if (error) { toast(error.message); return; }
+      toast("扫描完成：标记 " + (data?.flagged ?? 0) + " 台设备");
+      loadRisk();
     }
 
     boot();

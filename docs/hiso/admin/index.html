@@ -65,6 +65,7 @@
       </header>
       <nav>
         <button data-tab="review" class="active" onclick="tab('review')">审核队列</button>
+        <button data-tab="claims" onclick="tab('claims')">认领</button>
         <button data-tab="catalog" onclick="tab('catalog')">目录</button>
         <button data-tab="metrics" onclick="tab('metrics')">数据看板</button>
         <button data-tab="risk" onclick="tab('risk')">风控</button>
@@ -79,7 +80,38 @@
         <div id="reviewList"></div>
       </div>
 
+      <div id="tab-claims" class="hidden">
+        <div class="card row">
+          <input id="claimNote" placeholder="审核备注（可选）" style="flex:1" />
+          <button class="primary" onclick="loadClaims()">刷新</button>
+        </div>
+        <div id="claimsList"></div>
+      </div>
+
       <div id="tab-catalog" class="hidden">
+        <div class="card">
+          <h3 style="margin:0 0 8px">采集导入（crawler）</h3>
+          <input id="crawlerSource" placeholder="数据源 JSON URL（留空则用 app_config.crawler_source）" />
+          <textarea id="crawlerItems" rows="3" placeholder="或直接粘贴 JSON 数组，如 [{&quot;username&quot;:&quot;x&quot;,&quot;title&quot;:&quot;X&quot;,&quot;category&quot;:&quot;tech&quot;}]"></textarea>
+          <div class="row">
+            <button class="primary" onclick="runCrawler()">运行采集</button>
+            <button class="ok" onclick="runTgram()">一键采集 tgram.io</button>
+            <button class="ghost" onclick="loadCrawlerStatus()">查看状态</button>
+            <span class="muted" id="crawlerStatus"></span>
+          </div>
+          <p class="muted" style="margin-top:6px">
+            tgram.io 一键采集：自动抓取主题列表 → Telegram 官方页面验证 → 过滤垃圾 → 幂等导入（默认 dev/sysadmin/data-science，各 2 页）。通用源字段：username/title/kind/category/description/language/tags/popularity/invite_link。
+          </p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 8px">chat_id 解析（根治 429 限流）</h3>
+          <div class="row">
+            <button class="primary" onclick="runChatResolver()">解析一批（100 条）</button>
+            <button class="ghost" onclick="resolverNext = 0; loadChatResolverStatus()">重置并查状态</button>
+            <span class="muted" id="resolverStatus"></span>
+          </div>
+          <p class="muted" style="margin-top:6px">服务端用 Bot API 按 @username 预解析 chat_id 并下发；客户端按 id 打开/校验，不再触发 searchPublicChat 限流。每批约 100 秒，可连续点击直至“全部完成”。</p>
+        </div>
         <div class="card row">
           <button class="primary" onclick="loadCatalog()">刷新</button>
           <button class="ok" onclick="batchEdit({'status':'listed'})">批量上架</button>
@@ -179,11 +211,158 @@
 
     function tab(name) {
       document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
-      ["review", "catalog", "metrics", "risk"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
+      ["review", "claims", "catalog", "metrics", "risk"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
       if (name === "review") loadSubmissions();
+      if (name === "claims") loadClaims();
       if (name === "catalog") loadCatalog();
       if (name === "metrics") loadLeaderboard();
       if (name === "risk") loadRisk();
+    }
+
+    async function loadClaims() {
+      const { data, error } = await client.rpc("admin_list_claims");
+      if (error) { toast(error.message); return; }
+      const claims = Array.isArray(data) ? data : [];
+      const kindLabel = (k) => k === "channel" ? "频道" : k === "bot" ? "机器人" : "群组";
+      $("claimsList").innerHTML = claims.map((c) => `
+        <div class="card">
+          <div class="row">
+            <strong style="flex:1">${esc(c.title)} <span class="muted">@${esc(c.username || "-")}</span></strong>
+            <span class="badge ${esc(c.status)}">${esc(c.status)}</span>
+            <span class="badge ${esc(c.entry_claim_status)}">条目：${esc(c.entry_claim_status)}</span>
+          </div>
+          <p class="muted" style="margin:6px 0">
+            类型：${kindLabel(c.kind)} · 申请人：${esc(c.claimant || c.tg_user_id)} ·
+            来源：${esc(c.claim_source || "-")} · ${esc((c.created_at || "").slice(0, 16))}
+          </p>
+          ${c.status === "pending" ? `
+          <div class="row" style="margin-top:10px">
+            <button class="ok" onclick="reviewClaim(${c.id},'approved')">通过认领</button>
+            <button class="warn" onclick="reviewClaim(${c.id},'rejected')">驳回</button>
+          </div>` : `<p class="muted">备注：${esc(c.review_note || "—")}</p>`}
+        </div>`).join("") || '<div class="card muted">暂无认领申请</div>';
+    }
+
+    async function reviewClaim(id, status) {
+      const note = $("claimNote").value.trim();
+      const { data, error } = await client.rpc("review_claim", {
+        p_request_id: id, p_status: status, p_note: note || null,
+      });
+      if (error) { toast(error.message); return; }
+      if (data && data.ok === false) { toast(data.error || "处理失败"); return; }
+      toast(status === "approved" ? "已通过认领" : "已驳回");
+      loadClaims();
+    }
+
+    async function runCrawler() {
+      const { data: sess } = await client.auth.getSession();
+      const token = sess?.session?.access_token;
+      if (!token) { toast("登录状态失效"); return; }
+      const sourceUrl = $("crawlerSource").value.trim();
+      let items;
+      const raw = $("crawlerItems").value.trim();
+      if (raw) {
+        try { items = JSON.parse(raw); } catch (_) { toast("JSON 解析失败"); return; }
+        if (!Array.isArray(items)) { toast("items 必须是数组"); return; }
+      }
+      const payload = { ...(sourceUrl ? { source_url: sourceUrl } : {}), ...(items ? { items } : {}) };
+      $("crawlerStatus").textContent = "采集中…";
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/crawler/import`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+          body: JSON.stringify(payload),
+        });
+        const body = await res.json();
+        if (!res.ok || body.ok !== true) { toast("采集失败：" + (body.error || res.status)); $("crawlerStatus").textContent = ""; return; }
+        $("crawlerStatus").textContent = `导入 ${body.imported} · 更新 ${body.updated} · 共 ${body.total} 条`;
+        toast(`采集完成：新增 ${body.imported}，更新 ${body.updated}`);
+        $("crawlerItems").value = "";
+        loadCatalog();
+      } catch (e) {
+        toast("采集失败：" + e.message);
+        $("crawlerStatus").textContent = "";
+      }
+    }
+
+    let resolverNext = 0;
+
+    async function runChatResolver() {
+      const { data: sess } = await client.auth.getSession();
+      const token = sess?.session?.access_token;
+      if (!token) { toast("登录状态失效"); return; }
+      $("resolverStatus").textContent = "解析中（约 100 秒/批）…";
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/chat-resolver/resolve`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+          body: JSON.stringify({ limit: 100, next_id: resolverNext }),
+        });
+        const body = await res.json();
+        if (!res.ok || body.ok !== true) { toast("解析失败：" + (body.error || res.status)); $("resolverStatus").textContent = ""; return; }
+        resolverNext = body.next_id || 0;
+        const status = `本批：解析 ${body.resolved} / 失败 ${body.failed} / 处理 ${body.processed}` +
+          (body.rate_limited ? "（触发限流，稍后再点）" : body.processed < 100 ? "（全部完成）" : "（可继续点击续跑）");
+        $("resolverStatus").textContent = status;
+        toast(status);
+      } catch (e) {
+        toast("解析失败：" + e.message);
+        $("resolverStatus").textContent = "";
+      }
+    }
+
+    async function loadChatResolverStatus() {
+      const { data } = await client.from("entries")
+        .select("id", { count: "exact", head: true })
+        .eq("deleted_at", null).is("chat_id", null);
+      const done = await client.from("entries")
+        .select("id", { count: "exact", head: true })
+        .eq("deleted_at", null).not("chat_id", "is", null);
+      $("resolverStatus").textContent =
+        `待解析 ${data.count ?? 0} 条 · 已解析 ${done.count ?? 0} 条`;
+    }
+
+    async function runTgram() {
+      const { data: sess } = await client.auth.getSession();
+      const token = sess?.session?.access_token;
+      if (!token) { toast("登录状态失效"); return; }
+      $("crawlerStatus").textContent = "tgram.io 采集中（抓取→验证→导入，约 30-90 秒）…";
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/crawler/import`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
+          body: JSON.stringify({ site: "tgram", topics: ["dev", "sysadmin", "data-science"], max_pages: 2 }),
+        });
+        const body = await res.json();
+        if (!res.ok || body.ok !== true) {
+          toast("tgram 采集失败：" + (body.error || res.status));
+          $("crawlerStatus").textContent = "";
+          return;
+        }
+        $("crawlerStatus").textContent =
+          `tgram：抓取 ${body.total}，官方验证通过 ${body.verified}，新增 ${body.imported} / 更新 ${body.updated}`;
+        toast(`tgram 采集完成：新增 ${body.imported}，更新 ${body.updated}`);
+        loadCatalog();
+      } catch (e) {
+        toast("tgram 采集失败：" + e.message);
+        $("crawlerStatus").textContent = "";
+      }
+    }
+
+    async function loadCrawlerStatus() {
+      const { data: sess } = await client.auth.getSession();
+      const token = sess?.session?.access_token;
+      if (!token) { toast("登录状态失效"); return; }
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/crawler/status`, {
+          headers: { Authorization: "Bearer " + token },
+        });
+        const body = await res.json();
+        const last = body.last ? `上次：${body.last.imported} 新增 / ${body.last.updated} 更新（${body.last.at}）` : "尚未采集";
+        $("crawlerStatus").textContent = `数据源：${body.source || "未配置"} · ${last}`;
+      } catch (e) {
+        toast("获取状态失败：" + e.message);
+      }
     }
 
     async function loadSubmissions() {

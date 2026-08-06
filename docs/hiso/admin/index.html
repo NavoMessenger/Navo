@@ -108,6 +108,7 @@
             <button class="primary" onclick="runChatResolver('chat')">解析 chat_id（100 条）</button>
             <button class="ok" onclick="runChatResolver('avatar')">刷新过期头像</button>
             <button class="warn" onclick="runChatResolver('avatar', true)">强制刷新全部头像</button>
+            <button class="ok" onclick="resolveNewlyApproved()">解析新审核条目</button>
             <button class="ghost" onclick="loadChatResolverStatus()">查状态</button>
             <span class="muted" id="resolverStatus"></span>
           </div>
@@ -191,6 +192,7 @@
         $("login").classList.add("hidden");
         $("app").classList.remove("hidden");
         $("who").textContent = `${esc(currentUser.username || "admin")} · ${currentUser.email}`;
+        await refreshResolverSinceId();
         tab("review");
       } else {
         $("login").classList.remove("hidden");
@@ -288,8 +290,30 @@
 
     let resolverNextChat = 0;
     let resolverNextAvatar = 0;
+    // 审核通过后的自动补齐：记录已处理到的最大 entry id，
+    // 新审核条目用 since_id 定向解析，避免每次全量扫描。
+    let resolverSinceId = 0;
 
-    async function runChatResolver(mode, force) {
+    async function refreshResolverSinceId() {
+      try {
+        const { data } = await client.from("entries")
+          .select("id", { count: "exact", head: true })
+          .eq("deleted_at", null).eq("status", "listed")
+          .order("id", { ascending: false }).limit(1);
+        const maxId = Array.isArray(data) && data.length > 0 ? Number(data[0].id) : 0;
+        if (maxId > resolverSinceId) resolverSinceId = maxId;
+      } catch (_) { /* best-effort */ }
+    }
+
+    async function resolveNewlyApproved() {
+      // 解析自上次记录以来新上架条目的 chat_id 与头像。
+      await runChatResolver('chat', false, resolverSinceId);
+      await runChatResolver('avatar', false, resolverSinceId);
+      await refreshResolverSinceId();
+      await loadChatResolverStatus();
+    }
+
+    async function runChatResolver(mode, force, sinceId = 0) {
       const { data: sess } = await client.auth.getSession();
       const token = sess?.session?.access_token;
       if (!token) { toast("登录状态失效"); return; }
@@ -299,7 +323,7 @@
         const res = await fetch(`${SUPABASE_URL}/functions/v1/chat-resolver/resolve`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-          body: JSON.stringify({ mode, force: !!force, limit: 100, next_id: next }),
+          body: JSON.stringify({ mode, force: !!force, limit: 100, next_id: next, since_id: sinceId }),
         });
         const body = await res.json();
         if (!res.ok || body.ok !== true) { toast("解析失败：" + (body.error || res.status)); $("resolverStatus").textContent = ""; return; }

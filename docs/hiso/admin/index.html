@@ -65,7 +65,6 @@
       </header>
       <nav>
         <button data-tab="review" class="active" onclick="tab('review')">审核队列</button>
-        <button data-tab="claims" onclick="tab('claims')">认领</button>
         <button data-tab="catalog" onclick="tab('catalog')">目录</button>
         <button data-tab="metrics" onclick="tab('metrics')">数据看板</button>
         <button data-tab="risk" onclick="tab('risk')">风控</button>
@@ -80,14 +79,6 @@
         <div id="reviewList"></div>
       </div>
 
-      <div id="tab-claims" class="hidden">
-        <div class="card row">
-          <input id="claimNote" placeholder="审核备注（可选）" style="flex:1" />
-          <button class="primary" onclick="loadClaims()">刷新</button>
-        </div>
-        <div id="claimsList"></div>
-      </div>
-
       <div id="tab-catalog" class="hidden">
         <div class="card">
           <h3 style="margin:0 0 8px">采集导入（crawler）</h3>
@@ -99,20 +90,8 @@
             <span class="muted" id="crawlerStatus"></span>
           </div>
           <p class="muted" style="margin-top:6px">
-            通用源字段：username/title/kind/category/description/language/tags/popularity/invite_link。按 slug 幂等覆盖；群主可在客户端认领采集条目。
+            通用源字段：username/title/kind/category/description/language/tags/popularity/invite_link。按 slug 幂等覆盖。
           </p>
-        </div>
-        <div class="card">
-          <h3 style="margin:0 0 8px">chat_id 解析（根治 429 限流）</h3>
-          <div class="row">
-            <button class="primary" onclick="runChatResolver('chat')">解析 chat_id（100 条）</button>
-            <button class="ok" onclick="runChatResolver('avatar')">刷新过期头像</button>
-            <button class="warn" onclick="runChatResolver('avatar', true)">强制刷新全部头像</button>
-            <button class="ok" onclick="resolveNewlyApproved()">解析新审核条目</button>
-            <button class="ghost" onclick="loadChatResolverStatus()">查状态</button>
-            <span class="muted" id="resolverStatus"></span>
-          </div>
-          <p class="muted" style="margin-top:6px">服务端用 Bot API 按 @username 预解析 chat_id 并下发；客户端按 id 打开/校验，不再触发 searchPublicChat 限流。每批约 100 秒，可连续点击直至“全部完成”。</p>
         </div>
         <div class="card row">
           <button class="primary" onclick="loadCatalog()">刷新</button>
@@ -192,7 +171,6 @@
         $("login").classList.add("hidden");
         $("app").classList.remove("hidden");
         $("who").textContent = `${esc(currentUser.username || "admin")} · ${currentUser.email}`;
-        await refreshResolverSinceId();
         tab("review");
       } else {
         $("login").classList.remove("hidden");
@@ -214,47 +192,11 @@
 
     function tab(name) {
       document.querySelectorAll("nav button").forEach((b) => b.classList.toggle("active", b.dataset.tab === name));
-      ["review", "claims", "catalog", "metrics", "risk"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
+      ["review", "catalog", "metrics", "risk"].forEach((t) => $("tab-" + t).classList.toggle("hidden", t !== name));
       if (name === "review") loadSubmissions();
-      if (name === "claims") loadClaims();
       if (name === "catalog") loadCatalog();
       if (name === "metrics") loadLeaderboard();
       if (name === "risk") loadRisk();
-    }
-
-    async function loadClaims() {
-      const { data, error } = await client.rpc("admin_list_claims");
-      if (error) { toast(error.message); return; }
-      const claims = Array.isArray(data) ? data : [];
-      const kindLabel = (k) => k === "channel" ? "频道" : k === "bot" ? "机器人" : "群组";
-      $("claimsList").innerHTML = claims.map((c) => `
-        <div class="card">
-          <div class="row">
-            <strong style="flex:1">${esc(c.title)} <span class="muted">@${esc(c.username || "-")}</span></strong>
-            <span class="badge ${esc(c.status)}">${esc(c.status)}</span>
-            <span class="badge ${esc(c.entry_claim_status)}">条目：${esc(c.entry_claim_status)}</span>
-          </div>
-          <p class="muted" style="margin:6px 0">
-            类型：${kindLabel(c.kind)} · 申请人：${esc(c.claimant || c.tg_user_id)} ·
-            来源：${esc(c.claim_source || "-")} · ${esc((c.created_at || "").slice(0, 16))}
-          </p>
-          ${c.status === "pending" ? `
-          <div class="row" style="margin-top:10px">
-            <button class="ok" onclick="reviewClaim(${c.id},'approved')">通过认领</button>
-            <button class="warn" onclick="reviewClaim(${c.id},'rejected')">驳回</button>
-          </div>` : `<p class="muted">备注：${esc(c.review_note || "—")}</p>`}
-        </div>`).join("") || '<div class="card muted">暂无认领申请</div>';
-    }
-
-    async function reviewClaim(id, status) {
-      const note = $("claimNote").value.trim();
-      const { data, error } = await client.rpc("review_claim", {
-        p_request_id: id, p_status: status, p_note: note || null,
-      });
-      if (error) { toast(error.message); return; }
-      if (data && data.ok === false) { toast(data.error || "处理失败"); return; }
-      toast(status === "approved" ? "已通过认领" : "已驳回");
-      loadClaims();
     }
 
     async function runCrawler() {
@@ -286,74 +228,6 @@
         toast("采集失败：" + e.message);
         $("crawlerStatus").textContent = "";
       }
-    }
-
-    let resolverNextChat = 0;
-    let resolverNextAvatar = 0;
-    // 审核通过后的自动补齐：记录已处理到的最大 entry id，
-    // 新审核条目用 since_id 定向解析，避免每次全量扫描。
-    let resolverSinceId = 0;
-
-    async function refreshResolverSinceId() {
-      try {
-        const { data } = await client.from("entries")
-          .select("id", { count: "exact", head: true })
-          .eq("deleted_at", null).eq("status", "listed")
-          .order("id", { ascending: false }).limit(1);
-        const maxId = Array.isArray(data) && data.length > 0 ? Number(data[0].id) : 0;
-        if (maxId > resolverSinceId) resolverSinceId = maxId;
-      } catch (_) { /* best-effort */ }
-    }
-
-    async function resolveNewlyApproved() {
-      // 解析自上次记录以来新上架条目的 chat_id 与头像。
-      await runChatResolver('chat', false, resolverSinceId);
-      await runChatResolver('avatar', false, resolverSinceId);
-      await refreshResolverSinceId();
-      await loadChatResolverStatus();
-    }
-
-    async function runChatResolver(mode, force, sinceId = 0) {
-      const { data: sess } = await client.auth.getSession();
-      const token = sess?.session?.access_token;
-      if (!token) { toast("登录状态失效"); return; }
-      $("resolverStatus").textContent = mode === "chat" ? "解析 chat_id 中（约 100 秒/批）…" : "刷新头像中…";
-      const next = mode === "chat" ? resolverNextChat : resolverNextAvatar;
-      try {
-        const res = await fetch(`${SUPABASE_URL}/functions/v1/chat-resolver/resolve`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json", Authorization: "Bearer " + token },
-          body: JSON.stringify({ mode, force: !!force, limit: 100, next_id: next, since_id: sinceId }),
-        });
-        const body = await res.json();
-        if (!res.ok || body.ok !== true) { toast("解析失败：" + (body.error || res.status)); $("resolverStatus").textContent = ""; return; }
-        if (mode === "chat") resolverNextChat = body.next_id || 0;
-        else resolverNextAvatar = body.next_id || 0;
-        const label = mode === "chat" ? "chat_id" : "头像";
-        const status = `本批：${label} 解析 ${body.resolved} / 处理 ${body.processed}` +
-          (body.rate_limited ? "（触发限流，稍后再点）" : body.processed < 100 ? "（全部完成）" : "（可继续点击续跑）");
-        $("resolverStatus").textContent = status;
-        toast(status);
-      } catch (e) {
-        toast("解析失败：" + e.message);
-        $("resolverStatus").textContent = "";
-      }
-    }
-
-    async function loadChatResolverStatus() {
-      const chatTodo = await client.from("entries")
-        .select("id", { count: "exact", head: true })
-        .eq("deleted_at", null).eq("status", "listed").is("chat_id", null);
-      const chatDone = await client.from("entries")
-        .select("id", { count: "exact", head: true })
-        .eq("deleted_at", null).eq("status", "listed").not("chat_id", "is", null);
-      const avTodo = await client.from("entries")
-        .select("id", { count: "exact", head: true })
-        .eq("deleted_at", null).eq("status", "listed")
-        .or("avatar_url.is.null,avatar_checked_at.is.null");
-      $("resolverStatus").textContent =
-        `chat_id：待解析 ${chatTodo.data.count ?? 0} / 已解析 ${chatDone.data.count ?? 0} · ` +
-        `头像：待刷新 ${avTodo.data.count ?? 0}`;
     }
 
     async function loadCrawlerStatus() {

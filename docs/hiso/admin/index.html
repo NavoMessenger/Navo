@@ -97,9 +97,8 @@
           <button class="primary" onclick="loadCatalog()">刷新</button>
           <button class="ok" onclick="batchEdit({'status':'listed'})">批量上架</button>
           <button class="warn" onclick="batchEdit({'status':'hidden'})">批量隐藏</button>
-          <button class="ghost" onclick="batchEdit({'official':true})">官方✓</button>
-          <button class="ghost" onclick="batchEdit({'community_pick':true})">社区✓</button>
-          <button class="ghost" onclick="batchEdit({'is_new':true})">新✓</button>
+          <button class="ghost" onclick="batchEdit({'recommended':true})">推荐✓</button>
+          <button class="ghost" onclick="batchEdit({'recommended':false})">取消推荐</button>
           <select id="catSelect" style="width:auto;margin:0">
             <option value="">批量设分类…</option>
           </select>
@@ -108,7 +107,7 @@
           <textarea id="bulkImport" rows="3" placeholder='批量导入 JSON 数组，如 [{"slug":"x","title":"X","username":"x","category":"tech"}]'></textarea>
           <div class="row">
             <button class="primary" onclick="bulkImport()">导入/更新</button>
-            <span class="muted">按 slug 覆盖，支持 kind/description/language/tags/official/community_pick/is_new/popularity</span>
+            <span class="muted">按 slug 覆盖，支持 kind/description/language/tags/recommended/popularity</span>
           </div>
         </div>
         <div id="catalogList"></div>
@@ -117,8 +116,10 @@
       <div id="tab-metrics" class="hidden">
         <div class="card row">
           <button class="primary" onclick="loadLeaderboard()">刷新榜单</button>
+          <button class="ok" onclick="loadOwnerOverview()">群主收益总览</button>
         </div>
         <div id="leaderboardList"></div>
+        <div id="ownerOverviewList"></div>
       </div>
 
       <div id="tab-risk" class="hidden">
@@ -306,13 +307,12 @@
         `<option value="${esc(c.slug)}">${esc(c.slug)}</option>`).join("");
       $("catalogList").innerHTML = `
         <div class="card row"><strong>共 ${entries.length} 条</strong></div>
-        <table><thead><tr><th></th><th>标题</th><th>用户名</th><th>分类</th><th>徽章</th><th>等级</th><th>得分</th><th>状态</th></tr></thead>
+        <table><thead><tr><th></th><th>标题</th><th>用户名</th><th>分类</th><th>徽章</th><th>得分</th><th>状态</th></tr></thead>
         <tbody>${entries.map((e) => `
           <tr>
             <td><input type="checkbox" ${selected.has("e" + e.db_id) ? "checked" : ""} onchange="toggleSel('e${e.db_id}')" style="width:auto;margin:0" /></td>
             <td>${esc(e.title)}</td><td>@${esc(e.username)}</td><td>${esc(e.category || "-")}</td>
-            <td>${e.official ? "官方 " : ""}${e.community_pick ? "社区推荐 " : ""}${e.is_new ? "新" : ""}</td>
-            <td><span class="badge ${esc(e.tier)}">${esc(e.tier)}</span></td>
+            <td>${e.recommended ? '<span class="badge featured">推荐</span>' : ""}</td>
             <td>${esc(e.score)}</td><td>${esc(e.status)}</td>
           </tr>`).join("")}</tbody></table>`;
     }
@@ -348,13 +348,29 @@
       const { data, error } = await client.rpc("leaderboard", { p_limit: 50 });
       if (error) { toast(error.message); return; }
       $("leaderboardList").innerHTML = `
-        <table><thead><tr><th>#</th><th>群</th><th>等级</th><th>贡献分</th><th>加入</th></tr></thead>
+        <table><thead><tr><th>#</th><th>群</th><th>贡献分</th><th>加入</th></tr></thead>
         <tbody>${(data || []).map((e, i) => `
           <tr>
             <td>${i + 1}</td><td>${esc(e.title)} <span class="muted">@${esc(e.username)}</span></td>
-            <td><span class="badge ${esc(e.tier)}">${esc(e.tier)}</span></td>
             <td>${esc(e.score)}</td><td>${esc(e.joins)}</td>
           </tr>`).join("")}</tbody></table>` || '<div class="card muted">暂无数据</div>';
+    }
+
+    async function loadOwnerOverview() {
+      const { data, error } = await client.rpc("admin_owner_overview");
+      if (error) { toast(error.message); return; }
+      const rows = Array.isArray(data) ? data : [];
+      $("ownerOverviewList").innerHTML = rows.length
+        ? `<div class="card"><h3 style="margin:0 0 8px">群主收益总览（30 天）</h3>
+          <table><thead><tr><th>群主</th><th>提交</th><th>已收录</th><th>打开</th><th>浏览</th><th>加入</th><th>安装</th><th>得分</th></tr></thead>
+          <tbody>${rows.map((o) => `
+            <tr>
+              <td>${esc(o.display_name || o.username || ("#" + o.tg_user_id))}</td>
+              <td>${esc(o.submission_count)}</td><td>${esc(o.listed_count)}</td>
+              <td>${esc(o.opens)}</td><td>${esc(o.views)}</td><td>${esc(o.joins)}</td>
+              <td>${esc(o.installs)}</td><td>${esc(o.score)}</td>
+            </tr>`).join("")}</tbody></table></div>`
+        : '<div class="card muted">暂无群主提交</div>';
     }
 
     async function loadRisk() {

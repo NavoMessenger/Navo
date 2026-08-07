@@ -36,6 +36,7 @@
     .badge.regular { background:#232839; color:var(--sub); }
     .badge.premium { background:#2b2a3f; color:#a78bfa; }
     .badge.featured { background:#2f2a1d; color:var(--warn); }
+    .badge.promo { background:#16283f; color:#4da3ff; }
     .muted { color:var(--sub); font-size:12px; }
     #login { max-width:360px; margin:12vh auto; }
     .hidden { display:none; }
@@ -99,6 +100,8 @@
           <button class="warn" onclick="batchEdit({'status':'hidden'})">批量隐藏</button>
           <button class="ghost" onclick="batchEdit({'recommended':true})">推荐✓</button>
           <button class="ghost" onclick="batchEdit({'recommended':false})">取消推荐</button>
+          <button class="primary" onclick="batchPromo()">设推广…</button>
+          <button class="ghost" onclick="clearPromotion()">取消推广</button>
           <select id="catSelect" style="width:auto;margin:0">
             <option value="">批量设分类…</option>
           </select>
@@ -139,6 +142,22 @@
       </div>
     </section>
   </div>
+
+  <dialog id="promoDialog" style="border:none;border-radius:12px;padding:20px;min-width:340px">
+    <h3 style="margin:0 0 12px">设置推广时段（付费推广）</h3>
+    <label style="display:block;margin-bottom:10px">
+      开始时间
+      <input id="promoStart" type="datetime-local" style="width:100%;margin-top:4px" />
+    </label>
+    <label style="display:block;margin-bottom:14px">
+      结束时间
+      <input id="promoEnd" type="datetime-local" style="width:100%;margin-top:4px" />
+    </label>
+    <div class="row" style="justify-content:flex-end">
+      <button class="ghost" onclick="document.getElementById('promoDialog').close()">取消</button>
+      <button class="primary" onclick="confirmPromoDialog()">确认设置</button>
+    </div>
+  </dialog>
 
   <script>
     const SUPABASE_URL = window.SUPABASE_URL || "https://jvqrqmbinwzdbxvyrvlz.supabase.co";
@@ -307,15 +326,31 @@
         `<option value="${esc(c.slug)}">${esc(c.slug)}</option>`).join("");
       $("catalogList").innerHTML = `
         <div class="card row"><strong>共 ${entries.length} 条</strong></div>
-        <table><thead><tr><th></th><th>标题</th><th>用户名</th><th>分类</th><th>徽章</th><th>推荐</th><th>得分</th><th>状态</th></tr></thead>
+        <table><thead><tr><th></th><th>标题</th><th>用户名</th><th>分类</th><th>徽章</th><th>推荐</th><th>推广</th><th>得分</th><th>状态</th></tr></thead>
         <tbody>${entries.map((e) => `
           <tr>
             <td><input type="checkbox" ${selected.has("e" + e.db_id) ? "checked" : ""} onchange="toggleSel('e${e.db_id}')" style="width:auto;margin:0" /></td>
             <td>${esc(e.title)}</td><td>@${esc(e.username)}</td><td>${esc(e.category || "-")}</td>
             <td>${e.recommended ? '<span class="badge featured">推荐</span>' : ""}</td>
             <td><button class="ghost" onclick="toggleRecommended(${e.db_id}, ${!e.recommended})">${e.recommended ? "取消推荐" : "推荐"}</button></td>
+            <td>${promoCell(e)}</td>
             <td>${esc(e.score)}</td><td>${esc(e.status)}</td>
           </tr>`).join("")}</tbody></table>`;
+    }
+
+    function promoCell(e) {
+      const until = e.promotion_until ? new Date(e.promotion_until) : null;
+      const start = e.promotion_started_at ? new Date(e.promotion_started_at) : null;
+      const now = new Date();
+      let badge = '<span class="muted">未推广</span>';
+      if (until && until <= now) badge = '<span class="badge">已结束</span>';
+      else if (until && start && start > now) badge = '<span class="badge">未开始</span>';
+      else if (until && until > now) {
+        const days = Math.max(0, Math.ceil((until - now) / 86400000));
+        badge = `<span class="badge promo">推广中 · 剩 ${days} 天</span>`;
+      }
+      return `${badge}<br/><button class="ghost" onclick='openPromoDialog([${e.db_id}], ${JSON.stringify(e.promotion_started_at || "")}, ${JSON.stringify(e.promotion_until || "")})' style="margin-top:4px">设/改推广</button>` +
+        (until ? `<button class="ghost" onclick="clearPromotion([${e.db_id}])" style="margin-top:4px">取消</button>` : "");
     }
 
     async function toggleRecommended(id, val) {
@@ -340,6 +375,61 @@
       if (error) { toast(error.message); return; }
       ids.forEach((id) => selected.delete("e" + id));
       toast("已更新 " + ids.length + " 条");
+      loadCatalog();
+    }
+
+    function selectedPromoIds() {
+      return [...selected].filter((k) => k.startsWith("e")).map((k) => Number(k.slice(1)));
+    }
+
+    function batchPromo() {
+      const ids = selectedPromoIds();
+      if (!ids.length) { toast("请先勾选"); return; }
+      openPromoDialog(ids);
+    }
+
+    function openPromoDialog(ids, startIso, endIso) {
+      const fmt = (d) => {
+        const p = (n) => String(n).padStart(2, "0");
+        return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
+      };
+      $("promoStart").value = startIso ? fmt(new Date(startIso)) : fmt(new Date());
+      $("promoEnd").value = endIso ? fmt(new Date(endIso)) : fmt(new Date(Date.now() + 30 * 86400000));
+      $("promoDialog").dataset.ids = JSON.stringify(ids);
+      $("promoDialog").showModal();
+    }
+
+    async function confirmPromoDialog() {
+      const ids = JSON.parse($("promoDialog").dataset.ids || "[]");
+      const startVal = $("promoStart").value;
+      const endVal = $("promoEnd").value;
+      if (!endVal) { toast("请填写结束时间"); return; }
+      if (startVal && new Date(endVal) <= new Date(startVal)) {
+        toast("结束时间需晚于开始时间");
+        return;
+      }
+      const p_fields = { promotion_until: new Date(endVal).toISOString() };
+      if (startVal) p_fields.promotion_started_at = new Date(startVal).toISOString();
+      const { error } = await client.rpc("batch_update_entries", {
+        p_ids: ids, p_fields,
+      });
+      if (error) { toast(error.message); return; }
+      $("promoDialog").close();
+      toast("推广时段已设置");
+      ids.forEach((id) => selected.delete("e" + id));
+      loadCatalog();
+    }
+
+    async function clearPromotion(ids) {
+      const list = Array.isArray(ids) ? ids : selectedPromoIds();
+      if (!list.length) { toast("请先勾选"); return; }
+      const { error } = await client.rpc("batch_update_entries", {
+        p_ids: list,
+        p_fields: { promotion_started_at: null, promotion_until: null },
+      });
+      if (error) { toast(error.message); return; }
+      toast("已取消推广");
+      list.forEach((id) => selected.delete("e" + id));
       loadCatalog();
     }
 

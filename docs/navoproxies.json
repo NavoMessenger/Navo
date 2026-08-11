@@ -40,28 +40,16 @@
       "link": "tg://proxy?server=45.11.3.74&port=22124&secret=eed77ecc3d0cc0bbed1809bd5ae989e1977777772e6d6963726f736f66742e636f6d"
     },
     {
-      "location": "香港-Hong Kong",
-      "flag": "🇭🇰",
-      "server": "45.39.190.22",
-      "domain": "45.39.190.22",
-      "port": "12432",
-      "secret": "eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d",
+      "location": "日本-Japan",
+      "flag": "��",
+      "server": "5.180.77.135",
+      "domain": "5.180.77.135",
+      "port": "32432",
+      "secret": "eedfad09977a1a7fa3b4146eef97c1d85c7777772e6d6963726f736f66742e636f6d",
       "ping": "115ms",
       "speed": "Fast",
       "status": "online",
-      "link": "tg://proxy?server=45.39.190.22&port=12432&secret=eefbd42f09e61eb35b8ce843b28aa6b7986f7261636c652e636f6d"
-    },
-    {
-      "location": "韩国-Korea",
-      "flag": "🇰🇷",
-      "server": "146.56.133.135",
-      "domain": "146.56.133.135",
-      "port": "12432",
-      "secret": "eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d",
-      "ping": "145ms",
-      "speed": "Fast",
-      "status": "online",
-      "link": "tg://proxy?server=146.56.133.135&port=12432&secret=eed320b6a8bc3e556a13ffeb2d4c09b2656f7261636c652e636f6d"
+      "link": "tg://proxy?server=5.180.77.135&port=32432&secret=eedfad09977a1a7fa3b4146eef97c1d85c7777772e6d6963726f736f66742e636f6d"
     }
   ]
 }

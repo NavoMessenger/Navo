@@ -27,7 +27,19 @@
       "link": "tg://proxy?server=45.88.42.76&port=32431&secret=ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d"
     },
     {
-      "location": "日本-Japan",
+      "location": "Japan日本高速一",
+      "flag": "🇯🇵",
+      "server": "34.84.170.183",
+      "domain": "34.84.170.183",
+      "port": "32432",
+      "secret": "eebc97d8b09e9f2c92678ec05f9545bf247777772e6d6963726f736f66742e636f6d",
+      "ping": "115ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=34.84.170.183&port=32432&secret=eebc97d8b09e9f2c92678ec05f9545bf247777772e6d6963726f736f66742e636f6d"
+    },
+    {
+      "location": "Japan日本",
       "flag": "🇯🇵",
       "server": "5.180.77.135",
       "domain": "5.180.77.135",
@@ -39,7 +51,7 @@
       "link": "tg://proxy?server=5.180.77.135&port=32432&secret=eedfad09977a1a7fa3b4146eef97c1d85c7777772e6d6963726f736f66742e636f6d"
     },
     {
-      "location": "美国-United States",
+      "location": "USA美国",
       "flag": "🇺🇸",
       "server": "45.11.3.74",
       "domain": "45.11.3.74",

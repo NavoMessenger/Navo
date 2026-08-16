@@ -1,8 +1,21 @@
 {
   "updated_at": "2026-03-25T00:00:00Z",
   "proxies": [
+
     {
       "location": "Singapore高速一",
+      "flag": "🇸🇬",
+      "server": "34.87.158.150",
+      "domain": "34.87.158.150",
+      "port": "12432",
+      "secret": "eeeaabea0b96a8e55f0f842afd282417d07777772e6d6963726f736f66742e636f6d",
+      "ping": "90ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://proxy?server=34.87.158.150&port=12432&secret=eeeaabea0b96a8e55f0f842afd282417d07777772e6d6963726f736f66742e636f6d"
+    },
+    {
+      "location": "Singapore高速二",
       "flag": "🇸🇬",
       "server": "45.88.42.76",
       "domain": "45.88.42.76",
@@ -12,19 +25,6 @@
       "speed": "Fast",
       "status": "online",
       "link": "tg://proxy?server=45.88.42.76&port=32431&secret=ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d"
-    },
-
-    {
-      "location": "Singapore高速二",
-      "flag": "🇸🇬",
-      "server": "195.172.139.60",
-      "domain": "195.172.139.60",
-      "port": "12432",
-      "secret": "eeeaabea0b96a8e55f0f842afd282417d07777772e6d6963726f736f66742e636f6d",
-      "ping": "90ms",
-      "speed": "Fast",
-      "status": "online",
-      "link": "tg://proxy?server=195.172.139.60&port=12432&secret=eeeaabea0b96a8e55f0f842afd282417d07777772e6d6963726f736f66742e636f6d"
     },
     {
       "location": "日本-Japan",

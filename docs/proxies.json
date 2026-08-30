@@ -60,18 +60,6 @@
       "speed": "Fast",
       "status": "online",
       "link": "tg://proxy?server=5.180.77.135&port=32432&secret=eedfad09977a1a7fa3b4146eef97c1d85c7777772e6d6963726f736f66742e636f6d"
-    },
-    {
-      "location": "USA美国",
-      "flag": "🇺🇸",
-      "server": "45.11.3.74",
-      "domain": "45.11.3.74",
-      "port": "22124",
-      "secret": "eeb7f01f7abec67bbaf227ce230659e08a7777772e6d6963726f736f66742e636f6d",
-      "ping": "90ms",
-      "speed": "Fast",
-      "status": "online",
-      "link": "tg://proxy?server=45.11.3.74&port=22124&secret=eed77ecc3d0cc0bbed1809bd5ae989e1977777772e6d6963726f736f66742e636f6d"
     }
   ]
 }

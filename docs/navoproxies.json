@@ -26,18 +26,6 @@
       "link": "tg://proxy?server=34.146.224.20&port=12345&secret=eeab3c2009f08fbb6b433c148c4cd5ce1c7777772e6d6963726f736f66742e636f6d"
     },
     {
-      "location": "Singapore高速三",
-      "flag": "🇸🇬",
-      "server": "45.88.42.76",
-      "domain": "45.88.42.76",
-      "port": "32430",
-      "secret": "ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d",
-      "ping": "90ms",
-      "speed": "Fast",
-      "status": "online",
-      "link": "tg://proxy?server=45.88.42.76&port=32431&secret=ee01a888a94071a122b2c25153e940d1f97777772e6d6963726f736f66742e636f6d"
-    },
-    {
       "location": "Japan日本高速一",
       "flag": "🇯🇵",
       "server": "34.84.170.183",

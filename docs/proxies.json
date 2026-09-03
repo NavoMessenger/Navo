@@ -72,18 +72,6 @@
       "speed": "Fast",
       "status": "online",
       "link": "tg://proxy?server=144.225.53.150&port=12432&secret=ee8ead80833a964b949b5bed25e36850137777772e6d6963726f736f66742e636f6d"
-    },
-    {
-      "location": "Japan日本",
-      "flag": "🇯🇵",
-      "server": "5.180.77.135",
-      "domain": "5.180.77.135",
-      "port": "32432",
-      "secret": "eedfad09977a1a7fa3b4146eef97c1d85c7777772e6d6963726f736f66742e636f6d",
-      "ping": "115ms",
-      "speed": "Fast",
-      "status": "online",
-      "link": "tg://proxy?server=5.180.77.135&port=32432&secret=eedfad09977a1a7fa3b4146eef97c1d85c7777772e6d6963726f736f66742e636f6d"
     }
   ]
 }

@@ -88,7 +88,7 @@ description: Preview a shared Navo theme and download the app to import it.
       <p class="theme-download__lead" data-i18n="downloadLead">Available on Android, iOS, Windows, and macOS.</p>
       <div class="theme-download__cta">
         <a class="home-btn home-btn--primary" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
-        <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+        <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight · iOS &amp; Mac</a>
         <a class="home-btn home-btn--secondary" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="android" rel="noopener">Android APK</a>
         <a class="home-btn home-btn--secondary" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="windows" rel="noopener">Windows</a>
         <a class="home-btn home-btn--secondary" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="macos" rel="noopener">macOS</a>

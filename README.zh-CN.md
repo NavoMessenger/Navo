@@ -8,11 +8,39 @@
 
 独立、非官方的 **Android / iOS / Windows / macOS** 跨平台即时通讯客户端。使用现有 Telegram 账号登录 — 基于 **Flutter** 与 **[TDLib](https://core.telegram.org/tdlib)** 构建。
 
-<a href="https://play.google.com/store/apps/details?id=im.navo.app"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="前往 Google Play 下载" height="28"></a>
-[![加入 TestFlight 公测](https://img.shields.io/badge/TestFlight-加入公测-0D96F6?logo=apple&logoColor=white)](https://testflight.apple.com/join/mC3AXH8K)
-[![Latest Release](https://img.shields.io/github/v/release/NavoMessenger/Navo?label=Download)](https://github.com/NavoMessenger/Navo/releases/latest)
-[![Website](https://img.shields.io/badge/Website-navo.im-2D7FF9)](https://www.navo.im)
-[![CI](https://github.com/NavoMessenger/Navo/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/Navo/actions)
+## 下载 Navo
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <a href="https://play.google.com/store/apps/details?id=im.navo.app">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="前往 Google Play 下载 Navo" height="64">
+      </a>
+      <br>
+      <strong>Android</strong><br>
+      <a href="https://play.google.com/store/apps/details?id=im.navo.app"><strong>从 Google Play 安装 →</strong></a>
+    </td>
+    <td align="center" width="50%">
+      <a href="https://testflight.apple.com/join/mC3AXH8K">
+        <img src="https://testflight.apple.com/images/testflight-iOS-400x400_1x_40.png" alt="通过 TestFlight 加入 Navo 公测" width="64" height="64">
+      </a>
+      <br>
+      <strong>iPhone、iPad 与 Mac</strong><br>
+      <a href="https://testflight.apple.com/join/mC3AXH8K"><strong>加入 TestFlight 公测 →</strong></a>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <a href="https://github.com/NavoMessenger/Navo/releases/latest"><strong>Windows / macOS 安装包</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://www.navo.im/zh-CN/download.html"><strong>查看全部下载方式</strong></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/NavoMessenger/Navo/releases/latest"><img src="https://img.shields.io/github/v/release/NavoMessenger/Navo?label=Latest%20release" alt="Navo 最新版本"></a>
+  <a href="https://www.navo.im"><img src="https://img.shields.io/badge/Website-navo.im-2D7FF9" alt="Navo 官网"></a>
+</p>
 
 > **免责声明** — Navo 是一个**独立、非官方**项目，**与 Telegram 无隶属、背书或关联关系**。"Telegram" 为其各自所有者的商标。请自行承担风险，并遵守 Telegram 的[服务条款](https://telegram.org/tos)与 [API 条款](https://core.telegram.org/api/terms)。
 
@@ -23,7 +51,7 @@
 3. **Windows / macOS** — 从 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest) 下载安装包；Apple 用户也可在有兼容构建时加入 [TestFlight 公测](https://testflight.apple.com/join/mC3AXH8K)。
 4. **详细说明** — 见 [docs/zh-CN/download.md](docs/zh-CN/download.md) 或[官网下载页](https://www.navo.im/zh-CN/download.html)。
 
-## 下载
+## 全部下载方式
 
 | 平台 | 获取方式 | 状态 |
 |------|----------|------|

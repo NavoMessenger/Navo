@@ -15,7 +15,7 @@ description: 独立的 Android / iOS / Windows / macOS Telegram 客户端。Mess
     <p class="home-hero__lead">独立、非官方的 Android / iOS / Windows / macOS 即时通讯客户端。使用现有 Telegram 账号登录，在熟悉的网络上体验更轻量的客户端。</p>
     <div class="home-hero__cta">
       <a class="home-btn home-btn--primary" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
-      <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+      <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight · iPhone / Mac</a>
       <a class="home-btn home-btn--secondary" href="{{ '/zh-CN/download.html' | relative_url }}">下载</a>
       <a class="home-btn home-btn--ghost" href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
     </div>
@@ -151,7 +151,7 @@ description: 独立的 Android / iOS / Windows / macOS Telegram 客户端。Mess
       <li>
         <span class="home-platforms__name">iOS</span>
         <span class="home-platforms__actions">
-          <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+          <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">加入公测</a>
         </span>
       </li>
     </ul>

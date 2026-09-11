@@ -15,7 +15,7 @@ description: Independent Telegram client for Android, iOS, Windows & macOS. Mess
     <p class="home-hero__lead">Independent, unofficial messenger for Android, iOS, Windows, and macOS. Sign in with your existing Telegram account.</p>
     <div class="home-hero__cta">
       <a class="home-btn home-btn--primary" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
-      <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+      <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight · iOS &amp; Mac</a>
       <a class="home-btn home-btn--secondary" href="{{ '/download.html' | relative_url }}">Download</a>
       <a class="home-btn home-btn--ghost" href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
     </div>
@@ -151,7 +151,7 @@ description: Independent Telegram client for Android, iOS, Windows & macOS. Mess
       <li>
         <span class="home-platforms__name">iOS</span>
         <span class="home-platforms__actions">
-          <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+          <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">Join beta</a>
         </span>
       </li>
     </ul>

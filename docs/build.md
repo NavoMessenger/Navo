@@ -61,7 +61,7 @@ Optional: code-sign with an Apple Developer ID for distribution outside the App 
 
 ## Build: iOS {#ios}
 
-> **For developers only.** Ordinary users should wait for the App Store listing. An Apple Developer Program membership is required to run on devices and to ship to the App Store.
+> **For developers only.** End users should install the public beta through [TestFlight](https://testflight.apple.com/join/mC3AXH8K). An Apple Developer Program membership is required to run a source build on devices and to ship through Apple distribution.
 
 1. Join the [Apple Developer Program](https://developer.apple.com/programs/).
 2. Open the iOS project in Xcode and configure signing (team, bundle id).

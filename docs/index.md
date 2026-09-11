@@ -4,7 +4,7 @@ title: Navo
 nav_exclude: true
 permalink: /
 lang: en
-description: Independent Telegram client for Android, Windows & macOS. Messaging that keeps life moving.
+description: Independent Telegram client for Android, iOS, Windows & macOS. Messaging that keeps life moving.
 ---
 
 <section class="home-hero">
@@ -12,9 +12,10 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
   <div class="home-hero__content">
     <h1 class="home-hero__brand">Navo</h1>
     <p class="home-hero__slogan">Messaging that keeps life moving.</p>
-    <p class="home-hero__lead">Independent, unofficial messenger for Android, Windows, and macOS. Sign in with your existing Telegram account.</p>
+    <p class="home-hero__lead">Independent, unofficial messenger for Android, iOS, Windows, and macOS. Sign in with your existing Telegram account.</p>
     <div class="home-hero__cta">
       <a class="home-btn home-btn--primary" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
+      <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
       <a class="home-btn home-btn--secondary" href="{{ '/download.html' | relative_url }}">Download</a>
       <a class="home-btn home-btn--ghost" href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
     </div>
@@ -125,7 +126,7 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
   <div class="home-section__inner">
     <header class="home-section__header home-reveal">
       <h2>Get Navo</h2>
-      <p>Available on Android, Windows, and macOS. iOS is on the way.</p>
+      <p>Available on Android, Windows, and macOS, with an iOS public beta on TestFlight.</p>
     </header>
     <ul class="home-platforms__list home-reveal">
       <li>
@@ -149,7 +150,9 @@ description: Independent Telegram client for Android, Windows & macOS. Messaging
       </li>
       <li>
         <span class="home-platforms__name">iOS</span>
-        <span class="home-platforms__status">Coming soon</span>
+        <span class="home-platforms__actions">
+          <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+        </span>
       </li>
     </ul>
     <p class="home-platforms__more home-reveal">

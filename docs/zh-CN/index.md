@@ -4,7 +4,7 @@ title: Navo
 nav_exclude: true
 permalink: /zh-CN/
 lang: zh
-description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging that keeps life moving.
+description: 独立的 Android / iOS / Windows / macOS Telegram 客户端。Messaging that keeps life moving.
 ---
 
 <section class="home-hero">
@@ -12,9 +12,10 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
   <div class="home-hero__content">
     <h1 class="home-hero__brand">Navo</h1>
     <p class="home-hero__slogan">Messaging that keeps life moving.</p>
-    <p class="home-hero__lead">独立、非官方的 Android / Windows / macOS 即时通讯客户端。使用现有 Telegram 账号登录，在熟悉的网络上体验更轻量的客户端。</p>
+    <p class="home-hero__lead">独立、非官方的 Android / iOS / Windows / macOS 即时通讯客户端。使用现有 Telegram 账号登录，在熟悉的网络上体验更轻量的客户端。</p>
     <div class="home-hero__cta">
       <a class="home-btn home-btn--primary" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
+      <a class="home-btn home-btn--primary" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
       <a class="home-btn home-btn--secondary" href="{{ '/zh-CN/download.html' | relative_url }}">下载</a>
       <a class="home-btn home-btn--ghost" href="https://github.com/NavoMessenger/Navo" rel="noopener">GitHub</a>
     </div>
@@ -125,7 +126,7 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
   <div class="home-section__inner">
     <header class="home-section__header home-reveal">
       <h2>获取 Navo</h2>
-      <p>已支持 Android、Windows 与 macOS，iOS 即将推出。</p>
+      <p>已支持 Android、Windows 与 macOS，iOS 已开放 TestFlight 公测。</p>
     </header>
     <ul class="home-platforms__list home-reveal">
       <li>
@@ -149,7 +150,9 @@ description: 独立的 Android / Windows / macOS Telegram 客户端。Messaging 
       </li>
       <li>
         <span class="home-platforms__name">iOS</span>
-        <span class="home-platforms__status">即将推出</span>
+        <span class="home-platforms__actions">
+          <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
+        </span>
       </li>
     </ul>
     <p class="home-platforms__more home-reveal">

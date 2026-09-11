@@ -6,9 +6,10 @@
 
 **English** | [简体中文](README.zh-CN.md)
 
-Independent, unofficial messenger for **Android, Windows, and macOS**. Sign in with your existing Telegram account — built with **Flutter** on **[TDLib](https://core.telegram.org/tdlib)**.
+Independent, unofficial messenger for **Android, iOS, Windows, and macOS**. Sign in with your existing Telegram account — built with **Flutter** on **[TDLib](https://core.telegram.org/tdlib)**.
 
-[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=im.navo.app)
+<a href="https://play.google.com/store/apps/details?id=im.navo.app"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="28"></a>
+[![Join the TestFlight beta](https://img.shields.io/badge/TestFlight-Join_Beta-0D96F6?logo=apple&logoColor=white)](https://testflight.apple.com/join/mC3AXH8K)
 [![Latest Release](https://img.shields.io/github/v/release/NavoMessenger/Navo?label=Download)](https://github.com/NavoMessenger/Navo/releases/latest)
 [![Website](https://img.shields.io/badge/Website-navo.im-2D7FF9)](https://www.navo.im)
 [![CI](https://github.com/NavoMessenger/Navo/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/Navo/actions)
@@ -18,8 +19,9 @@ Independent, unofficial messenger for **Android, Windows, and macOS**. Sign in w
 ## Quick start
 
 1. **Android** — Install from [Google Play](https://play.google.com/store/apps/details?id=im.navo.app), or grab the APK from [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest).
-2. **Windows / macOS** — Download the installer from [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest).
-3. **Details** — See [docs/download.md](docs/download.md) or the [website download page](https://www.navo.im/download.html).
+2. **iOS** — Join the public beta on [TestFlight](https://testflight.apple.com/join/mC3AXH8K).
+3. **Windows / macOS** — Download the installer from [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest). Apple users can also join the [TestFlight beta](https://testflight.apple.com/join/mC3AXH8K) when a compatible build is available.
+4. **Details** — See [docs/download.md](docs/download.md) or the [website download page](https://www.navo.im/download.html).
 
 ## Download
 
@@ -28,9 +30,9 @@ Independent, unofficial messenger for **Android, Windows, and macOS**. Sign in w
 | **Android** | [Google Play](https://play.google.com/store/apps/details?id=im.navo.app) · [Release APK](https://github.com/NavoMessenger/Navo/releases/latest) | Available |
 | **Windows** | [GitHub Release](https://github.com/NavoMessenger/Navo/releases/latest) (`.exe` / `.msi`) | Available |
 | **macOS** | [GitHub Release](https://github.com/NavoMessenger/Navo/releases/latest) (`.dmg` / `.zip`) | Available |
-| **iOS** | App Store | **Coming soon** — Apple Developer account in progress |
+| **iOS** | [TestFlight](https://testflight.apple.com/join/mC3AXH8K) | Public beta |
 
-iOS is not yet on the App Store. There is no public TestFlight or sideload build for end users. Star this repo or watch [Releases](https://github.com/NavoMessenger/Navo/releases) for updates. Developers who need an iOS build (Apple Developer Program required) can see [docs/build.md#ios](docs/build.md#ios).
+iOS is currently distributed as a public beta through [TestFlight](https://testflight.apple.com/join/mC3AXH8K). TestFlight availability and supported devices are shown by Apple after you open the invitation. Developers who need to build from source (Apple Developer Program required) can see [docs/build.md#ios](docs/build.md#ios).
 
 - Website: <https://www.navo.im>
 - Privacy Policy: <https://www.navo.im/privacy.html>
@@ -72,7 +74,7 @@ Sign in with your existing Telegram account to message friends and groups in a c
 
 - **Android** — Available on Google Play
 - **Windows / macOS** — Prebuilt packages via [GitHub Releases](https://github.com/NavoMessenger/Navo/releases/latest)
-- **iOS** — Apple Developer account in progress; App Store listing coming soon
+- **iOS** — Public beta available through [TestFlight](https://testflight.apple.com/join/mC3AXH8K); App Store release planned
 - Contributions welcome via Issues and Pull Requests
 
 ## Why open source
@@ -87,7 +89,7 @@ Need to compile for Android, Windows, or macOS? See the full guide:
 
 **[docs/build.md](docs/build.md)** — prerequisites, Telegram API credentials, native TDLib build, signing, and CI.
 
-iOS builds require an Apple Developer Program membership; the App Store version is in preparation. Ordinary users should wait for the App Store release.
+iOS builds require an Apple Developer Program membership. End users can install the current public beta through [TestFlight](https://testflight.apple.com/join/mC3AXH8K).
 
 ## Architecture (brief)
 

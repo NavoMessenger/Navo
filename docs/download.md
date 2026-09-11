@@ -9,6 +9,7 @@ nav_order: 2
 
 <div class="download-cta" markdown="0">
   <a class="home-btn home-btn--primary home-btn--sm" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
+  <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
   <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="android" rel="noopener">Android APK</a>
   <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="windows" rel="noopener">Windows</a>
   <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="macos" rel="noopener">macOS</a>
@@ -53,13 +54,15 @@ Install from [Google Play](https://play.google.com/store/apps/details?id=im.navo
 
 **Requirements:** macOS 12 or newer. Prefer the universal build when available (Apple Silicon and Intel).
 
-## iOS (coming soon)
+## iOS (TestFlight beta)
 
-iOS is **not** on the App Store yet. An Apple Developer account is in progress.
+iOS is available as a public beta through [TestFlight](https://testflight.apple.com/join/mC3AXH8K).
 
-- No public TestFlight or sideload package for end users
-- After launch, distribution will be via the App Store
-- Star [NavoMessenger/Navo](https://github.com/NavoMessenger/Navo) or watch [Releases](https://github.com/NavoMessenger/Navo/releases) for updates
+1. Install Apple's TestFlight app from the App Store.
+2. Open the [Navo TestFlight invitation](https://testflight.apple.com/join/mC3AXH8K).
+3. Tap **Accept**, then **Install**. Apple shows current availability and device compatibility on the invitation page.
+
+Beta builds expire after the period shown in TestFlight. Update from TestFlight when a newer build is available.
 
 Developers who need to compile for iOS (Apple Developer Program required): see [Build from source](build.html#ios).
 

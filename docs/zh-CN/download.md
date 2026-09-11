@@ -9,6 +9,7 @@ nav_exclude: true
 
 <div class="download-cta" markdown="0">
   <a class="home-btn home-btn--primary home-btn--sm" href="https://play.google.com/store/apps/details?id=im.navo.app" rel="noopener">Google Play</a>
+  <a class="home-btn home-btn--primary home-btn--sm" href="https://testflight.apple.com/join/mC3AXH8K" rel="noopener">TestFlight</a>
   <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="android" rel="noopener">Android APK</a>
   <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="windows" rel="noopener">Windows</a>
   <a class="home-btn home-btn--secondary home-btn--sm" href="https://github.com/NavoMessenger/Navo/releases/latest" data-release-platform="macos" rel="noopener">macOS</a>
@@ -53,13 +54,15 @@ nav_exclude: true
 
 **系统要求：** macOS 12 及以上。优先选择 universal 构建（Apple Silicon 与 Intel）。
 
-## iOS（即将推出）
+## iOS（TestFlight 公测）
 
-iOS **暂未**上架 App Store，Apple 开发者账号申请中。
+iOS 目前通过 [TestFlight](https://testflight.apple.com/join/mC3AXH8K) 提供公开测试。
 
-- 暂不提供面向普通用户的 TestFlight 或侧载安装包
-- 上线后将通过 App Store 分发
-- 可 Star [NavoMessenger/Navo](https://github.com/NavoMessenger/Navo) 或关注 [Releases](https://github.com/NavoMessenger/Navo/releases)
+1. 从 App Store 安装 Apple 的 TestFlight 应用。
+2. 打开 [Navo TestFlight 邀请](https://testflight.apple.com/join/mC3AXH8K)。
+3. 点击「接受」，然后点击「安装」。邀请页会显示当前名额与设备兼容情况。
+
+测试版会在 TestFlight 显示的期限后过期；有新版本时请及时更新。
 
 开发者自行构建（需 Apple Developer Program）：见 [从源码构建]({{ site.baseurl }}/build.html#ios)。
 

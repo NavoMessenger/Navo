@@ -6,9 +6,10 @@
 
 [English](README.md) | **简体中文**
 
-独立、非官方的 **Android / Windows / macOS** 跨平台即时通讯客户端。使用现有 Telegram 账号登录 — 基于 **Flutter** 与 **[TDLib](https://core.telegram.org/tdlib)** 构建。
+独立、非官方的 **Android / iOS / Windows / macOS** 跨平台即时通讯客户端。使用现有 Telegram 账号登录 — 基于 **Flutter** 与 **[TDLib](https://core.telegram.org/tdlib)** 构建。
 
-[![Get it on Google Play](https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png)](https://play.google.com/store/apps/details?id=im.navo.app)
+<a href="https://play.google.com/store/apps/details?id=im.navo.app"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="前往 Google Play 下载" height="28"></a>
+[![加入 TestFlight 公测](https://img.shields.io/badge/TestFlight-加入公测-0D96F6?logo=apple&logoColor=white)](https://testflight.apple.com/join/mC3AXH8K)
 [![Latest Release](https://img.shields.io/github/v/release/NavoMessenger/Navo?label=Download)](https://github.com/NavoMessenger/Navo/releases/latest)
 [![Website](https://img.shields.io/badge/Website-navo.im-2D7FF9)](https://www.navo.im)
 [![CI](https://github.com/NavoMessenger/Navo/actions/workflows/master-apk.yml/badge.svg)](https://github.com/NavoMessenger/Navo/actions)
@@ -18,8 +19,9 @@
 ## 快速开始
 
 1. **Android** — 从 [Google Play](https://play.google.com/store/apps/details?id=im.navo.app) 安装，或从 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest) 下载 APK。
-2. **Windows / macOS** — 从 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest) 下载安装包。
-3. **详细说明** — 见 [docs/download.md](docs/download.md) 或[官网下载页](https://www.navo.im/download.html)。
+2. **iOS** — 通过 [TestFlight](https://testflight.apple.com/join/mC3AXH8K) 加入公开测试。
+3. **Windows / macOS** — 从 [Latest Release](https://github.com/NavoMessenger/Navo/releases/latest) 下载安装包；Apple 用户也可在有兼容构建时加入 [TestFlight 公测](https://testflight.apple.com/join/mC3AXH8K)。
+4. **详细说明** — 见 [docs/zh-CN/download.md](docs/zh-CN/download.md) 或[官网下载页](https://www.navo.im/zh-CN/download.html)。
 
 ## 下载
 
@@ -28,9 +30,9 @@
 | **Android** | [Google Play](https://play.google.com/store/apps/details?id=im.navo.app) · [Release APK](https://github.com/NavoMessenger/Navo/releases/latest) | 可用 |
 | **Windows** | [GitHub Release](https://github.com/NavoMessenger/Navo/releases/latest)（`.exe` / `.msi`） | 可用 |
 | **macOS** | [GitHub Release](https://github.com/NavoMessenger/Navo/releases/latest)（`.dmg` / `.zip`） | 可用 |
-| **iOS** | App Store | **即将推出** — Apple 开发者账号申请中 |
+| **iOS** | [TestFlight](https://testflight.apple.com/join/mC3AXH8K) | 公开测试中 |
 
-iOS 暂未上架 App Store，目前**不提供**面向普通用户的 TestFlight 或侧载安装包。可 Star 本仓库或关注 [Releases](https://github.com/NavoMessenger/Navo/releases) 获取上架通知。开发者如需自行构建 iOS（需 Apple Developer Program），见 [docs/build.md#ios](docs/build.md#ios)。
+iOS 目前通过 [TestFlight](https://testflight.apple.com/join/mC3AXH8K) 提供公开测试。打开邀请后，Apple 会显示当前名额与设备兼容情况。开发者如需自行构建 iOS（需 Apple Developer Program），见 [docs/build.md#ios](docs/build.md#ios)。
 
 - 官网：<https://www.navo.im>
 - 隐私政策：<https://www.navo.im/privacy.html>
@@ -72,7 +74,7 @@ iOS 暂未上架 App Store，目前**不提供**面向普通用户的 TestFlight
 
 - **Android** — 已上架 Google Play
 - **Windows / macOS** — 通过 [GitHub Releases](https://github.com/NavoMessenger/Navo/releases/latest) 提供预编译包
-- **iOS** — Apple Developer 账号申请中，App Store 即将推出
+- **iOS** — 已通过 [TestFlight](https://testflight.apple.com/join/mC3AXH8K) 公开测试，App Store 正式版筹备中
 - 欢迎通过 Issue 与 Pull Request 参与贡献
 
 ## 为什么开源
@@ -87,7 +89,7 @@ Navo 开源，便于你检查它如何通过 TDLib 连接 Telegram、审计与�
 
 **[docs/build.md](docs/build.md)** — 环境依赖、Telegram API 凭证、原生 TDLib 构建、签名与 CI。
 
-iOS 构建需 Apple Developer Program 会员资格；App Store 版本筹备中。普通用户请等待 App Store 上架。
+iOS 构建需 Apple Developer Program 会员资格；普通用户可通过 [TestFlight](https://testflight.apple.com/join/mC3AXH8K) 安装当前公开测试版。
 
 ## 架构（简要）
 

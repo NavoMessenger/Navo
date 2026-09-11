@@ -13,7 +13,7 @@ The authoring account may only have **push** access. An org **admin** (or mainta
 
 | Field | Value |
 |-------|--------|
-| Description | `Independent Telegram client for Android, Windows & macOS. Flutter + TDLib. iOS coming soon.` |
+| Description | `Independent Telegram client for Android, iOS, Windows & macOS. Flutter + TDLib.` |
 | Website | `https://www.navo.im` (after Pages + DNS: `https://navo.im`) |
 
 ## Topics

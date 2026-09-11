@@ -10,36 +10,39 @@ Independent, unofficial messenger for **Android, iOS, Windows, and macOS**. Sign
 
 ## Download Navo
 
-<table>
+Choose your platform and install Navo in one click.
+
+<table width="100%">
   <tr>
-    <td align="center" width="50%">
+    <td align="center" width="33%">
       <a href="https://play.google.com/store/apps/details?id=im.navo.app">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get Navo on Google Play" height="64">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get Navo on Google Play" height="56">
       </a>
       <br>
       <strong>Android</strong><br>
-      <a href="https://play.google.com/store/apps/details?id=im.navo.app"><strong>Install from Google Play →</strong></a>
+      <a href="https://play.google.com/store/apps/details?id=im.navo.app"><strong>Install&nbsp;from&nbsp;Google&nbsp;Play&nbsp;→</strong></a>
     </td>
-    <td align="center" width="50%">
+    <td align="center" width="34%">
       <a href="https://testflight.apple.com/join/mC3AXH8K">
         <img src="https://testflight.apple.com/images/testflight-iOS-400x400_1x_40.png" alt="Join the Navo beta with TestFlight" width="64" height="64">
       </a>
       <br>
       <strong>iPhone, iPad &amp; Mac</strong><br>
-      <a href="https://testflight.apple.com/join/mC3AXH8K"><strong>Join the TestFlight beta →</strong></a>
+      <a href="https://testflight.apple.com/join/mC3AXH8K"><strong>Join&nbsp;the&nbsp;TestFlight&nbsp;beta&nbsp;→</strong></a>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://github.com/NavoMessenger/Navo/releases/latest">
+        <img src="https://img.shields.io/badge/GitHub-Releases-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="Download Navo from GitHub Releases" height="40">
+      </a>
+      <br><br>
+      <strong>Windows &amp; macOS</strong><br>
+      <a href="https://github.com/NavoMessenger/Navo/releases/latest"><strong>Download&nbsp;the&nbsp;latest&nbsp;installer&nbsp;→</strong></a>
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://github.com/NavoMessenger/Navo/releases/latest"><strong>Windows / macOS installers</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://www.navo.im/download.html"><strong>All download options</strong></a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/NavoMessenger/Navo/releases/latest"><img src="https://img.shields.io/github/v/release/NavoMessenger/Navo?label=Latest%20release" alt="Latest Navo release"></a>
-  <a href="https://www.navo.im"><img src="https://img.shields.io/badge/Website-navo.im-2D7FF9" alt="Navo website"></a>
+  <a href="https://www.navo.im/download.html"><strong>View all download options and installation help →</strong></a>
 </p>
 
 > **Disclaimer** — Navo is an **independent, unofficial** project. It is **not affiliated with, endorsed by, or connected to Telegram**. "Telegram" is a trademark of its respective owner. Use at your own risk and in accordance with Telegram's [Terms of Service](https://telegram.org/tos) and [API Terms](https://core.telegram.org/api/terms).

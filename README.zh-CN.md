@@ -10,36 +10,39 @@
 
 ## 下载 Navo
 
-<table>
+选择你的平台，一键安装 Navo。
+
+<table width="100%">
   <tr>
-    <td align="center" width="50%">
+    <td align="center" width="33%">
       <a href="https://play.google.com/store/apps/details?id=im.navo.app">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="前往 Google Play 下载 Navo" height="64">
+        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="前往 Google Play 下载 Navo" height="56">
       </a>
       <br>
       <strong>Android</strong><br>
-      <a href="https://play.google.com/store/apps/details?id=im.navo.app"><strong>从 Google Play 安装 →</strong></a>
+      <a href="https://play.google.com/store/apps/details?id=im.navo.app"><strong>从&nbsp;Google&nbsp;Play&nbsp;安装&nbsp;→</strong></a>
     </td>
-    <td align="center" width="50%">
+    <td align="center" width="34%">
       <a href="https://testflight.apple.com/join/mC3AXH8K">
         <img src="https://testflight.apple.com/images/testflight-iOS-400x400_1x_40.png" alt="通过 TestFlight 加入 Navo 公测" width="64" height="64">
       </a>
       <br>
       <strong>iPhone、iPad 与 Mac</strong><br>
-      <a href="https://testflight.apple.com/join/mC3AXH8K"><strong>加入 TestFlight 公测 →</strong></a>
+      <a href="https://testflight.apple.com/join/mC3AXH8K"><strong>加入&nbsp;TestFlight&nbsp;公测&nbsp;→</strong></a>
+    </td>
+    <td align="center" width="33%">
+      <a href="https://github.com/NavoMessenger/Navo/releases/latest">
+        <img src="https://img.shields.io/badge/GitHub-Releases-181717?style=for-the-badge&amp;logo=github&amp;logoColor=white" alt="从 GitHub Releases 下载 Navo" height="40">
+      </a>
+      <br><br>
+      <strong>Windows 与 macOS</strong><br>
+      <a href="https://github.com/NavoMessenger/Navo/releases/latest"><strong>下载最新安装包&nbsp;→</strong></a>
     </td>
   </tr>
 </table>
 
 <p align="center">
-  <a href="https://github.com/NavoMessenger/Navo/releases/latest"><strong>Windows / macOS 安装包</strong></a>
-  &nbsp;·&nbsp;
-  <a href="https://www.navo.im/zh-CN/download.html"><strong>查看全部下载方式</strong></a>
-</p>
-
-<p align="center">
-  <a href="https://github.com/NavoMessenger/Navo/releases/latest"><img src="https://img.shields.io/github/v/release/NavoMessenger/Navo?label=Latest%20release" alt="Navo 最新版本"></a>
-  <a href="https://www.navo.im"><img src="https://img.shields.io/badge/Website-navo.im-2D7FF9" alt="Navo 官网"></a>
+  <a href="https://www.navo.im/zh-CN/download.html"><strong>查看全部下载方式与安装帮助 →</strong></a>
 </p>
 
 > **免责声明** — Navo 是一个**独立、非官方**项目，**与 Telegram 无隶属、背书或关联关系**。"Telegram" 为其各自所有者的商标。请自行承担风险，并遵守 Telegram 的[服务条款](https://telegram.org/tos)与 [API 条款](https://core.telegram.org/api/terms)。

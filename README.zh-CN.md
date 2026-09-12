@@ -66,7 +66,7 @@
 iOS 目前通过 [TestFlight](https://testflight.apple.com/join/mC3AXH8K) 提供公开测试。打开邀请后，Apple 会显示当前名额与设备兼容情况。开发者如需自行构建 iOS（需 Apple Developer Program），见 [docs/build.md#ios](docs/build.md#ios)。
 
 - 官网：<https://www.navo.im>
-- 隐私政策：<https://www.navo.im/privacy.html>
+- 隐私政策：<https://www.navo.im/zh-CN/privacy.html>
 - 服务条款：<https://www.navo.im/terms.html>
 
 ## 功能
@@ -140,4 +140,4 @@ Navo 基于 **[Mithka](https://github.com/iebb/mithka)**（作者 [iebb](https:/
 
 Navo **与 Telegram 无隶属、背书或关联关系**。"Telegram" 为其各自所有者的商标。Navo 是非官方客户端。使用 Telegram 网络须遵守 Telegram 服务条款。你有责任遵守适用法律与 Telegram 规则。
 
-[隐私政策](https://www.navo.im/privacy.html) · [服务条款](https://www.navo.im/terms.html) · [官网](https://www.navo.im)
+[隐私政策](https://www.navo.im/zh-CN/privacy.html) · [服务条款](https://www.navo.im/terms.html) · [官网](https://www.navo.im)

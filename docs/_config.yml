@@ -34,6 +34,7 @@ aux_links_new_tab: false
 footer_content: >-
   Independent unofficial Telegram client — not affiliated with Telegram.
   <a href="/privacy.html">Privacy</a> ·
+  <a href="/zh-CN/privacy.html">隐私政策</a> ·
   <a href="/terms.html">Terms</a> ·
   <a href="https://github.com/NavoMessenger/Navo">GitHub</a>
 

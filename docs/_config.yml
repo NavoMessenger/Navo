@@ -20,6 +20,8 @@ heading_anchors: true
 aux_links:
   "Download":
     - "/download.html"
+  "Support":
+    - "/support.html"
   "TestFlight":
     - "https://testflight.apple.com/join/mC3AXH8K"
   "GitHub":
@@ -33,6 +35,7 @@ aux_links_new_tab: false
 
 footer_content: >-
   Independent unofficial Telegram client — not affiliated with Telegram.
+  <a href="/support.html">Support</a> ·
   <a href="/privacy.html">Privacy</a> ·
   <a href="/zh-CN/privacy.html">隐私政策</a> ·
   <a href="/terms.html">Terms</a> ·

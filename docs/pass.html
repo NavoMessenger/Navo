@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#111936">
+  <title>Navo 社群护照</title>
+  <meta name="description" content="在 Navo 领取限量社群徽章，收藏你的社群身份编号。">
+  <style>
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 10%,#40d7b255,transparent 35%),radial-gradient(circle at 10% 90%,#635bff66,transparent 42%),#0b1020}.card{width:min(520px,100%);padding:34px;border:1px solid #ffffff25;border-radius:30px;background:#ffffff10;backdrop-filter:blur(22px);box-shadow:0 26px 80px #0008}.brand{font-size:13px;letter-spacing:1.2px;color:#ffffffa8;font-weight:750}.badge{width:74px;height:74px;margin:38px 0 28px;display:grid;place-items:center;border-radius:22px;font-size:38px;background:linear-gradient(135deg,#635bff,#40d7b2);box-shadow:0 18px 48px #635bff55}h1{font-size:38px;line-height:1.08;margin:0 0 14px;letter-spacing:-1px}p{color:#ffffffb5;line-height:1.6;margin:0 0 28px}.actions{display:grid;gap:12px}button,a{min-height:52px;border-radius:16px;border:0;font:inherit;font-weight:750;display:grid;place-items:center;text-decoration:none;cursor:pointer}.primary{background:#fff;color:#111936}.secondary{border:1px solid #ffffff24;color:#fff;background:#ffffff0d}.meta{margin-top:24px;font-size:12px;color:#ffffff70;text-align:center}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">NAVO · COMMUNITY PASSPORT</div>
+    <div class="badge">✦</div>
+    <h1 id="title">一枚只属于这个社群的徽章</h1>
+    <p id="lead">打开 Navo，验证你已加入社群后领取唯一编号。数量有限，先到先得。</p>
+    <div class="actions">
+      <button class="primary" id="open">在 Navo 领取</button>
+      <a class="secondary" id="download" href="/download.html">下载 Navo</a>
+    </div>
+    <div class="meta" id="privacy">不会公开手机号、群邀请链接或成员列表</div>
+  </main>
+  <script>
+    (function(){
+      var copy={
+        en:['A badge made just for this community','Open Navo, verify that you joined, and claim your unique number. Supply is limited.','Claim in Navo','Get Navo','Phone numbers, invite links, and member lists stay private','Invalid claim link'],
+        zh:['一枚只属于这个社群的徽章','打开 Navo，验证你已加入社群后领取唯一编号。数量有限，先到先得。','在 Navo 领取','下载 Navo','不会公开手机号、群邀请链接或成员列表','领取链接无效'],
+        ja:['このコミュニティだけのバッジ','Navoで参加を確認し、固有番号を受け取りましょう。数量限定です。','Navoで受け取る','Navoを入手','電話番号・招待リンク・メンバー一覧は公開されません','無効なリンク'],
+        ko:['이 커뮤니티만의 배지','Navo에서 가입을 확인하고 고유 번호를 받으세요. 수량이 한정되어 있습니다.','Navo에서 받기','Navo 다운로드','전화번호, 초대 링크, 멤버 목록은 공개되지 않습니다','잘못된 링크'],
+        fr:['Un badge créé pour cette communauté','Ouvrez Navo, confirmez votre adhésion et recevez votre numéro unique. Quantité limitée.','Recevoir dans Navo','Obtenir Navo','Numéros, liens et listes de membres restent privés','Lien invalide'],
+        es:['Una insignia creada para esta comunidad','Abre Navo, verifica que te uniste y reclama tu número único. Unidades limitadas.','Reclamar en Navo','Descargar Navo','Teléfonos, enlaces y listas de miembros siguen privados','Enlace no válido'],
+        de:['Ein Abzeichen nur für diese Community','Öffne Navo, bestätige deinen Beitritt und hole deine Nummer ab. Limitierte Auflage.','In Navo abholen','Navo laden','Telefonnummern, Einladungslinks und Mitgliederlisten bleiben privat','Ungültiger Link']
+      };
+      var lang=(navigator.language||'en').toLowerCase().split('-')[0];
+      var t=copy[lang]||copy.en;
+      document.documentElement.lang=lang;
+      document.title='Navo · '+t[0];
+      document.getElementById('title').textContent=t[0];
+      document.getElementById('lead').textContent=t[1];
+      document.getElementById('open').textContent=t[2];
+      document.getElementById('download').textContent=t[3];
+      document.getElementById('privacy').textContent=t[4];
+      var token='';
+      try{token=(new URLSearchParams(location.search).get('token')||'').trim()}catch(_){}
+      var button=document.getElementById('open');
+      if(!token){button.disabled=true;button.textContent=t[5];return}
+      var target='navo://passport?token='+encodeURIComponent(token);
+      function open(){location.href=target}
+      button.addEventListener('click',open);
+      if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) setTimeout(open,180);
+    })();
+  </script>
+</body>
+</html>

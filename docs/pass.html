@@ -2,54 +2,108 @@
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#111936">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#10162f">
+  <meta name="color-scheme" content="dark">
   <title>Navo 社群护照</title>
   <meta name="description" content="在 Navo 领取限量社群徽章，收藏你的社群身份编号。">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Navo 限量社群徽章">
+  <meta property="og:description" content="领取唯一编号，收藏你与社群共同经历的时刻。">
+  <meta property="og:image" content="https://www.navo.im/images/banner.png">
+  <meta name="twitter:card" content="summary_large_image">
   <style>
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:radial-gradient(circle at 80% 10%,#40d7b255,transparent 35%),radial-gradient(circle at 10% 90%,#635bff66,transparent 42%),#0b1020}.card{width:min(520px,100%);padding:34px;border:1px solid #ffffff25;border-radius:30px;background:#ffffff10;backdrop-filter:blur(22px);box-shadow:0 26px 80px #0008}.brand{font-size:13px;letter-spacing:1.2px;color:#ffffffa8;font-weight:750}.badge{width:74px;height:74px;margin:38px 0 28px;display:grid;place-items:center;border-radius:22px;font-size:38px;background:linear-gradient(135deg,#635bff,#40d7b2);box-shadow:0 18px 48px #635bff55}h1{font-size:38px;line-height:1.08;margin:0 0 14px;letter-spacing:-1px}p{color:#ffffffb5;line-height:1.6;margin:0 0 28px}.actions{display:grid;gap:12px}button,a{min-height:52px;border-radius:16px;border:0;font:inherit;font-weight:750;display:grid;place-items:center;text-decoration:none;cursor:pointer}.primary{background:#fff;color:#111936}.secondary{border:1px solid #ffffff24;color:#fff;background:#ffffff0d}.meta{margin-top:24px;font-size:12px;color:#ffffff70;text-align:center}
+    :root{--ink:#fff;--muted:rgba(255,255,255,.72);--line:rgba(255,255,255,.17);--glass:rgba(8,13,31,.42);--accent:#8debd5;--c1:#3157d5;--c2:#7055e7;--c3:#22ad96;--angle:135deg;--progress:0%}
+    *{box-sizing:border-box}html{min-height:100%;background:#090d1d}body{margin:0;min-height:100vh;min-height:100svh;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans SC","PingFang SC",sans-serif;background:#090d1d;overflow-x:hidden}
+    button,a{font:inherit}.page{position:relative;isolation:isolate;min-height:100vh;min-height:100svh;padding:max(22px,env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) max(34px,env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left));display:grid;place-items:center;overflow:hidden}
+    .page::before{content:"";position:fixed;z-index:-2;inset:-15%;background:linear-gradient(var(--angle),var(--c1),var(--c2) 52%,var(--c3));filter:saturate(.82)}.page::after{content:"";position:fixed;z-index:-1;inset:0;background:radial-gradient(circle at 10% 8%,rgba(255,255,255,.16),transparent 31%),radial-gradient(circle at 88% 88%,rgba(6,11,31,.5),transparent 36%),linear-gradient(180deg,rgba(4,8,24,.12),rgba(4,7,22,.42));pointer-events:none}
+    .shell{width:min(100%,1040px);display:grid;grid-template-columns:minmax(0,1.04fr) minmax(340px,.76fr);gap:22px;align-items:stretch}.panel{border:1px solid var(--line);background:var(--glass);box-shadow:0 30px 90px rgba(0,0,0,.34);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px)}
+    .passport{position:relative;min-height:650px;padding:34px;border-radius:38px;display:flex;flex-direction:column;overflow:hidden}.passport::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 72% 14%,rgba(255,255,255,.13),transparent 27%)}
+    .brand{position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;gap:16px}.wordmark{display:flex;align-items:center;gap:11px;font-size:12px;font-weight:850;letter-spacing:1.75px;color:rgba(255,255,255,.84)}.brand-mark{width:34px;height:34px;border:1px solid rgba(255,255,255,.28);border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.09);font-size:18px}.status{padding:8px 11px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.09);font-size:11px;font-weight:800;white-space:nowrap}.status[data-state="active"]::before{content:"";display:inline-block;width:7px;height:7px;margin-right:7px;border-radius:50%;background:#78f1c3;box-shadow:0 0 0 4px rgba(120,241,195,.13)}
+    .art-stage{position:relative;z-index:1;margin:38px auto 30px;width:min(52vw,294px);aspect-ratio:1}.art-halo{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.22),transparent 68%);filter:blur(16px)}.art-frame{position:relative;width:100%;height:100%;padding:10px;border-radius:50%;background:linear-gradient(145deg,rgba(255,255,255,.75),rgba(255,255,255,.13) 48%,rgba(0,0,0,.28));box-shadow:0 22px 54px rgba(0,0,0,.34),inset 0 0 0 1px rgba(255,255,255,.34)}.art-frame::after{content:"";position:absolute;inset:16px;border-radius:50%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.22);pointer-events:none}.art{width:100%;height:100%;border-radius:50%;display:block;object-fit:cover;background:rgba(255,255,255,.12)}.art-fallback{position:absolute;inset:10px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(145deg,rgba(255,255,255,.18),rgba(255,255,255,.04));font-size:72px}
+    .identity{position:relative;z-index:1;margin-top:auto}.eyebrow{margin:0 0 10px;color:rgba(255,255,255,.62);font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}.identity h1{margin:0;font-size:clamp(40px,6vw,66px);line-height:.98;letter-spacing:-2.2px;overflow-wrap:anywhere}.community{margin:20px 0 0;font-size:clamp(18px,2.4vw,25px);font-weight:760;color:rgba(255,255,255,.9)}.tagline{margin:10px 0 0;max-width:34em;font-size:15px;line-height:1.58;color:var(--muted)}
+    .claim{border-radius:38px;padding:30px;display:flex;flex-direction:column}.claim-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}.claim h2{margin:0;font-size:27px;line-height:1.12;letter-spacing:-.7px}.edition{padding:7px 10px;border-radius:10px;background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);font-size:11px;font-weight:800;white-space:nowrap}.promise{margin:11px 0 25px;color:var(--muted);font-size:14px;line-height:1.58}
+    .supply{padding:18px;border:1px solid rgba(255,255,255,.14);border-radius:20px;background:rgba(255,255,255,.075)}.supply-line{display:flex;justify-content:space-between;gap:14px;align-items:baseline}.supply-line strong{font-size:20px}.supply-line span{color:var(--muted);font-size:13px}.track{height:8px;margin-top:13px;border-radius:999px;background:rgba(255,255,255,.13);overflow:hidden}.track::after{content:"";display:block;width:var(--progress);height:100%;border-radius:inherit;background:linear-gradient(90deg,#fff,var(--accent));box-shadow:0 0 18px rgba(255,255,255,.36);transition:width .55s ease}.deadline{margin-top:11px;color:rgba(255,255,255,.66);font-size:12px}
+    .steps{display:grid;gap:13px;margin:24px 0}.step{display:grid;grid-template-columns:32px 1fr;gap:11px;align-items:center;color:rgba(255,255,255,.82);font-size:13px}.step i{width:32px;height:32px;border-radius:11px;display:grid;place-items:center;background:rgba(255,255,255,.1);font-style:normal;font-size:12px;font-weight:900}.step b{display:block;color:#fff;font-size:14px;margin-bottom:2px}.step small{color:rgba(255,255,255,.59);font-size:11px}
+    .actions{margin-top:auto;display:grid;gap:10px}.primary,.secondary,.icon-button{border:0;text-decoration:none;cursor:pointer}.primary{min-height:58px;border-radius:18px;background:#fff;color:#0b1230;font-weight:850;font-size:17px;box-shadow:0 13px 34px rgba(0,0,0,.22);transition:transform .16s ease,box-shadow .16s ease}.primary:hover{transform:translateY(-2px);box-shadow:0 17px 40px rgba(0,0,0,.28)}.primary:active{transform:translateY(0)}.primary:disabled{opacity:.52;cursor:not-allowed;transform:none}.subactions{display:grid;grid-template-columns:1fr auto;gap:10px}.secondary,.icon-button{min-height:48px;border-radius:15px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;font-weight:750}.secondary{display:grid;place-items:center}.icon-button{width:48px;font-size:18px}.privacy{display:flex;align-items:flex-start;gap:7px;margin:14px 2px 0;color:rgba(255,255,255,.55);font-size:11px;line-height:1.5}.privacy::before{content:"✓";color:#8debd5;font-weight:900}
+    .loading{animation:pulse 1.2s ease-in-out infinite}.error{grid-column:1/-1;width:min(100%,520px);margin:auto;padding:34px;border-radius:28px;text-align:center}.error-icon{font-size:38px}.error h1{margin:15px 0 8px;font-size:26px}.error p{margin:0 0 22px;color:var(--muted);line-height:1.6}.hidden{display:none!important}.toast{position:fixed;left:50%;bottom:max(22px,env(safe-area-inset-bottom));z-index:20;transform:translate(-50%,18px);padding:11px 16px;border-radius:999px;background:#fff;color:#10162f;font-size:13px;font-weight:800;opacity:0;pointer-events:none;transition:.2s ease}.toast.show{opacity:1;transform:translate(-50%,0)}
+    @keyframes pulse{50%{opacity:.55}}@media(max-width:780px){.page{padding:0;place-items:stretch}.shell{display:block;width:100%;min-width:0}.passport,.claim{border:0;border-radius:0;box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none;background:transparent}.passport{min-height:auto;padding:22px 22px 24px}.claim{min-width:0;padding:24px 22px calc(106px + env(safe-area-inset-bottom));background:rgba(5,10,28,.43);border-top:1px solid rgba(255,255,255,.15);border-radius:28px 28px 0 0}.brand .status,.edition{display:none}.art-stage{width:min(58vw,246px);margin:28px auto 24px}.identity h1{font-size:44px;letter-spacing:-1.6px}.community{margin-top:16px;font-size:19px}.claim h2{font-size:24px}.supply-line{flex-wrap:wrap}.steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.step{display:block;text-align:center;padding:10px 5px;border-radius:14px;background:rgba(255,255,255,.055)}.step i{margin:0 auto 7px}.step small{display:none}.primary{position:fixed;z-index:12;left:18px;right:18px;bottom:max(14px,env(safe-area-inset-bottom));width:auto;box-shadow:0 14px 42px rgba(3,7,24,.48),0 0 0 7px rgba(9,14,34,.28);padding:0 16px}.claim-head{align-items:center}}
+    @media(max-width:380px){.passport{padding-inline:18px}.claim{padding-inline:18px}.identity h1{font-size:38px}.wordmark{letter-spacing:1.2px}.steps{gap:5px}.step b{font-size:12px}.art-stage{width:220px}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="brand">NAVO · COMMUNITY PASSPORT</div>
-    <div class="badge">✦</div>
-    <h1 id="title">一枚只属于这个社群的徽章</h1>
-    <p id="lead">打开 Navo，验证你已加入社群后领取唯一编号。数量有限，先到先得。</p>
-    <div class="actions">
-      <button class="primary" id="open">在 Navo 领取</button>
-      <a class="secondary" id="download" href="/download.html">下载 Navo</a>
-    </div>
-    <div class="meta" id="privacy">不会公开手机号、群邀请链接或成员列表</div>
+  <main class="page" id="page">
+    <section class="shell loading" id="content" aria-live="polite">
+      <article class="passport panel">
+        <header class="brand">
+          <div class="wordmark"><span class="brand-mark">✦</span><span>NAVO · COMMUNITY PASSPORT</span></div>
+          <span class="status" id="status" data-state="active">限量发行</span>
+        </header>
+        <div class="art-stage">
+          <div class="art-halo"></div>
+          <div class="art-frame"><div class="art-fallback" id="artFallback">✦</div><img class="art hidden" id="art" alt="" referrerpolicy="no-referrer"></div>
+        </div>
+        <div class="identity">
+          <p class="eyebrow" id="eyebrow">社群身份纪念</p>
+          <h1 id="badgeTitle">正在载入徽章</h1>
+          <p class="community" id="community">Navo Community</p>
+          <p class="tagline" id="tagline">读取这枚徽章的发行信息…</p>
+        </div>
+      </article>
+      <aside class="claim panel">
+        <div class="claim-head"><h2 id="claimTitle">领取你的唯一编号</h2><span class="edition" id="edition">LIMITED</span></div>
+        <p class="promise" id="promise">加入社群后即可免费领取。这枚徽章会永久收藏在你的 Navo 社群护照中。</p>
+        <div class="supply"><div class="supply-line"><strong id="remaining">—</strong><span id="claimed">—</span></div><div class="track" role="progressbar" id="progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div><div class="deadline" id="deadline">正在确认领取状态…</div></div>
+        <div class="steps" aria-label="领取步骤">
+          <div class="step"><i>1</i><div><b id="step1">打开 Navo</b><small id="step1Sub">安全进入领取页</small></div></div>
+          <div class="step"><i>2</i><div><b id="step2">验证成员</b><small id="step2Sub">不会公开成员资料</small></div></div>
+          <div class="step"><i>3</i><div><b id="step3">获得编号</b><small id="step3Sub">先到先得且不可重复</small></div></div>
+        </div>
+        <div class="actions">
+          <button class="primary" id="open" disabled>在 Navo 领取</button>
+          <div class="subactions"><a class="secondary" id="download" href="/download.html">还没有 Navo？免费下载</a><button class="icon-button" id="share" aria-label="分享领取链接" title="分享">↗</button></div>
+        </div>
+        <div class="privacy" id="privacy">只验证是否已加入，不公开手机号、邀请链接或成员列表</div>
+      </aside>
+    </section>
+    <section class="error panel hidden" id="error" aria-live="assertive"><div class="error-icon">◇</div><h1 id="errorTitle">这枚徽章暂时无法领取</h1><p id="errorBody">链接可能无效、已过期或活动已经结束。</p><a class="secondary" href="/" id="errorAction">返回 Navo 官网</a></section>
   </main>
+  <div class="toast" id="toast" role="status">领取链接已复制</div>
   <script>
     (function(){
-      var copy={
-        en:['A badge made just for this community','Open Navo, verify that you joined, and claim your unique number. Supply is limited.','Claim in Navo','Get Navo','Phone numbers, invite links, and member lists stay private','Invalid claim link'],
-        zh:['一枚只属于这个社群的徽章','打开 Navo，验证你已加入社群后领取唯一编号。数量有限，先到先得。','在 Navo 领取','下载 Navo','不会公开手机号、群邀请链接或成员列表','领取链接无效'],
-        ja:['このコミュニティだけのバッジ','Navoで参加を確認し、固有番号を受け取りましょう。数量限定です。','Navoで受け取る','Navoを入手','電話番号・招待リンク・メンバー一覧は公開されません','無効なリンク'],
-        ko:['이 커뮤니티만의 배지','Navo에서 가입을 확인하고 고유 번호를 받으세요. 수량이 한정되어 있습니다.','Navo에서 받기','Navo 다운로드','전화번호, 초대 링크, 멤버 목록은 공개되지 않습니다','잘못된 링크'],
-        fr:['Un badge créé pour cette communauté','Ouvrez Navo, confirmez votre adhésion et recevez votre numéro unique. Quantité limitée.','Recevoir dans Navo','Obtenir Navo','Numéros, liens et listes de membres restent privés','Lien invalide'],
-        es:['Una insignia creada para esta comunidad','Abre Navo, verifica que te uniste y reclama tu número único. Unidades limitadas.','Reclamar en Navo','Descargar Navo','Teléfonos, enlaces y listas de miembros siguen privados','Enlace no válido'],
-        de:['Ein Abzeichen nur für diese Community','Öffne Navo, bestätige deinen Beitritt und hole deine Nummer ab. Limitierte Auflage.','In Navo abholen','Navo laden','Telefonnummern, Einladungslinks und Mitgliederlisten bleiben privat','Ungültiger Link']
+      'use strict';
+      var SUPABASE='https://jvqrqmbinwzdbxvyrvlz.supabase.co',KEY='sb_publishable__VX5h9iIUbmuCu1LhST41w_eSfT-0tt';
+      var strings={
+        en:{limited:'Limited release',memory:'Community keepsake',loading:'Loading badge',claim:'Claim your unique number',promise:'Join the community and claim it free. This badge stays in your Navo Community Passport.',open:'Claim in Navo',download:'New to Navo? Download free',remaining:'{n} remaining',claimed:'{n} of {s} claimed',forever:'Open indefinitely',until:'Claim by {date}',ended:'Claiming has ended',full:'All badges claimed',paused:'Claiming is paused',s1:'Open Navo',s1s:'Enter the secure claim',s2:'Verify member',s2s:'No member data is exposed',s3:'Get your number',s3s:'Unique and first come',privacy:'Only membership is checked. Phone numbers, invite links and member lists stay private.',invalid:'This badge cannot be claimed',invalidBody:'The link may be invalid, expired, or the campaign has ended.',home:'Visit Navo',copied:'Claim link copied',share:'Claim “{badge}” from {community} in Navo.'},
+        zh:{limited:'限量发行',memory:'社群身份纪念',loading:'正在载入徽章',claim:'领取你的唯一编号',promise:'加入社群后即可免费领取。这枚徽章会永久收藏在你的 Navo 社群护照中。',open:'在 Navo 领取',download:'还没有 Navo？免费下载',remaining:'仅剩 {n} 枚',claimed:'已领取 {n} / {s}',forever:'长期开放领取',until:'领取截止：{date}',ended:'领取已经结束',full:'已全部领完',paused:'领取暂时停止',s1:'打开 Navo',s1s:'安全进入领取页',s2:'验证成员',s2s:'不会公开成员资料',s3:'获得编号',s3s:'先到先得且不可重复',privacy:'只验证是否已加入，不公开手机号、邀请链接或成员列表',invalid:'这枚徽章暂时无法领取',invalidBody:'链接可能无效、已过期或活动已经结束。',home:'返回 Navo 官网',copied:'领取链接已复制',share:'在 Navo 领取「{community}」发行的「{badge}」限量徽章。'},
+        'zh-hant':{limited:'限量發行',memory:'社群身份紀念',loading:'正在載入徽章',claim:'領取你的唯一編號',promise:'加入社群後即可免費領取。這枚徽章會永久收藏在你的 Navo 社群護照中。',open:'在 Navo 領取',download:'還沒有 Navo？免費下載',remaining:'僅剩 {n} 枚',claimed:'已領取 {n} / {s}',forever:'長期開放領取',until:'領取截止：{date}',ended:'領取已經結束',full:'已全部領完',paused:'領取暫時停止',s1:'開啟 Navo',s1s:'安全進入領取頁',s2:'驗證成員',s2s:'不會公開成員資料',s3:'獲得編號',s3s:'先到先得且不可重複',privacy:'只驗證是否已加入，不公開手機號碼、邀請連結或成員名單',invalid:'這枚徽章暫時無法領取',invalidBody:'連結可能無效、已過期或活動已經結束。',home:'返回 Navo 官網',copied:'領取連結已複製',share:'在 Navo 領取「{community}」發行的「{badge}」限量徽章。'},
+        ja:{limited:'数量限定',memory:'コミュニティの記念',loading:'バッジを読み込み中',claim:'あなただけの番号を受け取る',promise:'コミュニティ参加後、無料で受け取れます。Navoコミュニティパスポートに保存されます。',open:'Navoで受け取る',download:'Navoを無料で入手',remaining:'残り {n} 個',claimed:'{s} 個中 {n} 個受取済み',forever:'期限なし',until:'受取期限：{date}',ended:'受取は終了しました',full:'すべて受取済み',paused:'受取を一時停止中',s1:'Navoを開く',s1s:'安全な受取画面へ',s2:'参加を確認',s2s:'メンバー情報は非公開',s3:'番号を取得',s3s:'先着順の固有番号',privacy:'参加状況のみ確認し、電話番号・招待リンク・メンバー一覧は公開しません。',invalid:'このバッジは受け取れません',invalidBody:'リンクが無効、期限切れ、または配布終了の可能性があります。',home:'Navoサイトへ',copied:'リンクをコピーしました',share:'Navoで「{community}」の限定バッジ「{badge}」を受け取りましょう。'},
+        ko:{limited:'한정 발행',memory:'커뮤니티 기념',loading:'배지 불러오는 중',claim:'나만의 번호 받기',promise:'커뮤니티 가입 후 무료로 받을 수 있으며 Navo 커뮤니티 패스포트에 보관됩니다.',open:'Navo에서 받기',download:'Navo 무료 다운로드',remaining:'{n}개 남음',claimed:'{s}개 중 {n}개 수령',forever:'상시 수령 가능',until:'수령 마감: {date}',ended:'수령이 종료되었습니다',full:'모두 수령되었습니다',paused:'수령이 일시 중지되었습니다',s1:'Navo 열기',s1s:'안전한 수령 화면',s2:'멤버 확인',s2s:'멤버 정보 비공개',s3:'번호 받기',s3s:'선착순 고유 번호',privacy:'가입 여부만 확인하며 전화번호, 초대 링크, 멤버 목록은 공개하지 않습니다.',invalid:'이 배지를 받을 수 없습니다',invalidBody:'링크가 잘못되었거나 만료 또는 종료되었을 수 있습니다.',home:'Navo 홈으로',copied:'수령 링크 복사됨',share:'Navo에서 “{community}”의 한정 배지 “{badge}”를 받아보세요.'},
+        fr:{limited:'Édition limitée',memory:'Souvenir de communauté',loading:'Chargement du badge',claim:'Recevez votre numéro unique',promise:'Rejoignez la communauté et recevez-le gratuitement dans votre Passeport Navo.',open:'Recevoir dans Navo',download:'Télécharger Navo gratuitement',remaining:'{n} restants',claimed:'{n} sur {s} reçus',forever:'Disponible sans limite',until:'Avant le {date}',ended:'Distribution terminée',full:'Tous les badges sont pris',paused:'Distribution en pause',s1:'Ouvrir Navo',s1s:'Accès sécurisé',s2:'Vérifier',s2s:'Données privées',s3:'Votre numéro',s3s:'Unique et limité',privacy:'Seule l’adhésion est vérifiée. Numéros, liens et listes restent privés.',invalid:'Badge indisponible',invalidBody:'Le lien est peut-être invalide, expiré ou terminé.',home:'Visiter Navo',copied:'Lien copié',share:'Recevez le badge « {badge} » de « {community} » dans Navo.'},
+        es:{limited:'Edición limitada',memory:'Recuerdo de la comunidad',loading:'Cargando insignia',claim:'Obtén tu número único',promise:'Únete a la comunidad y recíbela gratis en tu Pasaporte de Navo.',open:'Recibir en Navo',download:'Descargar Navo gratis',remaining:'Quedan {n}',claimed:'{n} de {s} reclamadas',forever:'Disponible sin límite',until:'Hasta el {date}',ended:'La entrega terminó',full:'Todas fueron reclamadas',paused:'Entrega en pausa',s1:'Abrir Navo',s1s:'Acceso seguro',s2:'Verificar',s2s:'Datos privados',s3:'Tu número',s3s:'Único y limitado',privacy:'Solo se verifica la membresía. Teléfonos, enlaces y listas siguen privados.',invalid:'Insignia no disponible',invalidBody:'El enlace puede no ser válido, haber caducado o finalizado.',home:'Visitar Navo',copied:'Enlace copiado',share:'Recibe “{badge}” de “{community}” en Navo.'},
+        de:{limited:'Limitierte Ausgabe',memory:'Community-Erinnerung',loading:'Abzeichen wird geladen',claim:'Hol dir deine eigene Nummer',promise:'Tritt der Community bei und erhalte es kostenlos in deinem Navo-Pass.',open:'In Navo abholen',download:'Navo kostenlos laden',remaining:'Noch {n} verfügbar',claimed:'{n} von {s} abgeholt',forever:'Dauerhaft verfügbar',until:'Bis {date}',ended:'Ausgabe beendet',full:'Alle vergeben',paused:'Ausgabe pausiert',s1:'Navo öffnen',s1s:'Sicher zur Abholung',s2:'Mitglied prüfen',s2s:'Daten bleiben privat',s3:'Nummer erhalten',s3s:'Einmalig und limitiert',privacy:'Nur die Mitgliedschaft wird geprüft. Telefonnummern, Links und Listen bleiben privat.',invalid:'Abzeichen nicht verfügbar',invalidBody:'Der Link ist eventuell ungültig, abgelaufen oder beendet.',home:'Navo besuchen',copied:'Link kopiert',share:'Hol dir „{badge}“ von „{community}“ in Navo.'}
       };
-      var lang=(navigator.language||'en').toLowerCase().split('-')[0];
-      var t=copy[lang]||copy.en;
-      document.documentElement.lang=lang;
-      document.title='Navo · '+t[0];
-      document.getElementById('title').textContent=t[0];
-      document.getElementById('lead').textContent=t[1];
-      document.getElementById('open').textContent=t[2];
-      document.getElementById('download').textContent=t[3];
-      document.getElementById('privacy').textContent=t[4];
-      var token='';
-      try{token=(new URLSearchParams(location.search).get('token')||'').trim()}catch(_){}
-      var button=document.getElementById('open');
-      if(!token){button.disabled=true;button.textContent=t[5];return}
-      var target='navo://passport?token='+encodeURIComponent(token);
-      function open(){location.href=target}
-      button.addEventListener('click',open);
-      if(/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) setTimeout(open,180);
+      var rawLang=(navigator.language||'en').toLowerCase(),lang=rawLang.indexOf('zh')===0?(rawLang.indexOf('tw')>0||rawLang.indexOf('hk')>0||rawLang.indexOf('hant')>0?'zh-hant':'zh'):rawLang.split('-')[0],t=strings[lang]||strings.en;
+      document.documentElement.lang=lang==='zh'?'zh-CN':lang;
+      function el(id){return document.getElementById(id)}function put(id,value){el(id).textContent=value}function fmt(template,values){return template.replace(/\{(\w+)\}/g,function(_,key){return values[key]==null?'':values[key]})}function safeColor(value,fallback){return /^#[0-9a-f]{6}$/i.test(value||'')?value:fallback}
+      function showError(){el('content').classList.add('hidden');el('error').classList.remove('hidden');put('errorTitle',t.invalid);put('errorBody',t.invalidBody);put('errorAction',t.home)}
+      function localDate(value){try{return new Intl.DateTimeFormat(lang==='zh'?'zh-CN':lang,{year:'numeric',month:'short',day:'numeric'}).format(new Date(value))}catch(_){return String(value)}}
+      function applyStatic(){put('status',t.limited);put('eyebrow',t.memory);put('badgeTitle',t.loading);put('claimTitle',t.claim);put('promise',t.promise);put('open',t.open);put('download',t.download);put('step1',t.s1);put('step1Sub',t.s1s);put('step2',t.s2);put('step2Sub',t.s2s);put('step3',t.s3);put('step3Sub',t.s3s);put('privacy',t.privacy);put('toast',t.copied)}
+      applyStatic();var token='';try{token=(new URLSearchParams(location.search).get('token')||'').trim()}catch(_){}
+      if(!/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(token)){showError();return}
+      var deepLink='navo://passport?token='+encodeURIComponent(token),controller=window.AbortController?new AbortController():null,timer=controller?setTimeout(function(){controller.abort()},9000):null;
+      fetch(SUPABASE+'/rest/v1/rpc/get_community_badge_preview',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+KEY,'Content-Type':'application/json'},body:JSON.stringify({p_token:token}),signal:controller?controller.signal:void 0}).then(function(response){if(!response.ok)throw new Error('request');return response.json()}).then(function(result){if(!result||result.ok!==true||!result.data)throw new Error('not_found');render(result.data)}).catch(showError).finally(function(){if(timer)clearTimeout(timer)});
+      function render(data){
+        var root=document.documentElement,theme=data.card_theme||{},colors=Array.isArray(theme.colors)?theme.colors:[];root.style.setProperty('--c1',safeColor(colors[0],'#3157D5'));root.style.setProperty('--c2',safeColor(colors[1],'#7055E7'));root.style.setProperty('--c3',safeColor(colors[2],'#22AD96'));var angle=Number(theme.angle);root.style.setProperty('--angle',(isFinite(angle)&&angle>=0&&angle<=360?angle:135)+'deg');
+        var title=String(data.badge_title||t.loading),community=String(data.chat_title||'Navo Community'),tagline=String(data.tagline||'');put('badgeTitle',title);put('community',community);put('tagline',tagline);document.title=title+' · '+community+' · Navo';document.querySelector('meta[name="description"]').setAttribute('content',fmt(t.share,{badge:title,community:community}));
+        var art=el('art'),url=String(data.artwork_thumb_url||data.artwork_url||'');if(/^https:\/\//i.test(url)){art.alt=title;art.onload=function(){art.classList.remove('hidden');el('artFallback').classList.add('hidden')};art.src=url}
+        var supply=Math.max(0,Number(data.supply)||0),claimed=Math.max(0,Number(data.claimed_count)||0),remaining=Math.max(0,supply-claimed),percent=supply?Math.min(100,claimed/supply*100):0;put('remaining',fmt(t.remaining,{n:remaining.toLocaleString()}));put('claimed',fmt(t.claimed,{n:claimed.toLocaleString(),s:supply.toLocaleString()}));root.style.setProperty('--progress',percent+'%');el('progress').setAttribute('aria-valuemax',String(supply));el('progress').setAttribute('aria-valuenow',String(claimed));put('edition',(supply?supply.toLocaleString()+' · ':'')+'LIMITED');
+        var expired=data.expires_at&&new Date(data.expires_at).getTime()<=Date.now(),state=String(data.status||'active'),available=state==='active'&&!expired&&remaining>0;if(expired){put('deadline',t.ended)}else if(data.expires_at){put('deadline',fmt(t.until,{date:localDate(data.expires_at)}))}else{put('deadline',t.forever)}if(!available){put('status',remaining<=0?t.full:(state==='paused'?t.paused:t.ended));el('status').dataset.state='closed';put('open',remaining<=0?t.full:(state==='paused'?t.paused:t.ended))}
+        var open=el('open');open.disabled=!available;open.onclick=function(){location.href=deepLink};
+        var shareText=fmt(t.share,{badge:title,community:community});el('share').onclick=function(){if(navigator.share){navigator.share({title:title,text:shareText,url:location.href}).catch(function(){})}else if(navigator.clipboard){navigator.clipboard.writeText(location.href).then(toast)}else{var field=document.createElement('textarea');field.value=location.href;field.style.position='fixed';field.style.opacity='0';document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();toast()}};el('content').classList.remove('loading')
+      }
+      function toast(){el('toast').classList.add('show');setTimeout(function(){el('toast').classList.remove('show')},1800)}
     })();
   </script>
 </body>

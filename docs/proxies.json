@@ -49,6 +49,18 @@
       "speed": "Fast",
       "status": "online",
       "link": "tg://proxy?server=144.225.53.150&port=12432&secret=ee8ead80833a964b949b5bed25e36850137777772e6d6963726f736f66742e636f6d"
+    },
+      {
+      "location": "webproxy(测试)",
+      "flag": "🇸🇬",
+      "server": "webproxy.resohub.net",
+      "domain": "webproxy.resohub.net",
+      "port": "443",
+      "secret": "dd0d9047ded0e2467f6386bc2cd44b47c5",
+      "ping": "90ms",
+      "speed": "Fast",
+      "status": "online",
+      "link": "tg://webproxy?server=webproxy.resohub.net&secret=dd0d9047ded0e2467f6386bc2cd44b47c5"
     }
   ]
 }
